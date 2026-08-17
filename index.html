@@ -58,20 +58,12 @@
         }
 
         @keyframes orbFloat1 {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                transform: translate(-120px, 80px) scale(1.2);
-            }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-120px, 80px) scale(1.2); }
         }
         @keyframes orbFloat2 {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            100% {
-                transform: translate(100px, -60px) scale(1.3);
-            }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, -60px) scale(1.3); }
         }
 
         /* ── Glass Card ── */
@@ -151,10 +143,6 @@
             box-shadow: 0 8px 30px rgba(13, 148, 136, 0.50);
         }
 
-        .connect-btn i {
-            font-size: 14px;
-        }
-
         /* ── Tabs ── */
         .tab-container {
             display: grid;
@@ -221,14 +209,8 @@
         }
 
         @keyframes fadeSlide {
-            0% {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* ── Form Elements ── */
@@ -294,15 +276,15 @@
             color: #ffffff;
         }
 
-        /* ── Mode Selector ── */
+        /* ── Mode Selector (Upgraded for 4 modes) ── */
         .mode-selector {
-            display: flex;
-            gap: 8px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
             margin-top: 4px;
         }
 
         .mode-option {
-            flex: 1;
             text-align: center;
         }
 
@@ -312,16 +294,17 @@
 
         .mode-option label {
             display: block;
-            padding: 10px 6px;
+            padding: 10px 4px;
             background: rgba(255, 255, 255, 0.03);
             border: 1.5px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
             cursor: pointer;
             color: rgba(255, 255, 255, 0.50);
             transition: all 0.3s ease;
             font-family: inherit;
+            white-space: nowrap;
         }
 
         .mode-option label:hover {
@@ -509,10 +492,6 @@
             font-weight: 700;
         }
 
-        .budget-box h4 i {
-            font-size: 16px;
-        }
-
         .suggestion-list {
             margin-top: 10px;
             display: flex;
@@ -641,10 +620,6 @@
             display: inline-block;
             margin: 3px 4px 3px 0;
             border: 1px solid rgba(248, 113, 113, 0.10);
-        }
-
-        .medical-requirements i {
-            margin-right: 8px;
         }
 
         .medical-requirements strong {
@@ -844,18 +819,6 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        #ageDetailOutput {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.60);
-        }
-
-        #roundAgeOutput {
-            font-size: 18px;
-            font-weight: 700;
-            color: #5eead4;
-            margin-top: 6px;
-        }
-
         /* ── Benefit Modal ── */
         .benefit-body h3 {
             color: #ffffff;
@@ -877,13 +840,6 @@
             line-height: 1.7;
         }
 
-        .benefit-body ul {
-            font-size: 14px;
-            padding-left: 20px;
-            line-height: 1.8;
-            color: rgba(255, 255, 255, 0.70);
-        }
-
         /* ── Print ── */
         #print-section {
             display: none;
@@ -896,12 +852,7 @@
                 margin: 0 !important;
                 color: #000000 !important;
             }
-            body::before,
-            body::after {
-                display: none !important;
-            }
-            .calculator-card,
-            .modal-overlay {
+            body::before, body::after, .calculator-card, .modal-overlay {
                 display: none !important;
             }
             #print-section {
@@ -919,15 +870,8 @@
                 padding-bottom: 14px;
                 margin-bottom: 18px;
             }
-            .print-header h1 {
-                font-size: 24px;
-                color: #0f766e;
-                margin-bottom: 4px;
-            }
-            .print-header p {
-                font-size: 13px;
-                color: #475569;
-            }
+            .print-header h1 { font-size: 24px; color: #0f766e; margin-bottom: 4px; }
+            .print-header p { font-size: 13px; color: #475569; }
             .print-badge {
                 display: inline-block;
                 background: #f0fdf4;
@@ -945,23 +889,14 @@
                 margin-top: 14px;
                 margin-bottom: 16px;
             }
-            .print-table th,
-            .print-table td {
+            .print-table th, .print-table td {
                 border: 1px solid #cbd5e1;
                 padding: 8px 14px;
                 font-size: 14px;
                 text-align: left;
             }
-            .print-table th {
-                background: #f1f5f9;
-                color: #1e293b;
-                width: 40%;
-                font-weight: 600;
-            }
-            .print-table td {
-                font-weight: 700;
-                color: #0f172a;
-            }
+            .print-table th { background: #f1f5f9; color: #1e293b; width: 40%; font-weight: 600; }
+            .print-table td { font-weight: 700; color: #0f172a; }
             .print-box {
                 border: 1px solid #cbd5e1;
                 border-radius: 8px;
@@ -971,15 +906,8 @@
                 font-size: 13px;
                 line-height: 1.6;
             }
-            .print-box.medical-box {
-                border-color: #fca5a5;
-                background: #fff5f5;
-            }
-            .print-box h4 {
-                font-size: 14px;
-                color: #0f172a;
-                margin-bottom: 6px;
-            }
+            .print-box.medical-box { border-color: #fca5a5; background: #fff5f5; }
+            .print-box h4 { font-size: 14px; color: #0f172a; margin-bottom: 6px; }
             .print-signatures {
                 display: flex;
                 justify-content: space-between;
@@ -1007,78 +935,22 @@
 
         /* ── Responsive ── */
         @media (max-width: 600px) {
-            .calculator-card {
-                padding: 20px 16px 18px;
-                border-radius: 24px;
-            }
-            .header-container h2 {
-                font-size: 17px;
-                gap: 8px;
-            }
-            .header-container h2 i {
-                font-size: 20px;
-            }
-            .connect-btn {
-                padding: 8px 16px;
-                font-size: 11px;
-            }
-            .tab-container {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 4px;
-                padding: 4px;
-            }
-            .tab-btn {
-                font-size: 10px;
-                padding: 8px 2px;
-            }
-            .tab-btn i {
-                font-size: 14px;
-            }
-            .checkbox-group {
-                grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-            }
-            .action-row {
-                flex-direction: column;
-            }
-            .action-row .btn {
-                padding: 10px;
-            }
-            .results {
-                padding: 14px 16px;
-            }
-            .result-item {
-                font-size: 13px;
-            }
-            .result-item.total .amount {
-                font-size: 16px;
-            }
-            .modal-content {
-                padding: 20px 16px;
-            }
-            .date-select-group select,
-            .date-select-group input {
-                font-size: 12px;
-                padding: 8px 10px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .tab-container {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .tab-btn {
-                font-size: 9px;
-                padding: 6px 2px;
-            }
-            .tab-btn i {
-                font-size: 12px;
-            }
-            .mode-selector {
-                flex-wrap: wrap;
-            }
-            .mode-option {
-                flex: 1 1 45%;
-            }
+            .calculator-card { padding: 20px 16px 18px; border-radius: 24px; }
+            .header-container h2 { font-size: 17px; gap: 8px; }
+            .header-container h2 i { font-size: 20px; }
+            .connect-btn { padding: 8px 16px; font-size: 11px; }
+            .tab-container { grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 4px; }
+            .tab-btn { font-size: 10px; padding: 8px 2px; }
+            .tab-btn i { font-size: 14px; }
+            .checkbox-group { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+            .mode-selector { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+            .action-row { flex-direction: column; }
+            .action-row .btn { padding: 10px; }
+            .results { padding: 14px 16px; }
+            .result-item { font-size: 13px; }
+            .result-item.total .amount { font-size: 16px; }
+            .modal-content { padding: 20px 16px; }
+            .date-select-group select, .date-select-group input { font-size: 12px; padding: 8px 10px; }
         }
     </style>
 </head>
@@ -1328,14 +1200,14 @@
 
         // Plan 06 (Education)
         const plan6Rates = {
-            20: { 10: 116.40, 12: 97.60, 15: 79.00, 18: 66.80, 20: 60.80 },
-            25: { 10: 116.50, 12: 97.70, 15: 79.10, 18: 67.00, 20: 61.10 },
-            30: { 10: 116.70, 12: 97.90, 15: 79.50, 18: 67.70, 20: 62.00 },
-            35: { 10: 117.30, 12: 98.70, 15: 80.80, 18: 69.40, 20: 64.20 },
-            40: { 10: 119.00, 12: 100.90, 15: 83.70, 18: 73.30, 20: 68.70 },
-            45: { 10: 122.70, 12: 105.30, 15: 89.40, 18: 80.40, 20: 76.90 },
-            50: { 10: 129.00, 12: 112.80, 15: 98.90, 18: 92.20, 20: 90.40 },
-            55: { 10: 139.10, 12: 124.90, 15: 114.10 }
+            20: { 10: 116.40, 11: 106.10, 12: 97.60, 13: 90.40, 14: 84.30, 15: 79.00, 16: 74.40, 17: 70.40, 18: 66.80, 19: 63.70, 20: 60.80 },
+            25: { 10: 116.50, 11: 106.20, 12: 97.70, 13: 90.50, 14: 84.40, 15: 79.10, 16: 74.50, 17: 70.50, 18: 67.00, 19: 63.90, 20: 61.10 },
+            30: { 10: 116.70, 11: 106.40, 12: 97.90, 13: 90.80, 14: 84.70, 15: 79.50, 16: 75.00, 17: 71.00, 18: 67.70, 19: 64.60, 20: 62.00 },
+            35: { 10: 117.30, 11: 107.10, 12: 98.70, 13: 91.70, 14: 85.80, 15: 80.80, 16: 76.40, 17: 72.70, 18: 69.40, 19: 66.60, 20: 64.20 },
+            40: { 10: 119.00, 11: 109.10, 12: 100.90, 13: 94.20, 14: 88.50, 15: 83.70, 16: 79.70, 17: 76.20, 18: 73.30, 19: 70.80, 20: 68.70 },
+            45: { 10: 122.70, 11: 113.10, 12: 105.30, 13: 99.00, 14: 93.70, 15: 89.40, 16: 85.80, 17: 82.80, 18: 80.40, 19: 78.40, 20: 76.90 },
+            50: { 10: 129.00, 11: 120.00, 12: 112.80, 13: 107.10, 14: 102.50, 15: 98.90, 16: 96.00, 17: 93.80, 18: 92.20, 19: 91.00, 20: 90.40 },
+            55: { 10: 139.10, 11: 131.00, 12: 124.90, 13: 120.20, 14: 116.70, 15: 114.10 }
         };
         for (let a = 20; a <= 55; a++) {
             if (!plan6Rates[a]) plan6Rates[a] = { ...plan6Rates[Math.floor(a / 5) * 5] };
@@ -1364,7 +1236,7 @@
             3: { title: "৩ কিস্তি বীমা (Plan 03)", terms: [12, 15, 18, 21, 24], minAge: 20, maxAge: 53, riders: ['adb', 'pdab', 'plus', 'cc', 'wp', 'ibr'] },
             4: { title: "৪ কিস্তি বীমা (Plan 04)", terms: [12, 16, 20, 24, 28], minAge: 20, maxAge: 55, riders: ['adb', 'pdab', 'plus', 'cc', 'wp', 'ibr'] },
             5: { title: "৫ কিস্তি বীমা (Plan 05)", terms: [10, 15, 20, 25, 30], minAge: 20, maxAge: 55, riders: ['adb', 'pdab', 'plus', 'cc', 'wp', 'ibr'] },
-            6: { title: "শিক্ষা সুরক্ষা বীমা (Plan 06)", terms: [10, 12, 15, 18, 20], minAge: 20, maxAge: 55, riders: ['plus', 'cc', 'ibr'] },
+            6: { title: "শিক্ষা সুরক্ষা বীমা (Plan 06)", terms: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], minAge: 20, maxAge: 55, riders: ['plus', 'cc', 'ibr'] },
             9: { title: "এককালীন সঞ্চয়ী / এফডিআর (Plan 09)", terms: [6, 8, 10, 12, 15], minAge: 20, maxAge: 54, riders: [], isSingle: true }
         };
 
@@ -1441,7 +1313,7 @@
             return parseFloat(base.toFixed(2));
         }
 
-        // ─── MEDICAL REQUIREMENTS ──────────────────────────────
+        // ─── ACCURATE AGE-BASED MEDICAL UNDERWRITING ──────────
         const testNameMap = {
             'NMS': 'Non-Medical Statement (NMS)',
             'FMR': 'Full Medical Report (FMR)',
@@ -1459,19 +1331,107 @@
 
         function getMedicalTests(age, sumAssured) {
             if (!age || !sumAssured || sumAssured <= 0) return [];
-            if (sumAssured <= 500000) return [{ code: 'NMS', name: testNameMap['NMS'] }];
+            const a = parseInt(age);
+
+            // Tier 1: Sum Assured <= 5,00,000 (5 Lac)
+            if (sumAssured <= 500000) {
+                if (a <= 50) {
+                    return [{ code: 'NMS', name: testNameMap['NMS'] }];
+                } else {
+                    return [{ code: 'FMR', name: testNameMap['FMR'] }, { code: 'PUR', name: testNameMap['PUR'] }];
+                }
+            }
+
+            // Tier 2: 5,00,001 to 10,00,000 (10 Lac)
             if (sumAssured <= 1000000) {
-                return (age <= 45) ? [{ code: 'NMS', name: testNameMap['NMS'] }] : [{ code: 'FMR', name: testNameMap['FMR'] }, { code: 'PUR', name: testNameMap['PUR'] }];
+                if (a <= 45) {
+                    return [{ code: 'NMS', name: testNameMap['NMS'] }];
+                } else if (a <= 50) {
+                    return [{ code: 'FMR', name: testNameMap['FMR'] }, { code: 'PUR', name: testNameMap['PUR'] }];
+                } else {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] },
+                        { code: 'FBS', name: testNameMap['FBS'] }
+                    ];
+                }
             }
+
+            // Tier 3: 10,00,001 to 20,00,000 (20 Lac)
             if (sumAssured <= 2000000) {
-                return [{ code: 'FMR', name: testNameMap['FMR'] }, { code: 'PUR', name: testNameMap['PUR'] }, { code: 'ECG', name: testNameMap['ECG'] }];
+                if (a <= 35) {
+                    return [{ code: 'FMR', name: testNameMap['FMR'] }, { code: 'PUR', name: testNameMap['PUR'] }];
+                } else if (a <= 45) {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] }
+                    ];
+                } else if (a <= 50) {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] },
+                        { code: 'FBS', name: testNameMap['FBS'] },
+                        { code: 'C-XR', name: testNameMap['C-XR'] }
+                    ];
+                } else {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] },
+                        { code: 'FBS', name: testNameMap['FBS'] },
+                        { code: 'C-XR', name: testNameMap['C-XR'] },
+                        { code: 'FLP', name: testNameMap['FLP'] }
+                    ];
+                }
             }
+
+            // Tier 4: 20,00,001 to 50,00,000 (50 Lac)
+            if (sumAssured <= 5000000) {
+                if (a <= 35) {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] },
+                        { code: 'FBS', name: testNameMap['FBS'] }
+                    ];
+                } else if (a <= 45) {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] },
+                        { code: 'FBS', name: testNameMap['FBS'] },
+                        { code: 'C-XR', name: testNameMap['C-XR'] },
+                        { code: 'FLP', name: testNameMap['FLP'] }
+                    ];
+                } else {
+                    return [
+                        { code: 'FMR', name: testNameMap['FMR'] },
+                        { code: 'PUR', name: testNameMap['PUR'] },
+                        { code: 'ECG', name: testNameMap['ECG'] },
+                        { code: 'FBS', name: testNameMap['FBS'] },
+                        { code: 'C-XR', name: testNameMap['C-XR'] },
+                        { code: 'FLP', name: testNameMap['FLP'] },
+                        { code: 'LFT', name: testNameMap['LFT'] },
+                        { code: 'Echo', name: testNameMap['Echo'] }
+                    ];
+                }
+            }
+
+            // Tier 5: Above 50,00,000 (50 Lac+)
             return [
                 { code: 'FMR', name: testNameMap['FMR'] },
                 { code: 'PUR', name: testNameMap['PUR'] },
                 { code: 'ECG', name: testNameMap['ECG'] },
                 { code: 'FBS', name: testNameMap['FBS'] },
-                { code: 'C-XR', name: testNameMap['C-XR'] }
+                { code: 'C-XR', name: testNameMap['C-XR'] },
+                { code: 'FLP', name: testNameMap['FLP'] },
+                { code: 'LFT', name: testNameMap['LFT'] },
+                { code: 'Echo', name: testNameMap['Echo'] },
+                { code: 'HIV', name: testNameMap['HIV'] },
+                { code: 'FQ', name: testNameMap['FQ'] }
             ];
         }
 
@@ -1480,22 +1440,22 @@
             if (!container) return;
             if (!age || !sumAssured || sumAssured <= 0) {
                 container.className = 'medical-requirements';
-                container.innerHTML = '<i class="fas fa-info-circle"></i> বয়স ও বীমা অংক দিলে মেডিকেল শর্তাবলী দেখাবে।';
+                container.innerHTML = '<i class="fas fa-info-circle"></i> বয়স ও বীমা অংক দিলে স্বয়ংক্রিয়ভাবে প্রযোজ্য মেডিকেল টেস্টের তালিকা দেখাবে।';
                 return;
             }
             const tests = getMedicalTests(age, sumAssured);
             let html = '';
             if (tests.length === 1 && tests[0].code === 'NMS') {
                 container.className = 'medical-requirements non-med';
-                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> কোনো মেডিকেল টেস্ট লাগবে না।';
+                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> গ্রাহকের বয়স ও বীমা অংক অনুযায়ী কোনো প্যাথলজিক্যাল মেডিকেল টেস্টের প্রয়োজন নেই।';
             } else {
                 container.className = 'medical-requirements has-med';
-                html = '<div><i class="fas fa-stethoscope"></i> <strong>প্রয়োজনীয় টেস্টসমূহ:</strong></div><div style="margin-top:4px;">' +
+                html = '<div><i class="fas fa-stethoscope"></i> <strong>বয়স (' + toBangla(age) + ' বছর) অনুযায়ী প্রয়োজনীয় টেস্টসমূহ:</strong></div><div style="margin-top:4px;">' +
                     tests.map(t => `<span class="test-tag">${t.name}</span>`).join('') + '</div>';
             }
 
             if (sumAssured > 1000000) {
-                html += '<div style="margin-top:8px; font-size:12px; color:#fbbf24;"><i class="fas fa-file-invoice"></i> ১০ লক্ষ টাকার বেশি হওয়ায় আয়ের উৎস সংক্রান্ত প্রমাণপত্র (Financial Document) দিতে হবে।</div>';
+                html += '<div style="margin-top:8px; font-size:12px; color:#fbbf24;"><i class="fas fa-file-invoice"></i> ১০ লক্ষ টাকার বেশি হওয়ায় আয়ের উৎস সংক্রান্ত প্রমাণপত্র (Financial Document) প্রদান করতে হবে।</div>';
             }
 
             container.innerHTML = html;
@@ -1528,7 +1488,7 @@
             let modeHTML = conf.isSingle ? `
                 <div class="form-group">
                     <label><i class="fas fa-credit-card"></i> মোড</label>
-                    <div class="mode-selector">
+                    <div class="mode-selector" style="grid-template-columns: 1fr;">
                         <div class="mode-option">
                             <input type="radio" id="p-m-single" name="p-mode" value="yearly" checked onchange="calculatePlan(${planId})" />
                             <label for="p-m-single"><i class="fas fa-hand-holding-usd"></i> এককালীন (Single)</label>
@@ -1542,6 +1502,10 @@
                         <div class="mode-option">
                             <input type="radio" id="p-m-monthly" name="p-mode" value="monthly" checked onchange="calculatePlan(${planId})" />
                             <label for="p-m-monthly">Monthly</label>
+                        </div>
+                        <div class="mode-option">
+                            <input type="radio" id="p-m-quarterly" name="p-mode" value="quarterly" onchange="calculatePlan(${planId})" />
+                            <label for="p-m-quarterly">Quarterly</label>
                         </div>
                         <div class="mode-option">
                             <input type="radio" id="p-m-hy" name="p-mode" value="half_yearly" onchange="calculatePlan(${planId})" />
@@ -1640,7 +1604,9 @@
         function calculateDPS() {
             const deposit = parseFloat(document.getElementById('deposit').value) || 0;
             const term = parseFloat(document.getElementById('dps-term').value) || 0;
-            const age = parseInt(document.getElementById('dps-age').value) || 30;
+            const ageInputVal = document.getElementById('dps-age').value;
+            const age = parseInt(ageInputVal) || (ageInputVal === '' ? null : 30);
+
             const hasADB = document.getElementById('dps-adb').checked;
             const hasPlus = document.getElementById('dps-plus').checked;
             const hasCC = document.getElementById('dps-cc').checked;
@@ -1649,10 +1615,11 @@
             const sumAssured = deposit * 12 * term;
             const modeFactor = 0.0925;
 
+            const effectiveAge = age || 30;
             const adbAmt = hasADB ? Math.round((sumAssured / 1000) * 1.25 * modeFactor) : 0;
             const plusAmt = hasPlus ? Math.round((sumAssured / 1000) * 6.45 * modeFactor) : 0;
-            const ccAmt = hasCC ? Math.round((sumAssured / 1000) * getCCRate(age) * modeFactor) : 0;
-            const wpAmt = hasWP ? Math.round((sumAssured / 1000) * getWPRate(age) * modeFactor) : 0;
+            const ccAmt = hasCC ? Math.round((sumAssured / 1000) * getCCRate(effectiveAge) * modeFactor) : 0;
+            const wpAmt = hasWP ? Math.round((sumAssured / 1000) * getWPRate(effectiveAge) * modeFactor) : 0;
 
             const total = deposit + adbAmt + plusAmt + ccAmt + wpAmt;
 
@@ -1686,7 +1653,12 @@
 
             const modeElem = document.querySelector('input[name="p-mode"]:checked');
             const mode = modeElem ? modeElem.value : 'yearly';
-            let modeFactor = (mode === 'monthly') ? 0.0925 : ((mode === 'half_yearly') ? 0.525 : 1.0);
+            
+            // Standard multiplier matrix
+            let modeFactor = 1.0;
+            if (mode === 'monthly') modeFactor = 0.0925;
+            else if (mode === 'quarterly') modeFactor = 0.275;
+            else if (mode === 'half_yearly') modeFactor = 0.525;
 
             if (!age) {
                 resetPlanResults();
@@ -1795,7 +1767,10 @@
                 return;
             }
 
-            let modeFactor = (mode === 'monthly') ? 0.0925 : ((mode === 'half_yearly') ? 0.525 : 1.0);
+            let modeFactor = 1.0;
+            if (mode === 'monthly') modeFactor = 0.0925;
+            else if (mode === 'quarterly') modeFactor = 0.275;
+            else if (mode === 'half_yearly') modeFactor = 0.525;
 
             const rate = ratesTable[currentAge][selectedTerm];
             const adbRate = hasADB ? 1.25 : 0;
@@ -1900,7 +1875,6 @@
 
         // ─── AGE CALCULATOR MODAL ──────────────────────────────
         function openAgeModal() { document.getElementById('ageModal').style.display = 'flex'; }
-
         function closeAgeModal() { document.getElementById('ageModal').style.display = 'none'; }
 
         function calculateAge() {
@@ -1919,10 +1893,16 @@
             let years = asOf.getFullYear() - dob.getFullYear();
             let months = asOf.getMonth() - dob.getMonth();
             let days = asOf.getDate() - dob.getDate();
-            if (days < 0) { months--;
-                days += 30; }
-            if (months < 0) { years--;
-                months += 12; }
+
+            if (days < 0) {
+                months--;
+                const prevMonthDays = new Date(asY, asM, 0).getDate();
+                days += prevMonthDays;
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
 
             let roundAge = years + (months >= 6 ? 1 : 0);
             document.getElementById('ageDetailOutput').innerText = `${toBangla(years)} বছর ${toBangla(months)} মাস ${toBangla(days)} দিন`;
@@ -1933,8 +1913,10 @@
                 calculateDPS();
             } else {
                 const el = document.getElementById('p-age');
-                if (el) { el.value = roundAge;
-                    calculatePlan(currentActiveTab); }
+                if (el) {
+                    el.value = roundAge;
+                    calculatePlan(currentActiveTab);
+                }
             }
         }
 
@@ -1958,12 +1940,12 @@
         function openBenefitModal(type) {
             const body = document.getElementById('benefitModalBody');
             const data = {
-                adb: { title: "ADB (Accidental Death Benefit)", desc: "দুর্ঘটনাজনিত মৃত্যু হলে অতিরিক্ত মূল বীমা অংকের সমপরিমাণ টাকা প্রদান করা হয় [source: 3]।" },
-                pdab: { title: "PDAB (Disability & Accidental Benefit)", desc: "দুর্ঘটনাজনিত মৃত্যুতে দ্বিগুণ সুবিধা এবং স্থায়ী অঙ্গহানিতে ক্ষতিপূরণ তালিকা অনুযায়ী এককালীন বীমা অংক প্রদেয় [source: 3]।" },
-                plus: { title: "Plus (প্লাস কভারেজ)", desc: "দুর্ঘটনাজনিত মৃত্যু, অঙ্গহানি এবং সর্বোচ্চ ১৫% পর্যন্ত প্রকৃত হাসপাতাল চিকিৎসা খরচ সুবিধা [source: 3]।" },
-                cc: { title: "CC (Critical Care)", desc: "পলিসি চালুর ৬ মাস পর ১৮টি নির্দিষ্ট দুরারোগ্য ও জটিল ব্যাধি ধরা পড়লে এককালীন আর্থিক সুরক্ষা [source: 3]।" },
-                wp: { title: "WP (Waiver of Premium)", desc: "অসুস্থতা বা দুর্ঘটনায় পূর্ণাঙ্গ অক্ষম হলে পলিসির ভবিষ্যৎ সকল প্রিমিয়াম সম্পূর্ণ মওকুফ করা হয় [source: 3]।" },
-                ibr: { title: "IBR (Income Benefit Rider)", desc: "বীমাগ্রহীতার স্থায়ী অক্ষমতায় প্রতি মাসে মূল বীমা অংকের ১% হারে মাসিক পেনশন ও মেয়াদে পুরো বীমা অংক প্রদান [source: 3]।" }
+                adb: { title: "ADB (Accidental Death Benefit)", desc: "দুর্ঘটনাজনিত কারণে মৃত্যু হলে মূল বীমা অংকের সমপরিমাণ অতিরিক্ত অর্থ প্রদান করা হয়।" },
+                pdab: { title: "PDAB (Disability & Accidental Benefit)", desc: "দুর্ঘটনাজনিত মৃত্যুতে দ্বিগুণ সুবিধা এবং স্থায়ী অঙ্গহানিতে ক্ষতিপূরণ তালিকা অনুযায়ী এককালীন বীমা অংক প্রদেয়।" },
+                plus: { title: "Plus (প্লাস কভারেজ)", desc: "দুর্ঘটনাজনিত মৃত্যু, অঙ্গহানি এবং সর্বোচ্চ ১৫% পর্যন্ত প্রকৃত হাসপাতাল চিকিৎসা খরচ সুবিধা।" },
+                cc: { title: "CC (Critical Care)", desc: "পলিসি চালুর ৬ মাস পর ১৮টি নির্দিষ্ট দুরারোগ্য ও জটিল ব্যাধি ধরা পড়লে এককালীন আর্থিক সুরক্ষা।" },
+                wp: { title: "WP (Waiver of Premium)", desc: "অসুস্থতা বা দুর্ঘটনায় পূর্ণাঙ্গ অক্ষম হলে পলিসির ভবিষ্যৎ সকল প্রিমিয়াম সম্পূর্ণ মওকুফ করা হয়।" },
+                ibr: { title: "IBR (Income Benefit Rider)", desc: "বীমাগ্রহীতার স্থায়ী অক্ষমতায় প্রতি মাসে মূল বীমা অংকের ১% হারে মাসিক পেনশন ও মেয়াদে পুরো বীমা অংক প্রদান।" }
             };
             const item = data[type];
             if (item) {
@@ -2038,6 +2020,7 @@
                 const modeVal = modeElem ? modeElem.value : 'yearly';
                 const modeNames = {
                     'monthly': 'মাসিক (Monthly)',
+                    'quarterly': 'ত্রৈমাসিক (Quarterly)',
                     'half_yearly': 'ষাণ্মাসিক (Half Yearly)',
                     'yearly': conf.isSingle ? 'এককালীন (Single Payment)' : 'বার্ষিক (Yearly)'
                 };
