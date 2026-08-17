@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>বীমা প্রিমিয়াম ও বাজেট ক্যালকুলেটর - আলফা ইসলামী লাইফ</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -24,7 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 24px 16px;
+            padding: 24px 12px;
             position: relative;
             overflow-x: hidden;
         }
@@ -73,12 +73,12 @@
             background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border-radius: 32px;
+            border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.10);
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
             width: 100%;
-            max-width: 720px;
-            padding: 32px 30px 26px;
+            max-width: 760px;
+            padding: 24px 18px 20px;
         }
 
         /* ── Header ── */
@@ -86,24 +86,26 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 22px;
-            padding-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .header-container h2 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.3px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .header-container h2 i {
             color: #5eead4;
-            font-size: 26px;
+            font-size: 24px;
         }
 
         .header-container h2 span {
@@ -115,35 +117,42 @@
         .connect-btn {
             background: linear-gradient(135deg, #0d9488, #0f766e);
             color: #fff;
-            padding: 10px 22px;
+            padding: 8px 18px;
             border-radius: 40px;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             border: none;
             cursor: pointer;
+            white-space: nowrap;
         }
 
         /* ── Tabs ── */
+        .tab-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 22px;
+            padding-bottom: 4px;
+        }
+
         .tab-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 6px;
+            display: flex;
+            gap: 4px;
             background: rgba(255, 255, 255, 0.04);
             border-radius: 16px;
-            padding: 6px;
-            margin-bottom: 26px;
+            padding: 5px;
             border: 1px solid rgba(255, 255, 255, 0.04);
+            min-width: max-content;
         }
 
         .tab-btn {
-            padding: 10px 4px;
+            padding: 8px 12px;
             border: none;
             background: transparent;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.50);
             cursor: pointer;
@@ -151,12 +160,14 @@
             transition: all 0.3s ease;
             text-align: center;
             font-family: inherit;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .tab-btn i {
-            display: block;
-            font-size: 17px;
-            margin-bottom: 4px;
+            font-size: 15px;
         }
 
         .tab-btn.active {
@@ -171,7 +182,7 @@
 
         .tab-content {
             display: none;
-            animation: fadeSlide 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: fadeSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .tab-content.active {
@@ -179,36 +190,36 @@
         }
 
         @keyframes fadeSlide {
-            0% { opacity: 0; transform: translateY(12px); }
+            0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         /* ── Form Elements ── */
         .form-group {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 7px;
+            margin-bottom: 5px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.85);
-            font-size: 14px;
+            font-size: 13.5px;
         }
 
         .form-group label i {
             color: #5eead4;
-            margin-right: 8px;
+            margin-right: 6px;
             width: 18px;
         }
 
         .form-group input[type="number"],
         .form-group select {
             width: 100%;
-            padding: 13px 18px;
+            padding: 11px 16px;
             border: 1.5px solid rgba(255, 255, 255, 0.08);
             border-radius: 14px;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             background: rgba(255, 255, 255, 0.04);
             color: #ffffff;
@@ -220,8 +231,8 @@
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235eead4' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 44px;
+            background-position: right 14px center;
+            padding-right: 40px;
         }
 
         .form-group select option {
@@ -229,7 +240,16 @@
             color: #ffffff;
         }
 
-        /* ── Mode Selector (4 Columns) ── */
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+
+        /* ── Mode Selector ── */
         .mode-selector {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -243,11 +263,11 @@
 
         .mode-option label {
             display: block;
-            padding: 10px 4px;
+            padding: 9px 4px;
             background: rgba(255, 255, 255, 0.03);
             border: 1.5px solid rgba(255, 255, 255, 0.06);
             border-radius: 12px;
-            font-size: 12.5px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             color: rgba(255, 255, 255, 0.50);
@@ -263,10 +283,10 @@
 
         /* ── Rider Section ── */
         .rider-section-title {
-            font-size: 14px;
+            font-size: 13.5px;
             font-weight: 700;
             color: #5eead4;
-            margin-top: 16px;
+            margin-top: 14px;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
@@ -275,63 +295,84 @@
 
         .checkbox-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 6px;
         }
 
         .checkbox-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 9px 14px;
+            padding: 7px 12px;
             border-radius: 12px;
             border: 1.5px solid rgba(255, 255, 255, 0.05);
         }
 
         .checkbox-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
+            width: 17px;
+            height: 17px;
             accent-color: #0d9488;
+            flex-shrink: 0;
         }
 
         .checkbox-item label {
             margin: 0;
-            font-size: 13px;
+            font-size: 12.5px;
             color: rgba(255, 255, 255, 0.75);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             cursor: pointer;
+        }
+
+        /* CC Custom Inputs */
+        .cc-custom-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 6px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px dashed rgba(94, 234, 212, 0.15);
+        }
+
+        .cc-custom-group .form-group {
+            flex: 1 1 120px;
+            margin-bottom: 0;
+        }
+
+        .cc-custom-group label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.60);
+        }
+
+        .cc-custom-group input {
+            padding: 7px 10px;
+            font-size: 13px;
         }
 
         .mini-age-btn {
             background: linear-gradient(135deg, rgba(13, 148, 136, 0.20), rgba(15, 118, 110, 0.10));
             color: #5eead4;
             border: 1px solid rgba(94, 234, 212, 0.12);
-            padding: 5px 16px;
+            padding: 4px 14px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-        }
-
-        .flex-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 4px;
+            gap: 5px;
         }
 
         /* ── Results ── */
         .results {
-            margin-top: 20px;
+            margin-top: 18px;
             background: rgba(255, 255, 255, 0.04);
-            padding: 18px 20px;
-            border-radius: 18px;
+            padding: 14px 16px;
+            border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -339,10 +380,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 7px 0;
-            font-size: 14px;
+            padding: 6px 0;
+            font-size: 13.5px;
             color: rgba(255, 255, 255, 0.75);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            gap: 8px;
         }
 
         .result-item:last-of-type {
@@ -352,70 +394,74 @@
         .result-item .label-wrap {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .result-item .label-wrap i {
             color: #5eead4;
-            width: 20px;
+            width: 18px;
+            font-size: 14px;
         }
 
         .result-item .amount {
             font-weight: 700;
             color: #ffffff;
-            font-size: 15px;
+            font-size: 14px;
+            text-align: right;
         }
 
         .result-item.total {
-            margin-top: 8px;
-            padding-top: 12px;
+            margin-top: 6px;
+            padding-top: 10px;
             border-top: 2px solid rgba(94, 234, 212, 0.12);
-            font-size: 16px;
+            font-size: 15px;
             color: #ffffff;
         }
 
         .result-item.total .amount {
             color: #5eead4;
-            font-size: 18px;
+            font-size: 17px;
         }
 
-        /* ── Budget Box & Suggestion Styling ── */
+        /* ── Budget Box ── */
         .budget-box {
             background: rgba(212, 168, 83, 0.06);
             border: 1px solid rgba(212, 168, 83, 0.10);
-            padding: 16px 18px;
+            padding: 14px 14px;
             border-radius: 16px;
-            margin: 12px 0 18px;
+            margin: 10px 0 14px;
         }
 
         .budget-box h4 {
             color: #fbbf24;
-            font-size: 14px;
-            margin-bottom: 10px;
+            font-size: 13.5px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: 700;
         }
 
         .suggestion-list {
-            margin-top: 10px;
+            margin-top: 8px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 300px;
+            gap: 6px;
+            max-height: 260px;
             overflow-y: auto;
         }
 
         .suggestion-card {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 12px 16px;
-            border-radius: 14px;
+            padding: 10px 14px;
+            border-radius: 12px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            font-size: 13px;
+            gap: 8px;
+            font-size: 12.5px;
             transition: all 0.25s ease;
         }
 
@@ -430,14 +476,14 @@
         }
 
         .sug-tag {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: 700;
             padding: 2px 8px;
             border-radius: 6px;
-            margin-left: 6px;
+            margin-left: 4px;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
         }
 
         .sug-tag.tag-low {
@@ -466,29 +512,30 @@
             background: linear-gradient(135deg, #0d9488, #0f766e);
             color: #fff;
             border: none;
-            padding: 7px 16px;
+            padding: 5px 14px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
+            white-space: nowrap;
         }
 
         .error-text {
             color: #f87171;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
-            margin-top: 6px;
+            margin-top: 4px;
         }
 
         /* ── Medical Requirements ── */
         .medical-requirements {
             color: rgba(255, 255, 255, 0.70);
-            margin-top: 16px;
+            margin-top: 14px;
             background: rgba(255, 255, 255, 0.03);
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-radius: 14px;
             border: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 13px;
+            font-size: 12.5px;
             line-height: 1.6;
         }
 
@@ -507,34 +554,35 @@
         .medical-requirements .test-tag {
             background: rgba(248, 113, 113, 0.15);
             color: #fca5a5;
-            padding: 3px 12px;
+            padding: 2px 10px;
             border-radius: 8px;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 600;
             display: inline-block;
-            margin: 3px 4px 3px 0;
+            margin: 2px 3px 2px 0;
             border: 1px solid rgba(248, 113, 113, 0.10);
         }
 
         /* ── Action Buttons ── */
         .action-row {
             display: flex;
-            gap: 10px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
         }
 
         .action-row .btn {
-            flex: 1;
-            padding: 12px 16px;
+            flex: 1 1 100px;
+            padding: 10px 14px;
             border: none;
             border-radius: 14px;
-            font-size: 13.5px;
+            font-size: 12.5px;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn-copy {
@@ -549,28 +597,29 @@
 
         .clear-btn {
             width: 100%;
-            padding: 12px;
+            padding: 10px;
             background: rgba(239, 68, 68, 0.08);
             color: #fca5a5;
             border: 1px solid rgba(239, 68, 68, 0.08);
             border-radius: 14px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 8px;
         }
 
         .credit {
             text-align: center;
-            margin-top: 20px;
-            font-size: 12.5px;
+            margin-top: 16px;
+            font-size: 12px;
             color: rgba(255, 255, 255, 0.25);
         }
 
+        /* ── Modal ── */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -588,18 +637,18 @@
 
         .modal-content {
             background: rgba(15, 23, 42, 0.92);
-            padding: 28px 26px;
+            padding: 24px 20px;
             border-radius: 24px;
             width: 100%;
-            max-width: 460px;
+            max-width: 420px;
             position: relative;
         }
 
         .close-modal {
             position: absolute;
-            top: 14px;
-            right: 18px;
-            font-size: 26px;
+            top: 12px;
+            right: 16px;
+            font-size: 24px;
             color: rgba(255, 255, 255, 0.25);
             cursor: pointer;
             border: none;
@@ -609,22 +658,23 @@
         .date-select-group {
             display: flex;
             gap: 6px;
+            flex-wrap: wrap;
         }
 
         .date-select-group select,
         .date-select-group input {
-            flex: 1;
-            padding: 10px 12px;
+            flex: 1 1 80px;
+            padding: 8px 10px;
             border-radius: 12px;
-            font-size: 14px;
+            font-size: 13px;
             background: rgba(255, 255, 255, 0.04);
             color: #ffffff;
             border: 1.5px solid rgba(255, 255, 255, 0.06);
         }
 
         .age-result-box {
-            margin-top: 16px;
-            padding: 14px;
+            margin-top: 14px;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 14px;
             text-align: center;
@@ -723,11 +773,78 @@
             }
         }
 
-        @media (max-width: 600px) {
-            .tab-container { grid-template-columns: repeat(4, 1fr); gap: 4px; }
-            .tab-btn { font-size: 10px; padding: 8px 2px; }
-            .mode-selector { grid-template-columns: repeat(2, 1fr); }
-            .action-row { flex-direction: column; }
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .calculator-card {
+                padding: 16px 12px;
+                border-radius: 20px;
+            }
+            .header-container h2 {
+                font-size: 17px;
+            }
+            .header-container h2 i {
+                font-size: 20px;
+            }
+            .connect-btn {
+                font-size: 11px;
+                padding: 6px 14px;
+            }
+            .tab-btn {
+                font-size: 10px;
+                padding: 6px 10px;
+            }
+            .tab-btn i {
+                font-size: 13px;
+            }
+            .mode-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .checkbox-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cc-custom-group .form-group {
+                flex: 1 1 100%;
+            }
+            .action-row .btn {
+                flex: 1 1 100%;
+            }
+            .result-item {
+                font-size: 12.5px;
+            }
+            .result-item .amount {
+                font-size: 13px;
+            }
+            .result-item.total .amount {
+                font-size: 15px;
+            }
+            .suggestion-card {
+                font-size: 11.5px;
+                padding: 8px 10px;
+            }
+            .select-sug-btn {
+                font-size: 10px;
+                padding: 4px 12px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .tab-container {
+                gap: 2px;
+                padding: 3px;
+            }
+            .tab-btn {
+                font-size: 9px;
+                padding: 5px 6px;
+            }
+            .tab-btn i {
+                font-size: 11px;
+            }
+            .checkbox-item {
+                padding: 5px 8px;
+            }
+            .checkbox-item label {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -741,15 +858,17 @@
             </a>
         </div>
 
-        <div class="tab-container">
-            <button class="tab-btn active" onclick="switchPlanTab('dps')"><i class="fas fa-coins"></i> DPS (14)</button>
-            <button class="tab-btn" onclick="switchPlanTab(1)"><i class="fas fa-piggy-bank"></i> সঞ্চয়ী (01)</button>
-            <button class="tab-btn" onclick="switchPlanTab(2)"><i class="fas fa-calendar-days"></i> দ্বিবার্ষিক (02)</button>
-            <button class="tab-btn" onclick="switchPlanTab(3)"><i class="fas fa-layer-group"></i> ৩ কিস্তি (03)</button>
-            <button class="tab-btn" onclick="switchPlanTab(4)"><i class="fas fa-layer-group"></i> ৪ কিস্তি (04)</button>
-            <button class="tab-btn" onclick="switchPlanTab(5)"><i class="fas fa-layer-group"></i> ৫ কিস্তি (05)</button>
-            <button class="tab-btn" onclick="switchPlanTab(6)"><i class="fas fa-graduation-cap"></i> শিক্ষা (06)</button>
-            <button class="tab-btn" onclick="switchPlanTab(9)"><i class="fas fa-vault"></i> এককালীন (09)</button>
+        <div class="tab-wrapper">
+            <div class="tab-container" id="tabContainer">
+                <button class="tab-btn active" onclick="switchPlanTab('dps')"><i class="fas fa-coins"></i> DPS</button>
+                <button class="tab-btn" onclick="switchPlanTab(1)"><i class="fas fa-piggy-bank"></i> 01</button>
+                <button class="tab-btn" onclick="switchPlanTab(2)"><i class="fas fa-calendar-days"></i> 02</button>
+                <button class="tab-btn" onclick="switchPlanTab(3)"><i class="fas fa-layer-group"></i> 03</button>
+                <button class="tab-btn" onclick="switchPlanTab(4)"><i class="fas fa-layer-group"></i> 04</button>
+                <button class="tab-btn" onclick="switchPlanTab(5)"><i class="fas fa-layer-group"></i> 05</button>
+                <button class="tab-btn" onclick="switchPlanTab(6)"><i class="fas fa-graduation-cap"></i> 06</button>
+                <button class="tab-btn" onclick="switchPlanTab(9)"><i class="fas fa-vault"></i> 09</button>
+            </div>
         </div>
 
         <!-- TAB: DPS -->
@@ -787,6 +906,18 @@
                 <div class="checkbox-item">
                     <input type="checkbox" id="dps-wp" onchange="handleRiderToggle('dps', 'wp')" />
                     <label for="dps-wp"><i class="fas fa-file-invoice"></i> WP</label>
+                </div>
+            </div>
+
+            <!-- CC Custom Inputs for DPS -->
+            <div id="dps-cc-custom" class="cc-custom-group" style="display:none;">
+                <div class="form-group">
+                    <label><i class="fas fa-percent"></i> CC রেট (প্রতি হাজারে)</label>
+                    <input type="number" id="dps-cc-rate" placeholder="ডিফল্ট: ৪.৪৫" step="0.01" oninput="calculateDPS()" />
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-coins"></i> CC আওতায় বিমা অংক</label>
+                    <input type="number" id="dps-cc-sa" placeholder="সর্বোচ্চ ৫,০০,০০০" oninput="calculateDPS()" />
                 </div>
             </div>
 
@@ -864,6 +995,7 @@
     </div>
 
     <script>
+        // ─── DATA & CONFIGS ─────────────────────────────────────────
         const plan1Rates = {
             20: { 10: 106.20, 11: 95.90, 12: 87.40, 13: 80.20, 14: 74.00, 15: 68.70, 16: 64.00, 17: 59.90, 18: 56.30, 19: 53.10, 20: 50.10, 21: 47.50, 22: 45.20, 23: 43.00, 24: 41.00, 25: 39.20, 30: 32.10, 35: 27.30 },
             25: { 10: 106.20, 11: 96.00, 12: 87.40, 13: 80.20, 14: 74.00, 15: 68.70, 16: 64.10, 17: 60.00, 18: 56.30, 19: 53.10, 20: 50.20, 21: 47.60, 22: 45.20, 23: 43.10, 24: 41.10, 25: 39.40, 30: 32.40, 35: 27.70 },
@@ -874,9 +1006,7 @@
             50: { 10: 110.20, 11: 100.20, 12: 92.00, 13: 85.00, 14: 79.20, 15: 74.20, 16: 69.80, 17: 66.10, 18: 62.80, 19: 59.90, 20: 57.40 },
             55: { 10: 113.50, 11: 103.70, 12: 95.60, 13: 88.90, 14: 83.20, 15: 78.40 }
         };
-        for (let a = 20; a <= 55; a++) {
-            if (!plan1Rates[a]) plan1Rates[a] = { ...plan1Rates[Math.floor(a / 5) * 5] };
-        }
+        for (let a = 20; a <= 55; a++) { if (!plan1Rates[a]) plan1Rates[a] = { ...plan1Rates[Math.floor(a / 5) * 5] }; }
 
         const plan2Rates = {
             20: { 10: 116.10, 15: 81.60, 20: 63.10 }, 25: { 10: 116.10, 15: 81.70, 20: 63.40 },
@@ -884,9 +1014,7 @@
             40: { 10: 117.60, 15: 84.50, 20: 67.40 }, 45: { 10: 119.50, 15: 87.40, 20: 71.10 },
             50: { 10: 122.60, 15: 92.00 }, 55: { 10: 127.50 }
         };
-        for (let a = 20; a <= 55; a++) {
-            if (!plan2Rates[a]) plan2Rates[a] = { ...plan2Rates[Math.floor(a / 5) * 5] };
-        }
+        for (let a = 20; a <= 55; a++) { if (!plan2Rates[a]) plan2Rates[a] = { ...plan2Rates[Math.floor(a / 5) * 5] }; }
 
         const plan3Rates = {
             20: { 12: 96.00, 15: 77.10, 18: 64.60, 21: 55.70, 24: 49.00 },
@@ -897,9 +1025,7 @@
             45: { 12: 100.00, 15: 82.00, 18: 70.50 },
             50: { 12: 103.40, 15: 86.00 }, 53: { 12: 106.40 }
         };
-        for (let a = 20; a <= 53; a++) {
-            if (!plan3Rates[a]) plan3Rates[a] = { ...plan3Rates[Math.floor(a / 5) * 5] };
-        }
+        for (let a = 20; a <= 53; a++) { if (!plan3Rates[a]) plan3Rates[a] = { ...plan3Rates[Math.floor(a / 5) * 5] }; }
 
         const plan4Rates = {
             20: { 12: 98.70, 16: 71.00, 20: 54.90, 24: 44.60, 28: 37.40 },
@@ -910,9 +1036,7 @@
             45: { 12: 103.60, 16: 77.30, 20: 63.00, 24: 54.50 },
             50: { 12: 108.00, 16: 82.40, 20: 68.90 }, 55: { 12: 114.80 }
         };
-        for (let a = 20; a <= 55; a++) {
-            if (!plan4Rates[a]) plan4Rates[a] = { ...plan4Rates[Math.floor(a / 5) * 5] };
-        }
+        for (let a = 20; a <= 55; a++) { if (!plan4Rates[a]) plan4Rates[a] = { ...plan4Rates[Math.floor(a / 5) * 5] }; }
 
         const plan5Rates = {
             20: { 10: 118.00, 15: 80.20, 20: 61.30, 25: 50.20, 30: 42.90 },
@@ -923,9 +1047,7 @@
             45: { 10: 121.70, 15: 85.50, 20: 68.60, 25: 59.80 },
             50: { 10: 125.10, 15: 89.80, 20: 74.00 }, 55: { 10: 130.40, 15: 96.50 }
         };
-        for (let a = 20; a <= 55; a++) {
-            if (!plan5Rates[a]) plan5Rates[a] = { ...plan5Rates[Math.floor(a / 5) * 5] };
-        }
+        for (let a = 20; a <= 55; a++) { if (!plan5Rates[a]) plan5Rates[a] = { ...plan5Rates[Math.floor(a / 5) * 5] }; }
 
         const plan6Rates = {
             20: { 10: 116.40, 11: 106.10, 12: 97.60, 13: 90.40, 14: 84.30, 15: 79.00, 16: 74.40, 17: 70.40, 18: 66.80, 19: 63.70, 20: 60.80 },
@@ -937,9 +1059,7 @@
             50: { 10: 129.00, 11: 120.00, 12: 112.80, 13: 107.10, 14: 102.50, 15: 98.90, 16: 96.00, 17: 93.80, 18: 92.20, 19: 91.00, 20: 90.40 },
             55: { 10: 139.10, 11: 131.00, 12: 124.90, 13: 120.20, 14: 116.70, 15: 114.10 }
         };
-        for (let a = 20; a <= 55; a++) {
-            if (!plan6Rates[a]) plan6Rates[a] = { ...plan6Rates[Math.floor(a / 5) * 5] };
-        }
+        for (let a = 20; a <= 55; a++) { if (!plan6Rates[a]) plan6Rates[a] = { ...plan6Rates[Math.floor(a / 5) * 5] }; }
 
         const plan9Rates = {
             20: { 6: 1442.50, 8: 1244.10, 10: 1074.50, 12: 929.30, 15: 750.10 },
@@ -948,9 +1068,7 @@
             50: { 6: 1453.30, 8: 1264.00, 10: 1105.80 },
             54: { 6: 1460.10 }
         };
-        for (let a = 20; a <= 54; a++) {
-            if (!plan9Rates[a]) plan9Rates[a] = { ...plan9Rates[Math.floor(a / 10) * 10 || 20] };
-        }
+        for (let a = 20; a <= 54; a++) { if (!plan9Rates[a]) plan9Rates[a] = { ...plan9Rates[Math.floor(a / 10) * 10 || 20] }; }
 
         const planRatesMap = { 1: plan1Rates, 2: plan2Rates, 3: plan3Rates, 4: plan4Rates, 5: plan5Rates, 6: plan6Rates, 9: plan9Rates };
         const planConfig = {
@@ -967,16 +1085,21 @@
         let currentActiveTab = 'dps';
 
         function toBangla(num) {
-            if (num === null || num === undefined) return '০';
+            if (num === null || num === undefined || isNaN(num)) return '০';
             return num.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
         }
 
+        // ─── RIDER TOGGLE LOGIC (CC custom show/hide) ──────────────
         function handleRiderToggle(planContext, clickedRider) {
             if (planContext === 'dps') {
                 const plusEl = document.getElementById('dps-plus');
                 const adbEl = document.getElementById('dps-adb');
                 if (clickedRider === 'plus' && plusEl && plusEl.checked && adbEl) adbEl.checked = false;
                 else if (clickedRider === 'adb' && adbEl && adbEl.checked && plusEl) plusEl.checked = false;
+
+                // Show/hide CC custom inputs
+                const ccChecked = document.getElementById('dps-cc').checked;
+                document.getElementById('dps-cc-custom').style.display = ccChecked ? 'flex' : 'none';
                 calculateDPS();
             } else {
                 const plusEl = document.getElementById('p-plus');
@@ -988,11 +1111,18 @@
                 } else if ((clickedRider === 'adb' || clickedRider === 'pdab') && plusEl) {
                     if ((adbEl && adbEl.checked) || (pdabEl && pdabEl.checked)) plusEl.checked = false;
                 }
+                const ccChecked = document.getElementById('p-cc')?.checked || false;
+                const ccCustom = document.getElementById('p-cc-custom');
+                if (ccCustom) ccCustom.style.display = ccChecked ? 'flex' : 'none';
                 calculatePlan(currentActiveTab);
             }
         }
 
-        function getCCRate(age) {
+        // ─── CC RATE & SA HELPERS ───────────────────────────────────
+        function getCCRate(age, customRate) {
+            if (customRate !== undefined && customRate !== null && !isNaN(customRate) && customRate > 0) {
+                return parseFloat(customRate);
+            }
             const a = parseInt(age) || 20;
             if (a <= 29) return 4.45;
             if (a <= 34) return 6.95;
@@ -1001,6 +1131,13 @@
             if (a <= 49) return 26.95;
             if (a <= 54) return 47.95;
             return 79.95;
+        }
+
+        function getCCSumAssured(customSA, mainSA) {
+            if (customSA !== undefined && customSA !== null && !isNaN(customSA) && customSA > 0) {
+                return Math.min(customSA, 500000);
+            }
+            return Math.min(mainSA, 500000);
         }
 
         function getWPRate(age) {
@@ -1020,7 +1157,7 @@
             return parseFloat((3.22 + (a - 20) * 0.12 + (t - 10) * 0.03).toFixed(2));
         }
 
-        // ─── 100% PDF ACCURATE MEDICAL UNDERWRITING LOGIC ──────────
+        // ─── MEDICAL LOGIC ──────────────────────────────────────────
         const testNameMap = {
             'NMS': 'Personal Non-Medical Statements (NMS)',
             'FMR': 'Full Medical Report (FMR)',
@@ -1039,9 +1176,7 @@
         function getMedicalCodes(age, sa) {
             if (!age || !sa || sa <= 0) return [];
             const a = parseInt(age);
-
             if (a >= 60) return ['DECLINE'];
-
             let ageGroup = 1;
             if (a >= 55) ageGroup = 4;
             else if (a >= 46) ageGroup = 3;
@@ -1075,9 +1210,6 @@
                 if (ageGroup === 2) return ['FMR', 'PUR', 'FBS', 'FLP', 'LFT', 'ECG'];
                 if (ageGroup === 3) return ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'FLP', 'LFT', 'ETT'];
                 return ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'FLP', 'LFT', 'ETT'];
-            } else if (sa <= 7500000) {
-                if (ageGroup === 1) return ['FMR', 'PUR', 'FBS', 'C-XR', 'ETT', 'FLP', 'LFT', 'HIV', 'FQ'];
-                return ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'ETT', 'FLP', 'LFT', 'HIV', 'FQ'];
             } else {
                 if (ageGroup === 1) return ['FMR', 'PUR', 'FBS', 'C-XR', 'ETT', 'FLP', 'LFT', 'HIV', 'FQ'];
                 return ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'ETT', 'FLP', 'LFT', 'HIV', 'FQ'];
@@ -1095,7 +1227,6 @@
         function updateMedicalDisplay(containerId, age, sumAssured) {
             const container = document.getElementById(containerId);
             if (!container) return;
-
             if (!age && (!sumAssured || sumAssured <= 0)) {
                 container.className = 'medical-requirements';
                 container.innerHTML = '<i class="fas fa-info-circle"></i> প্রস্তাবকের বয়স ও বীমা অংক দিলে স্বয়ংক্রিয়ভাবে প্রযোজ্য মেডিকেল শর্ত দেখাবে।';
@@ -1111,13 +1242,11 @@
                 container.innerHTML = '<i class="fas fa-coins"></i> সঠিক মেডিকেল চার্ট দেখতে বীমা অংক বা জমা নির্ধারণ করুন।';
                 return;
             }
-
             const tests = getMedicalTests(age, sumAssured);
             let html = '';
-
             if (tests.length === 1 && tests[0].code === 'NMS') {
                 container.className = 'medical-requirements non-med';
-                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> বয়স (' + toBangla(age) + ' বছর) ও বীমা অংক অনুযায়ী কোনো মেডিকেল টেস্টের প্রয়োজন নেই[cite: 3]। শুধুমাত্র ব্যক্তিগত নন-মেডিকেল ঘোষণা (Personal Non-Medical Statement) প্রযোজ্য[cite: 3]।';
+                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> বয়স (' + toBangla(age) + ' বছর) ও বীমা অংক অনুযায়ী কোনো মেডিকেল টেস্টের প্রয়োজন নেই। শুধুমাত্র ব্যক্তিগত নন-মেডিকেল ঘোষণা (Personal Non-Medical Statement) প্রযোজ্য।';
             } else if (tests.length === 1 && tests[0].code === 'DECLINE') {
                 container.className = 'medical-requirements has-med';
                 html = '<i class="fas fa-triangle-exclamation"></i> <strong>সতর্কতা:</strong> ' + tests[0].name;
@@ -1126,23 +1255,32 @@
                 html = '<div><i class="fas fa-stethoscope"></i> <strong>প্রস্তাবকের বয়স (' + toBangla(age) + ' বছর) অনুযায়ী প্রয়োজনীয় টেস্টসমূহ:</strong></div><div style="margin-top:5px;">' +
                     tests.map(t => `<span class="test-tag">${t.name}</span>`).join('') + '</div>';
             }
-
             if (sumAssured > 1000000) {
                 html += '<div style="margin-top:8px; font-size:12px; color:#fbbf24;"><i class="fas fa-file-invoice"></i> বীমা অংক ১০ লক্ষ টাকার বেশি হওয়ায় আয়ের উৎস সংক্রান্ত প্রমাণপত্র (Financial Document) প্রয়োজন।</div>';
             }
-
             container.innerHTML = html;
         }
 
-        // ─── TAB SWITCHING & RENDERING ─────────────────────────
+        // ─── TAB SWITCHING ──────────────────────────────────────────
         function switchPlanTab(planId) {
             currentActiveTab = planId;
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            if (event && event.currentTarget) event.currentTarget.classList.add('active');
+            const allBtns = document.querySelectorAll('.tab-btn');
+            allBtns.forEach(b => b.classList.remove('active'));
+            // Find which button was clicked
+            const btns = document.querySelectorAll('.tab-btn');
+            let idx = 0;
+            if (planId === 'dps') idx = 0;
+            else if (planId === 1) idx = 1;
+            else if (planId === 2) idx = 2;
+            else if (planId === 3) idx = 3;
+            else if (planId === 4) idx = 4;
+            else if (planId === 5) idx = 5;
+            else if (planId === 6) idx = 6;
+            else if (planId === 9) idx = 7;
+            if (btns[idx]) btns[idx].classList.add('active');
 
             const dpsTab = document.getElementById('tab-dps');
             const dynamicContainer = document.getElementById('dynamic-plan-container');
-
             if (planId === 'dps') {
                 dpsTab.style.display = 'block';
                 dynamicContainer.style.display = 'none';
@@ -1191,6 +1329,11 @@
                 if (conf.riders.includes('wp')) riderHTML += `<div class="checkbox-item"><input type="checkbox" id="p-wp" onchange="handleRiderToggle('plan', 'wp')" /><label for="p-wp"><i class="fas fa-file-invoice"></i> WP</label></div>`;
                 if (conf.riders.includes('ibr')) riderHTML += `<div class="checkbox-item"><input type="checkbox" id="p-ibr" onchange="handleRiderToggle('plan', 'ibr')" /><label for="p-ibr"><i class="fas fa-hand-holding-dollar"></i> IBR</label></div>`;
                 riderHTML += `</div>`;
+                // CC Custom inputs (hidden by default)
+                riderHTML += `<div id="p-cc-custom" class="cc-custom-group" style="display:none;">
+                    <div class="form-group"><label><i class="fas fa-percent"></i> CC রেট (প্রতি হাজারে)</label><input type="number" id="p-cc-rate" placeholder="ডিফল্ট" step="0.01" oninput="calculatePlan(${planId})" /></div>
+                    <div class="form-group"><label><i class="fas fa-coins"></i> CC আওতায় বিমা অংক</label><input type="number" id="p-cc-sa" placeholder="সর্বোচ্চ ৫,০০,০০০" oninput="calculatePlan(${planId})" /></div>
+                </div>`;
             }
 
             container.innerHTML = `
@@ -1241,24 +1384,31 @@
             const term = parseFloat(document.getElementById('dps-term').value) || 0;
             const ageInputVal = document.getElementById('dps-age').value;
             const age = ageInputVal !== '' ? parseInt(ageInputVal) : null;
-
             const hasADB = document.getElementById('dps-adb').checked;
             const hasPlus = document.getElementById('dps-plus').checked;
             const hasCC = document.getElementById('dps-cc').checked;
             const hasWP = document.getElementById('dps-wp').checked;
 
-            const sumAssured = deposit * 12 * term;
+            const mainSA = deposit * 12 * term;
             const modeFactor = 0.0925;
             const effAge = age || 30;
 
-            const adbAmt = hasADB ? Math.round((sumAssured / 1000) * 1.25 * modeFactor) : 0;
-            const plusAmt = hasPlus ? Math.round((sumAssured / 1000) * 6.45 * modeFactor) : 0;
-            const ccAmt = hasCC ? Math.round((sumAssured / 1000) * getCCRate(effAge) * modeFactor) : 0;
-            const wpAmt = hasWP ? Math.round((sumAssured / 1000) * getWPRate(effAge) * modeFactor) : 0;
+            // CC custom
+            const ccRateInput = document.getElementById('dps-cc-rate').value;
+            const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
+            const ccSAInput = document.getElementById('dps-cc-sa').value;
+            const ccSA = ccSAInput !== '' ? parseFloat(ccSAInput) : null;
+
+            const adbAmt = hasADB ? Math.round((mainSA / 1000) * 1.25 * modeFactor) : 0;
+            const plusAmt = hasPlus ? Math.round((mainSA / 1000) * 6.45 * modeFactor) : 0;
+            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, mainSA) : 0;
+            const ccRateUsed = hasCC ? getCCRate(effAge, ccRate) : 0;
+            const ccAmt = hasCC ? Math.round((ccSaUsed / 1000) * ccRateUsed * modeFactor) : 0;
+            const wpAmt = hasWP ? Math.round((mainSA / 1000) * getWPRate(effAge) * modeFactor) : 0;
 
             const total = deposit + adbAmt + plusAmt + ccAmt + wpAmt;
 
-            document.getElementById('dps-sumAssured').innerText = sumAssured.toLocaleString('bn-BD') + ' ৳';
+            document.getElementById('dps-sumAssured').innerText = mainSA.toLocaleString('bn-BD') + ' ৳';
             document.getElementById('dps-adbAmount').innerText = adbAmt.toLocaleString('bn-BD') + ' ৳';
             document.getElementById('dps-plusAmount').innerText = plusAmt.toLocaleString('bn-BD') + ' ৳';
             document.getElementById('dps-ccAmount').innerText = ccAmt.toLocaleString('bn-BD') + ' ৳';
@@ -1269,8 +1419,9 @@
             document.getElementById('row-dps-plus').style.display = hasPlus ? 'flex' : 'none';
             document.getElementById('row-dps-cc').style.display = hasCC ? 'flex' : 'none';
             document.getElementById('row-dps-wp').style.display = hasWP ? 'flex' : 'none';
+            document.getElementById('dps-cc-custom').style.display = hasCC ? 'flex' : 'none';
 
-            updateMedicalDisplay('medical-dps', age, sumAssured);
+            updateMedicalDisplay('medical-dps', age, mainSA);
         }
 
         // ─── CALCULATE GENERAL PLAN ────────────────────────────
@@ -1317,10 +1468,18 @@
             const hasWP = document.getElementById('p-wp')?.checked || false;
             const hasIBR = document.getElementById('p-ibr')?.checked || false;
 
+            // CC custom
+            const ccRateInput = document.getElementById('p-cc-rate')?.value;
+            const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
+            const ccSAInput = document.getElementById('p-cc-sa')?.value;
+            const ccSA = ccSAInput !== '' ? parseFloat(ccSAInput) : null;
+
             const adbCharge = hasADB ? Math.round((sum / 1000) * 1.25 * modeFactor) : 0;
             const pdabCharge = hasPDAB ? Math.round((sum / 1000) * 3.50 * modeFactor) : 0;
             const plusCharge = hasPlus ? Math.round((sum / 1000) * 6.45 * modeFactor) : 0;
-            const ccCharge = hasCC ? Math.round((sum / 1000) * getCCRate(age) * modeFactor) : 0;
+            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, sum) : 0;
+            const ccRateUsed = hasCC ? getCCRate(age, ccRate) : 0;
+            const ccCharge = hasCC ? Math.round((ccSaUsed / 1000) * ccRateUsed * modeFactor) : 0;
             const wpCharge = hasWP ? Math.round((sum / 1000) * getWPRate(age) * modeFactor) : 0;
             const ibrCharge = hasIBR ? Math.round((sum / 1000) * getIBRRate(age, term) * modeFactor) : 0;
 
@@ -1359,7 +1518,7 @@
             });
         }
 
-        // ─── BUDGET SUGGESTIONS WITH DISTINCT COLOR STYLES ─────
+        // ─── BUDGET SUGGESTIONS ──────────────────────────────────
         function generateBudgetSuggestions(planId) {
             const targetBudgetElem = document.getElementById('p-target-budget');
             const container = document.getElementById('p-sug-container');
@@ -1375,6 +1534,12 @@
             const hasCC = document.getElementById('p-cc')?.checked || false;
             const hasWP = document.getElementById('p-wp')?.checked || false;
             const hasIBR = document.getElementById('p-ibr')?.checked || false;
+
+            // CC custom rates for suggestions
+            const ccRateInput = document.getElementById('p-cc-rate')?.value;
+            const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
+            const ccSAInput = document.getElementById('p-cc-sa')?.value;
+            const ccSA = ccSAInput !== '' ? parseFloat(ccSAInput) : null;
 
             const modeElem = document.querySelector('input[name="p-mode"]:checked');
             const mode = modeElem ? modeElem.value : 'yearly';
@@ -1398,7 +1563,15 @@
             else if (mode === 'half_yearly') modeFactor = 0.525;
 
             const rate = ratesTable[currentAge][selectedTerm];
-            const totalRiderRate = (hasADB ? 1.25 : 0) + (hasPDAB ? 3.50 : 0) + (hasPlus ? 6.45 : 0) + (hasCC ? getCCRate(currentAge) : 0) + (hasWP ? getWPRate(currentAge) : 0) + (hasIBR ? getIBRRate(currentAge, selectedTerm) : 0);
+            const ccRateUsed = hasCC ? getCCRate(currentAge, ccRate) : 0;
+            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, 1000000) : 0; // use a placeholder for SA
+            // For suggestion, we approximate CC as if it's proportional to main SA (but limited)
+            // We'll treat CC as a fixed rider rate per thousand based on main SA
+            const ccEffectiveRate = hasCC ? ccRateUsed * (ccSaUsed / 1000) : 0; // this is per thousand of main SA
+
+            const totalRiderRate = (hasADB ? 1.25 : 0) + (hasPDAB ? 3.50 : 0) + (hasPlus ? 6.45 : 0) +
+                (hasCC ? ccRateUsed * (ccSaUsed / 1000) : 0) + (hasWP ? getWPRate(currentAge) : 0) +
+                (hasIBR ? getIBRRate(currentAge, selectedTerm) : 0);
             const effRatePerThousand = (rate + totalRiderRate) * modeFactor;
 
             const rawSumAssured = (targetBudget / effRatePerThousand) * 1000;
@@ -1412,7 +1585,15 @@
                 const sa = centerSum + (i * 1000);
                 if (sa >= minSum) {
                     const baseP = Math.round((sa / 1000) * rate * modeFactor);
-                    const riderP = Math.round((sa / 1000) * totalRiderRate * modeFactor);
+                    const ccSaActual = hasCC ? getCCSumAssured(ccSA, sa) : 0;
+                    const ccRateActual = hasCC ? getCCRate(currentAge, ccRate) : 0;
+                    const ccP = hasCC ? Math.round((ccSaActual / 1000) * ccRateActual * modeFactor) : 0;
+                    const riderP = (hasADB ? Math.round((sa / 1000) * 1.25 * modeFactor) : 0) +
+                        (hasPDAB ? Math.round((sa / 1000) * 3.50 * modeFactor) : 0) +
+                        (hasPlus ? Math.round((sa / 1000) * 6.45 * modeFactor) : 0) +
+                        ccP +
+                        (hasWP ? Math.round((sa / 1000) * getWPRate(currentAge) * modeFactor) : 0) +
+                        (hasIBR ? Math.round((sa / 1000) * getIBRRate(currentAge, selectedTerm) * modeFactor) : 0);
                     const totalP = baseP + riderP;
                     const item = { term: selectedTerm, sumAssured: sa, totalPremium: totalP };
                     if (totalP < targetBudget) lessArray.push(item);
@@ -1437,7 +1618,7 @@
                 card.innerHTML = `
                     <div class="sug-info">
                         <div class="sug-main">মেয়াদ: ${toBangla(s.term)} বছর · বীমা অংক: <strong>${s.sumAssured.toLocaleString('bn-BD')}</strong> ৳</div>
-                        <div style="margin-top: 3px; display: flex; align-items: center;">
+                        <div style="margin-top: 3px; display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
                             <span class="${isLower ? 'sug-amount-low' : 'sug-amount-high'}">
                                 <i class="fas fa-coins"></i> নির্ধারিত কিস্তি: ${s.totalPremium.toLocaleString('bn-BD')} ৳
                             </span>
@@ -1468,6 +1649,9 @@
                 document.getElementById('dps-term').value = '';
                 document.getElementById('dps-age').value = '';
                 ['adb', 'plus', 'cc', 'wp'].forEach(r => document.getElementById(`dps-${r}`).checked = false);
+                document.getElementById('dps-cc-rate').value = '';
+                document.getElementById('dps-cc-sa').value = '';
+                document.getElementById('dps-cc-custom').style.display = 'none';
                 calculateDPS();
             } else {
                 document.getElementById('p-age').value = '';
@@ -1480,6 +1664,12 @@
                     const el = document.getElementById(`p-${r}`);
                     if (el) el.checked = false;
                 });
+                const ccCustom = document.getElementById('p-cc-custom');
+                if (ccCustom) ccCustom.style.display = 'none';
+                const ccRate = document.getElementById('p-cc-rate');
+                if (ccRate) ccRate.value = '';
+                const ccSA = document.getElementById('p-cc-sa');
+                if (ccSA) ccSA.value = '';
                 calculatePlan(currentActiveTab);
             }
         }
@@ -1532,10 +1722,12 @@
         function initDateSelectors() {
             ['dobDay', 'asOfDay'].forEach(id => {
                 const el = document.getElementById(id);
+                el.innerHTML = '';
                 for (let i = 1; i <= 31; i++) el.innerHTML += `<option value="${i}">${toBangla(i)}</option>`;
             });
             ['dobMonth', 'asOfMonth'].forEach(id => {
                 const el = document.getElementById(id);
+                el.innerHTML = '';
                 banglaMonths.forEach((m, idx) => el.innerHTML += `<option value="${idx}">${m}</option>`);
             });
             const now = new Date();
@@ -1545,7 +1737,7 @@
             document.getElementById('dobYear').value = 1995;
         }
 
-        // ─── FULL DATA EXTRACTION FOR COPY & PRINT ──────────────
+        // ─── DATA EXTRACTION FOR COPY & PRINT ──────────────────
         function getCurrentCalculationData() {
             const data = {
                 planTitle: '', modeText: '', age: '--', term: '--', sumAssured: '০ ৳',
