@@ -1,0 +1,2701 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>বীমা প্রিমিয়াম ও বাজেট ক্যালকুলেটর - আলফা ইসলামী লাইফ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ── Reset & Base ── */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', 'Segoe UI', sans-serif;
+            background: linear-gradient(145deg, #eef2f7 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+        }
+
+        .calculator-card {
+            background: #ffffff;
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.10), 0 8px 24px rgba(0, 0, 0, 0.04);
+            width: 100%;
+            max-width: 620px;
+            padding: 28px 26px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .calculator-card:hover {
+            box-shadow: 0 28px 72px rgba(15, 23, 42, 0.14);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #f0f4f9;
+        }
+
+        .header-container h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0b1a33;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-container h2 i {
+            color: #0d9488;
+            font-size: 24px;
+        }
+
+        .connect-btn {
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.30);
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .connect-btn i {
+            font-size: 14px;
+        }
+
+        .connect-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(13, 148, 136, 0.40);
+            background: linear-gradient(135deg, #0f766e, #0d9488);
+        }
+
+        .tab-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            background: #f1f6fb;
+            border-radius: 14px;
+            padding: 6px;
+            margin-bottom: 24px;
+        }
+
+        .tab-btn {
+            flex: 1 1 calc(16.66% - 6px);
+            min-width: 72px;
+            padding: 10px 4px;
+            border: none;
+            background: transparent;
+            font-size: 12px;
+            font-weight: 600;
+            color: #5e6f8d;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.25s ease;
+            text-align: center;
+            letter-spacing: 0.2px;
+        }
+
+        .tab-btn i {
+            display: block;
+            font-size: 18px;
+            margin-bottom: 3px;
+        }
+
+        .tab-btn:hover {
+            color: #0b1a33;
+            background: rgba(13, 148, 136, 0.06);
+        }
+
+        .tab-btn.active {
+            background: #0d9488;
+            color: #ffffff;
+            box-shadow: 0 4px 14px rgba(13, 148, 136, 0.30);
+        }
+
+        .tab-btn.active i {
+            color: #fff;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeSlide 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            0% {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #1e2b45;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+        }
+
+        .form-group label i {
+            color: #0d9488;
+            margin-right: 6px;
+            width: 18px;
+        }
+
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.25s ease;
+            background: #fafcff;
+            color: #0b1a33;
+            font-weight: 500;
+        }
+
+        .form-group input[type="number"]:focus,
+        .form-group select:focus {
+            border-color: #0d9488;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+        }
+
+        .form-group input[type="number"]::placeholder {
+            color: #aab4c9;
+            font-weight: 400;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .mode-option {
+            flex: 1;
+            text-align: center;
+        }
+
+        .mode-option input[type="radio"] {
+            display: none;
+        }
+
+        .mode-option label {
+            display: block;
+            padding: 10px 6px;
+            background: #f4f8fe;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #4a5b7a;
+            transition: all 0.2s ease;
+        }
+
+        .mode-option label i {
+            margin-right: 4px;
+        }
+
+        .mode-option input[type="radio"]:checked+label {
+            background: #0d9488;
+            color: #ffffff;
+            border-color: #0d9488;
+            box-shadow: 0 3px 12px rgba(13, 148, 136, 0.25);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            background: #f4f8fe;
+            padding: 6px 14px 6px 10px;
+            border-radius: 30px;
+            border: 1.5px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #0d9488;
+            background: #f0faf9;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #0d9488;
+            margin: 0;
+        }
+
+        .checkbox-item label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1e2b45;
+            font-size: 13px;
+        }
+
+        .checkbox-item .badge-icon {
+            font-size: 14px;
+            color: #0d9488;
+        }
+
+        .mini-age-btn {
+            background: #0d9488;
+            color: #fff;
+            border: none;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .mini-age-btn:hover {
+            background: #0f766e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.30);
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .flex-row label {
+            margin-bottom: 0;
+        }
+
+        .results {
+            margin-top: 18px;
+            background: linear-gradient(145deg, #f0fdf6, #e6f4ea);
+            padding: 18px 20px;
+            border-radius: 16px;
+            border: 1px solid #c6f0d6;
+            box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #1e2b45;
+            border-bottom: 1px dashed rgba(13, 148, 136, 0.15);
+        }
+
+        .result-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .result-item .label-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .result-item .label-wrap i {
+            color: #0d9488;
+            width: 20px;
+            font-size: 15px;
+        }
+
+        .result-item .amount {
+            font-weight: 700;
+            color: #0b1a33;
+        }
+
+        .result-item.total {
+            margin-top: 6px;
+            padding-top: 12px;
+            border-top: 2px dashed #0d9488;
+            font-weight: 700;
+            font-size: 17px;
+            color: #065f46;
+        }
+
+        .result-item.total .amount {
+            color: #065f46;
+            font-size: 18px;
+        }
+
+        .budget-box {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            padding: 16px 18px;
+            border-radius: 14px;
+            margin-bottom: 18px;
+            margin-top: 4px;
+        }
+
+        .budget-box h4 {
+            color: #b45309;
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .budget-box h4 i {
+            font-size: 18px;
+        }
+
+        .suggestion-list {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 280px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .suggestion-list::-webkit-scrollbar {
+            width: 4px;
+        }
+        .suggestion-list::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+        .suggestion-list::-webkit-scrollbar-thumb {
+            background: #0d9488;
+            border-radius: 10px;
+        }
+
+        .suggestion-card {
+            background: #ffffff;
+            border: 1px solid #e8edf4;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .suggestion-card:hover {
+            border-color: #0d9488;
+            background: #f8fdfc;
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.08);
+        }
+
+        .suggestion-card .sug-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .suggestion-card .sug-info .sug-main {
+            font-weight: 600;
+            color: #0b1a33;
+        }
+
+        .suggestion-card .sug-info .sug-premium {
+            font-weight: 700;
+            color: #0d9488;
+        }
+
+        .suggestion-card .sug-info .sug-premium.low {
+            color: #ef4444;
+        }
+
+        .select-sug-btn {
+            background: #0d9488;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .select-sug-btn:hover {
+            background: #0f766e;
+            transform: scale(1.02);
+        }
+
+        .error-text {
+            color: #ef4444;
+            font-size: 13px;
+            font-weight: 600;
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ── Medical Requirements Section ── */
+        .medical-requirements {
+            color: #1e293b;
+            margin-top: 14px;
+            background: #f8fafc;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1.5px solid #cbd5e1;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .medical-requirements.non-med {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #166534;
+        }
+
+        .medical-requirements.has-med {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #991b1b;
+        }
+
+        .medical-requirements .test-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .medical-requirements .test-tag {
+            background: #dc2626;
+            color: #ffffff;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(220, 38, 38, 0.2);
+        }
+
+        /* ── Action Buttons ── */
+        .action-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .action-row .btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-copy {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1.5px solid #b8dffb;
+        }
+        .btn-copy:hover {
+            background: #b8dffb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(3, 105, 161, 0.15);
+        }
+
+        .btn-print {
+            background: #f3e8ff;
+            color: #6b21a8;
+            border: 1.5px solid #d8b4fe;
+        }
+        .btn-print:hover {
+            background: #d8b4fe;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(107, 33, 168, 0.15);
+        }
+
+        .btn-group {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .clear-btn {
+            width: 100%;
+            padding: 13px;
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1.5px solid #fecaca;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .clear-btn:hover {
+            background: #fecaca;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(239, 68, 68, 0.15);
+        }
+
+        .age-btn {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #0d9488, #0f766e);
+            color: #fff;
+            border: none;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.25);
+        }
+
+        .age-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(13, 148, 136, 0.35);
+            background: linear-gradient(135deg, #0f766e, #0d9488);
+        }
+
+        .credit {
+            text-align: center;
+            margin-top: 22px;
+            padding-top: 16px;
+            border-top: 2px solid #f0f4f9;
+            font-size: 13px;
+            color: #7a8aa3;
+        }
+
+        .credit strong {
+            color: #0d9488;
+            font-weight: 700;
+        }
+
+        /* ── Modal Overlay ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 26, 51, 0.50);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 28px 26px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.20);
+            animation: modalPop 0.30s ease;
+        }
+
+        @keyframes modalPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.96) translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            font-size: 26px;
+            font-weight: 300;
+            color: #aab4c9;
+            cursor: pointer;
+            border: none;
+            background: none;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: #1e2b45;
+        }
+
+        .date-select-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .date-select-group select,
+        .date-select-group input {
+            flex: 1;
+            padding: 10px 8px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fafcff;
+            outline: none;
+            transition: border-color 0.2s;
+            color: #0b1a33;
+            font-weight: 500;
+        }
+
+        .date-select-group select:focus,
+        .date-select-group input:focus {
+            border-color: #0d9488;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.12);
+        }
+
+        .date-select-group input {
+            min-width: 80px;
+        }
+
+        .age-result-box {
+            margin-top: 18px;
+            padding: 16px;
+            background: #f4f8fe;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+        }
+
+        .age-detail {
+            font-size: 14px;
+            color: #1e2b45;
+            margin-bottom: 8px;
+        }
+
+        .round-age {
+            padding-top: 10px;
+            border-top: 2px dashed #d1dbe8;
+            font-size: 17px;
+            font-weight: 700;
+            color: #0d9488;
+            text-align: center;
+        }
+
+        .benefit-body h3 {
+            color: #0b1a33;
+            margin-bottom: 12px;
+            border-bottom: 3px solid #0d9488;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        .benefit-body h3 i {
+            color: #0d9488;
+        }
+
+        .benefit-body p {
+            font-size: 13px;
+            color: #4a5b7a;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+
+        .benefit-body ul {
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.7;
+            color: #1e2b45;
+            padding-left: 20px;
+        }
+
+        .benefit-body ul li {
+            margin-bottom: 6px;
+        }
+
+        .benefit-body ol {
+            margin-top: 4px;
+            padding-left: 20px;
+            font-size: 12px;
+            color: #5e6f8d;
+            line-height: 1.6;
+            columns: 2;
+            column-gap: 20px;
+        }
+
+        /* ── DEDICATED PRINT QUOTATION SHEET (Hidden on screen) ── */
+        #print-section {
+            display: none;
+        }
+
+        /* ── Print Styles ── */
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                color: #000000 !important;
+            }
+            .calculator-card,
+            .modal-overlay {
+                display: none !important;
+            }
+            #print-section {
+                display: block !important;
+                width: 100% !important;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 24px;
+                font-family: 'Hind Siliguri', sans-serif;
+            }
+            .print-header {
+                text-align: center;
+                border-bottom: 2px solid #0d9488;
+                padding-bottom: 12px;
+                margin-bottom: 18px;
+            }
+            .print-header h1 {
+                font-size: 22px;
+                color: #0f766e;
+                margin-bottom: 4px;
+            }
+            .print-header p {
+                font-size: 13px;
+                color: #475569;
+            }
+            .print-badge {
+                display: inline-block;
+                background: #f0fdf4;
+                color: #166534;
+                border: 1px solid #bbf7d0;
+                padding: 4px 14px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 700;
+                margin-top: 8px;
+            }
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 14px;
+                margin-bottom: 16px;
+            }
+            .print-table th, .print-table td {
+                border: 1px solid #cbd5e1;
+                padding: 8px 12px;
+                font-size: 14px;
+                text-align: left;
+            }
+            .print-table th {
+                background: #f1f5f9;
+                color: #1e293b;
+                width: 40%;
+                font-weight: 600;
+            }
+            .print-table td {
+                font-weight: 700;
+                color: #0f172a;
+            }
+            .print-box {
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                padding: 12px 14px;
+                margin-top: 14px;
+                background: #fafafa;
+                font-size: 13px;
+                line-height: 1.6;
+            }
+            .print-box.medical-box {
+                border-color: #fca5a5;
+                background: #fff5f5;
+            }
+            .print-box h4 {
+                font-size: 14px;
+                color: #0f172a;
+                margin-bottom: 6px;
+            }
+            .print-signatures {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 50px;
+                padding-top: 20px;
+            }
+            .sign-col {
+                text-align: center;
+                width: 200px;
+                border-top: 1px dashed #64748b;
+                font-size: 13px;
+                font-weight: 600;
+                padding-top: 6px;
+            }
+            .print-footer {
+                text-align: center;
+                margin-top: 25px;
+                font-size: 11px;
+                color: #94a3b8;
+                border-top: 1px solid #e2e8f0;
+                padding-top: 8px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .calculator-card {
+                padding: 18px 14px;
+            }
+            .header-container h2 {
+                font-size: 18px;
+            }
+            .tab-btn {
+                font-size: 10px;
+                min-width: 56px;
+                padding: 8px 2px;
+            }
+            .mode-selector {
+                flex-wrap: wrap;
+            }
+            .mode-option {
+                flex: 1 1 calc(33.33% - 6px);
+                min-width: 70px;
+            }
+            .date-select-group {
+                flex-wrap: wrap;
+            }
+            .date-select-group select,
+            .date-select-group input {
+                flex: 1 1 calc(33.33% - 6px);
+                min-width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-card">
+
+        <!-- ─── HEADER ─── -->
+        <div class="header-container">
+            <h2><i class="fas fa-shield-alt"></i> বীমা প্রিমিয়াম</h2>
+            <a href="https://alphaconnect.alphalife.com.bd/" target="_blank" class="connect-btn">
+                <i class="fas fa-link"></i> Connect
+            </a>
+        </div>
+
+        <!-- ─── TABS ─── -->
+        <div class="tab-container">
+            <button class="tab-btn active" onclick="switchTab('dps')">
+                <i class="fas fa-coins"></i> DPS
+            </button>
+            <button class="tab-btn" onclick="switchTab('stage3')">
+                <i class="fas fa-layer-group"></i> 03
+            </button>
+            <button class="tab-btn" onclick="switchTab('stage4')">
+                <i class="fas fa-layer-group"></i> 04
+            </button>
+            <button class="tab-btn" onclick="switchTab('stage5')">
+                <i class="fas fa-layer-group"></i> 05
+            </button>
+            <button class="tab-btn" onclick="switchTab('plan6')">
+                <i class="fas fa-graduation-cap"></i> 06
+            </button>
+            <button class="tab-btn" onclick="switchTab('plan9')">
+                <i class="fas fa-hand-holding-usd"></i> 09
+            </button>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  TAB: DPS Gold                                      -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div id="tab-dps" class="tab-content active">
+            <div class="form-group">
+                <label><i class="fas fa-money-bill-wave"></i> মাসিক বেসিক জমা (টাকা)</label>
+                <input type="number" id="deposit" placeholder="যেমন: ৫০০০" oninput="calculateDPS()" />
+            </div>
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()">
+                        <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+                    </button>
+                </div>
+                <input type="number" id="dps-age" placeholder="যেমন: ৩০" min="18" max="59" oninput="calculateDPS()" />
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <input type="number" id="term" placeholder="যেমন: ১২" oninput="calculateDPS()" />
+            </div>
+            <div class="form-group checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="plus" onchange="calculateDPS()" />
+                    <label for="plus" class="long-press-target" data-type="plus" title="সুবিধা দেখতে চেপে ধরে রাখুন">
+                        <i class="fas fa-plus-circle badge-icon"></i> Plus
+                    </label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="cc" onchange="calculateDPS()" />
+                    <label for="cc" class="long-press-target" data-type="cc" title="সুবিধা দেখতে চেপে ধরে রাখুন">
+                        <i class="fas fa-heartbeat badge-icon"></i> CC
+                    </label>
+                </div>
+            </div>
+
+            <div class="results" id="dps-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-umbrella"></i> বীমা অংক</span>
+                    <span class="amount" id="sumAssured">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-plus-circle"></i> মাসিক প্লাস চার্জ</span>
+                    <span class="amount" id="plusAmount">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-heartbeat"></i> মাসিক CC চার্জ</span>
+                    <span class="amount" id="ccAmount">০ ৳</span>
+                </div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট মাসিক প্রিমিয়াম</span>
+                    <span class="amount" id="totalMonthly">০ ৳</span>
+                </div>
+            </div>
+
+            <div id="medical-dps" class="medical-requirements"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  TAB: 3 Stage (Plan 03)                            -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div id="tab-stage3" class="tab-content">
+            <div class="form-group">
+                <label><i class="fas fa-credit-card"></i> মোড / কিস্তি</label>
+                <div class="mode-selector">
+                    <div class="mode-option">
+                        <input type="radio" id="s3-m-monthly" name="s3-mode" value="monthly" checked onchange="calculateStage(3)" />
+                        <label for="s3-m-monthly"><i class="fas fa-calendar-alt"></i> Monthly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s3-m-hy" name="s3-mode" value="half_yearly" onchange="calculateStage(3)" />
+                        <label for="s3-m-hy"><i class="fas fa-calendar-check"></i> H. Yearly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s3-m-yearly" name="s3-mode" value="yearly" onchange="calculateStage(3)" />
+                        <label for="s3-m-yearly"><i class="fas fa-calendar"></i> Yearly</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()">
+                        <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+                    </button>
+                </div>
+                <input type="number" id="s3-age" placeholder="যেমন: ৪০" min="20" max="53" oninput="calculateStage(3)" />
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <select id="s3-term" onchange="calculateStage(3)">
+                    <option value="12">১২ বছর</option>
+                    <option value="15">১৫ বছর</option>
+                    <option value="18">১৮ বছর</option>
+                    <option value="21">২১ বছর</option>
+                    <option value="24">২৪ বছর</option>
+                </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s3-plus" onchange="calculateStage(3)" />
+                    <label for="s3-plus" class="long-press-target" data-type="plus"><i class="fas fa-plus-circle badge-icon"></i> Plus</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s3-cc" onchange="calculateStage(3)" />
+                    <label for="s3-cc" class="long-press-target" data-type="cc"><i class="fas fa-heartbeat badge-icon"></i> CC</label>
+                </div>
+            </div>
+
+            <div class="budget-box">
+                <h4><i class="fas fa-lightbulb"></i> বাজেট থেকে ২০টি পছন্দসই সাজেশন</h4>
+                <div class="form-group" style="margin-bottom:6px;">
+                    <input type="number" id="s3-target-budget" placeholder="কাঙ্ক্ষিত কিস্তি (যেমন: ১০০০)" oninput="generateBudgetSuggestions(3)" />
+                </div>
+                <div id="s3-sug-container" class="suggestion-list"></div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-file-invoice"></i> বীমা অংক (টাকা)</label>
+                <input type="number" id="s3-sum" placeholder="যেমন: ১০০০০০" oninput="calculateStage(3)" />
+            </div>
+            <div id="s3-error" class="error-text"></div>
+
+            <div class="results" id="stage3-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-percent"></i> হাজার প্রতি রেট</span>
+                    <span class="amount" id="s3-rate-val">০.০০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-file-signature"></i> মূল প্রিমিয়াম</span>
+                    <span class="amount" id="s3-base-premium">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-plus-circle"></i> প্লাস চার্জ</span>
+                    <span class="amount" id="s3-plus-charge">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-heartbeat"></i> CC চার্জ</span>
+                    <span class="amount" id="s3-cc-charge">০ ৳</span>
+                </div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট নির্ধারিত প্রিমিয়াম</span>
+                    <span class="amount" id="s3-total-premium">০ ৳</span>
+                </div>
+            </div>
+
+            <div id="medical-stage3" class="medical-requirements"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  TAB: 4 Stage (Plan 04)                            -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div id="tab-stage4" class="tab-content">
+            <div class="form-group">
+                <label><i class="fas fa-credit-card"></i> মোড / কিস্তি</label>
+                <div class="mode-selector">
+                    <div class="mode-option">
+                        <input type="radio" id="s4-m-monthly" name="s4-mode" value="monthly" checked onchange="calculateStage(4)" />
+                        <label for="s4-m-monthly"><i class="fas fa-calendar-alt"></i> Monthly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s4-m-hy" name="s4-mode" value="half_yearly" onchange="calculateStage(4)" />
+                        <label for="s4-m-hy"><i class="fas fa-calendar-check"></i> H. Yearly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s4-m-yearly" name="s4-mode" value="yearly" onchange="calculateStage(4)" />
+                        <label for="s4-m-yearly"><i class="fas fa-calendar"></i> Yearly</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()">
+                        <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+                    </button>
+                </div>
+                <input type="number" id="s4-age" placeholder="যেমন: ৪০" min="20" max="55" oninput="calculateStage(4)" />
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <select id="s4-term" onchange="calculateStage(4)">
+                    <option value="12">১২ বছর</option>
+                    <option value="16">১৬ বছর</option>
+                    <option value="20">২০ বছর</option>
+                    <option value="24">২৪ বছর</option>
+                    <option value="28">২৮ বছর</option>
+                </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s4-plus" onchange="calculateStage(4)" />
+                    <label for="s4-plus" class="long-press-target" data-type="plus"><i class="fas fa-plus-circle badge-icon"></i> Plus</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s4-cc" onchange="calculateStage(4)" />
+                    <label for="s4-cc" class="long-press-target" data-type="cc"><i class="fas fa-heartbeat badge-icon"></i> CC</label>
+                </div>
+            </div>
+
+            <div class="budget-box">
+                <h4><i class="fas fa-lightbulb"></i> বাজেট থেকে ২০টি পছন্দসই সাজেশন</h4>
+                <div class="form-group" style="margin-bottom:6px;">
+                    <input type="number" id="s4-target-budget" placeholder="কাঙ্ক্ষিত কিস্তি (যেমন: ১০০০)" oninput="generateBudgetSuggestions(4)" />
+                </div>
+                <div id="s4-sug-container" class="suggestion-list"></div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-file-invoice"></i> বীমা অংক (টাকা)</label>
+                <input type="number" id="s4-sum" placeholder="যেমন: ১০০০০০" oninput="calculateStage(4)" />
+            </div>
+            <div id="s4-error" class="error-text"></div>
+
+            <div class="results" id="stage4-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-percent"></i> হাজার প্রতি রেট</span>
+                    <span class="amount" id="s4-rate-val">০.০০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-file-signature"></i> মূল প্রিমিয়াম</span>
+                    <span class="amount" id="s4-base-premium">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-plus-circle"></i> প্লাস চার্জ</span>
+                    <span class="amount" id="s4-plus-charge">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-heartbeat"></i> CC চার্জ</span>
+                    <span class="amount" id="s4-cc-charge">০ ৳</span>
+                </div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট নির্ধারিত প্রিমিয়াম</span>
+                    <span class="amount" id="s4-total-premium">০ ৳</span>
+                </div>
+            </div>
+
+            <div id="medical-stage4" class="medical-requirements"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  TAB: 5 Stage (Plan 05)                            -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div id="tab-stage5" class="tab-content">
+            <div class="form-group">
+                <label><i class="fas fa-credit-card"></i> মোড / কিস্তি</label>
+                <div class="mode-selector">
+                    <div class="mode-option">
+                        <input type="radio" id="s5-m-monthly" name="s5-mode" value="monthly" checked onchange="calculateStage(5)" />
+                        <label for="s5-m-monthly"><i class="fas fa-calendar-alt"></i> Monthly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s5-m-hy" name="s5-mode" value="half_yearly" onchange="calculateStage(5)" />
+                        <label for="s5-m-hy"><i class="fas fa-calendar-check"></i> H. Yearly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s5-m-yearly" name="s5-mode" value="yearly" onchange="calculateStage(5)" />
+                        <label for="s5-m-yearly"><i class="fas fa-calendar"></i> Yearly</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()">
+                        <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+                    </button>
+                </div>
+                <input type="number" id="s5-age" placeholder="যেমন: ৪০" min="20" max="55" oninput="calculateStage(5)" />
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <select id="s5-term" onchange="calculateStage(5)">
+                    <option value="10">১০ বছর</option>
+                    <option value="15">১৫ বছর</option>
+                    <option value="20">২০ বছর</option>
+                    <option value="25">২৫ বছর</option>
+                    <option value="30">৩০ বছর</option>
+                </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s5-plus" onchange="calculateStage(5)" />
+                    <label for="s5-plus" class="long-press-target" data-type="plus"><i class="fas fa-plus-circle badge-icon"></i> Plus</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s5-cc" onchange="calculateStage(5)" />
+                    <label for="s5-cc" class="long-press-target" data-type="cc"><i class="fas fa-heartbeat badge-icon"></i> CC</label>
+                </div>
+            </div>
+
+            <div class="budget-box">
+                <h4><i class="fas fa-lightbulb"></i> বাজেট থেকে ২০টি পছন্দসই সাজেশন</h4>
+                <div class="form-group" style="margin-bottom:6px;">
+                    <input type="number" id="s5-target-budget" placeholder="কাঙ্ক্ষিত কিস্তি (যেমন: ১০০০)" oninput="generateBudgetSuggestions(5)" />
+                </div>
+                <div id="s5-sug-container" class="suggestion-list"></div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-file-invoice"></i> বীমা অংক (টাকা)</label>
+                <input type="number" id="s5-sum" placeholder="যেমন: ১০০০০০" oninput="calculateStage(5)" />
+            </div>
+            <div id="s5-error" class="error-text"></div>
+
+            <div class="results" id="stage5-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-percent"></i> হাজার প্রতি রেট</span>
+                    <span class="amount" id="s5-rate-val">০.০০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-file-signature"></i> মূল প্রিমিয়াম</span>
+                    <span class="amount" id="s5-base-premium">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-plus-circle"></i> প্লাস চার্জ</span>
+                    <span class="amount" id="s5-plus-charge">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-heartbeat"></i> CC চার্জ</span>
+                    <span class="amount" id="s5-cc-charge">০ ৳</span>
+                </div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট নির্ধারিত প্রিমিয়াম</span>
+                    <span class="amount" id="s5-total-premium">০ ৳</span>
+                </div>
+            </div>
+
+            <div id="medical-stage5" class="medical-requirements"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  TAB: Education (Plan 06)                          -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div id="tab-plan6" class="tab-content">
+            <div class="form-group">
+                <label><i class="fas fa-credit-card"></i> মোড / কিস্তি</label>
+                <div class="mode-selector">
+                    <div class="mode-option">
+                        <input type="radio" id="s6-m-monthly" name="s6-mode" value="monthly" checked onchange="calculateStage(6)" />
+                        <label for="s6-m-monthly"><i class="fas fa-calendar-alt"></i> Monthly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s6-m-hy" name="s6-mode" value="half_yearly" onchange="calculateStage(6)" />
+                        <label for="s6-m-hy"><i class="fas fa-calendar-check"></i> H. Yearly</label>
+                    </div>
+                    <div class="mode-option">
+                        <input type="radio" id="s6-m-yearly" name="s6-mode" value="yearly" onchange="calculateStage(6)" />
+                        <label for="s6-m-yearly"><i class="fas fa-calendar"></i> Yearly</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()">
+                        <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+                    </button>
+                </div>
+                <input type="number" id="s6-age" placeholder="যেমন: ৪০" min="20" max="55" oninput="calculateStage(6)" />
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <select id="s6-term" onchange="calculateStage(6)">
+                    <option value="10">১০ বছর</option><option value="11">১১ বছর</option>
+                    <option value="12">১২ বছর</option><option value="13">১৩ বছর</option>
+                    <option value="14">১৪ বছর</option><option value="15">১৫ বছর</option>
+                    <option value="16">১৬ বছর</option><option value="17">১৭ বছর</option>
+                    <option value="18">১৮ বছর</option><option value="19">১৯ বছর</option>
+                    <option value="20">২০ বছর</option>
+                </select>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s6-plus" onchange="calculateStage(6)" />
+                    <label for="s6-plus" class="long-press-target" data-type="plus"><i class="fas fa-plus-circle badge-icon"></i> Plus</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="s6-cc" onchange="calculateStage(6)" />
+                    <label for="s6-cc" class="long-press-target" data-type="cc"><i class="fas fa-heartbeat badge-icon"></i> CC</label>
+                </div>
+            </div>
+
+            <div class="budget-box">
+                <h4><i class="fas fa-lightbulb"></i> বাজেট থেকে ২০টি পছন্দসই সাজেশন</h4>
+                <div class="form-group" style="margin-bottom:6px;">
+                    <input type="number" id="s6-target-budget" placeholder="কাঙ্ক্ষিত কিস্তি (যেমন: ১০০০)" oninput="generateBudgetSuggestions(6)" />
+                </div>
+                <div id="s6-sug-container" class="suggestion-list"></div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-file-invoice"></i> বীমা অংক (টাকা)</label>
+                <input type="number" id="s6-sum" placeholder="যেমন: ১০০০০০" oninput="calculateStage(6)" />
+            </div>
+            <div id="s6-error" class="error-text"></div>
+
+            <div class="results" id="stage6-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-percent"></i> হাজার প্রতি রেট</span>
+                    <span class="amount" id="s6-rate-val">০.০০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-file-signature"></i> মূল প্রিমিয়াম</span>
+                    <span class="amount" id="s6-base-premium">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-plus-circle"></i> প্লাস চার্জ</span>
+                    <span class="amount" id="s6-plus-charge">০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-heartbeat"></i> CC চার্জ</span>
+                    <span class="amount" id="s6-cc-charge">০ ৳</span>
+                </div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট নির্ধারিত প্রিমিয়াম</span>
+                    <span class="amount" id="s6-total-premium">০ ৳</span>
+                </div>
+            </div>
+
+            <div id="medical-stage6" class="medical-requirements"></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!--  TAB: Single / FDR (Plan 09)                      -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div id="tab-plan9" class="tab-content">
+            <div class="form-group">
+                <label><i class="fas fa-credit-card"></i> মোড</label>
+                <div class="mode-selector">
+                    <div class="mode-option">
+                        <input type="radio" id="s9-m-yearly" name="s9-mode" value="yearly" checked onchange="calculateStage(9)" />
+                        <label for="s9-m-yearly"><i class="fas fa-hand-holding-usd"></i> Single Payment</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()">
+                        <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+                    </button>
+                </div>
+                <input type="number" id="s9-age" placeholder="যেমন: ৪০" min="20" max="54" oninput="calculateStage(9)" />
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <select id="s9-term" onchange="calculateStage(9)">
+                    <option value="6">৬ বছর</option><option value="7">৭ বছর</option>
+                    <option value="8">৮ বছর</option><option value="9">৯ বছর</option>
+                    <option value="10">১০ বছর</option><option value="11">১১ বছর</option>
+                    <option value="12">১২ বছর</option><option value="13">১৩ বছর</option>
+                    <option value="14">১৪ বছর</option><option value="15">১৫ বছর</option>
+                </select>
+            </div>
+
+            <div class="budget-box">
+                <h4><i class="fas fa-lightbulb"></i> বাজেট থেকে ২০টি পছন্দসই সাজেশন</h4>
+                <div class="form-group" style="margin-bottom:6px;">
+                    <input type="number" id="s9-target-budget" placeholder="কাঙ্ক্ষিত বাজেট (যেমন: ৫০০০০)" oninput="generateBudgetSuggestions(9)" />
+                </div>
+                <div id="s9-sug-container" class="suggestion-list"></div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-file-invoice"></i> বীমা অংক (টাকা)</label>
+                <input type="number" id="s9-sum" placeholder="যেমন: ১০০০০০" oninput="calculateStage(9)" />
+            </div>
+            <div id="s9-error" class="error-text"></div>
+
+            <div class="results" id="stage9-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-percent"></i> হাজার প্রতি রেট</span>
+                    <span class="amount" id="s9-rate-val">০.০০ ৳</span>
+                </div>
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-file-signature"></i> মূল প্রিমিয়াম</span>
+                    <span class="amount" id="s9-base-premium">০ ৳</span>
+                </div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট এককালীন প্রিমিয়াম</span>
+                    <span class="amount" id="s9-total-premium">০ ৳</span>
+                </div>
+            </div>
+
+            <div id="medical-stage9" class="medical-requirements"></div>
+        </div>
+
+        <!-- ─── ACTION BUTTONS (Copy & Print) ─── -->
+        <div class="action-row">
+            <button class="btn btn-copy" onclick="copyResults()">
+                <i class="fas fa-copy"></i> কপি রেজাল্ট
+            </button>
+            <button class="btn btn-print" onclick="printResults()">
+                <i class="fas fa-print"></i> প্রিন্ট/PDF
+            </button>
+        </div>
+
+        <!-- ─── BOTTOM BUTTONS ─── -->
+        <div class="btn-group">
+            <button type="button" class="clear-btn" onclick="clearFields()">
+                <i class="fas fa-eraser"></i> ক্লিয়ার করুন
+            </button>
+            <button type="button" class="age-btn" onclick="openAgeModal()">
+                <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর (NID)
+            </button>
+        </div>
+
+        <!-- ─── CREDIT ─── -->
+        <div class="credit">
+            ✨ Created by <strong>IT EMON</strong> ✨
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  PRINT SECTION (Official Proposal Slip for PDF/Print)   -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div id="print-section">
+        <div class="print-header">
+            <h1>আলফা ইসলামী লাইফ ইন্স্যুরেন্স লিমিটেড</h1>
+            <p>হেড অফিস: এ জে টাওয়ার, প্লট # ৪, সোনারগাঁও লিংক রোড, কাওরান বাজার, ঢাকা-১২১৫</p>
+            <div class="print-badge">বীমা পলিসি প্রিমিয়াম ও মেডিকেল প্রস্তাবনা সামারি</div>
+        </div>
+
+        <div id="print-content-body">
+            <!-- Dynamically populated before print -->
+        </div>
+
+        <div class="print-signatures">
+            <div class="sign-col">গ্রাহক / প্রস্তাবকের স্বাক্ষর</div>
+            <div class="sign-col">মাঠ কর্মকর্তা / প্রতিনিধির স্বাক্ষর</div>
+        </div>
+
+        <div class="print-footer">
+            ক্যালকুলেশন প্রস্তুতের তারিখ: <span id="print-date"></span> | সফ্টওয়্যার ডেভেলপমেন্ট: <strong>IT EMON</strong>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  MODAL: Age Calculator                                -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="ageModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAgeModal()">&times;</button>
+            <h3 style="color:#0d9488; text-align:center; margin-bottom:20px; display:flex; align-items:center; justify-content:center; gap:8px;">
+                <i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর
+            </h3>
+
+            <div class="form-group">
+                <label><i class="fas fa-calendar-day"></i> জন্ম তারিখ (NID অনুযায়ী)</label>
+                <div class="date-select-group">
+                    <select id="dobDay" onchange="calculateAge()"></select>
+                    <select id="dobMonth" onchange="calculateAge()"></select>
+                    <input type="number" id="dobYear" placeholder="সাল" oninput="calculateAge()" min="1900" max="2100" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label><i class="fas fa-calendar-check"></i> আজকের / নির্দিষ্ট তারিখ</label>
+                <div class="date-select-group">
+                    <select id="asOfDay" onchange="calculateAge()"></select>
+                    <select id="asOfMonth" onchange="calculateAge()"></select>
+                    <input type="number" id="asOfYear" placeholder="সাল" oninput="calculateAge()" min="1900" max="2100" />
+                </div>
+            </div>
+
+            <div class="age-result-box">
+                <div class="age-detail" id="ageDetailOutput">
+                    জন্ম তারিখ নির্বাচন করুন
+                </div>
+                <div class="round-age" id="roundAgeOutput">
+                    বয়স: --
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  MODAL: Benefit Details                               -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="benefitModal">
+        <div class="modal-content" style="max-width:480px; max-height:85vh; overflow-y:auto;">
+            <button class="close-modal" onclick="closeBenefitModal()">&times;</button>
+            <div id="benefitModalBody" class="benefit-body"></div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════ -->
+    <!--  JAVASCRIPT                                           -->
+    <!-- ═══════════════════════════════════════════════════ -->
+    <script>
+        // ─── PLAN RATE TABLES ──────────────────────────────────
+
+        const plan3Rates = {
+            20: { 12: 96.00, 15: 77.10, 18: 64.60, 21: 55.70, 24: 49.00 },
+            21: { 12: 96.00, 15: 77.10, 18: 64.60, 21: 55.70, 24: 49.10 },
+            22: { 12: 96.00, 15: 77.10, 18: 64.60, 21: 55.70, 24: 49.10 },
+            23: { 12: 96.00, 15: 77.10, 18: 64.60, 21: 55.80, 24: 49.20 },
+            24: { 12: 96.00, 15: 77.20, 18: 64.70, 21: 55.80, 24: 49.30 },
+            25: { 12: 96.00, 15: 77.20, 18: 64.70, 21: 55.90, 24: 49.40 },
+            26: { 12: 96.00, 15: 77.20, 18: 64.70, 21: 55.90, 24: 49.50 },
+            27: { 12: 96.10, 15: 77.30, 18: 64.80, 21: 56.00, 24: 49.60 },
+            28: { 12: 96.10, 15: 77.30, 18: 64.90, 21: 56.10, 24: 49.70 },
+            29: { 12: 96.10, 15: 77.40, 18: 65.00, 21: 56.30, 24: 49.90 },
+            30: { 12: 96.20, 15: 77.40, 18: 65.10, 21: 56.40, 24: 50.00 },
+            31: { 12: 96.30, 15: 77.50, 18: 65.20, 21: 56.60, 24: 50.20 },
+            32: { 12: 96.30, 15: 77.60, 18: 65.30, 21: 56.70, 24: 50.50 },
+            33: { 12: 96.40, 15: 77.80, 18: 65.50, 21: 57.00, 24: 50.70 },
+            34: { 12: 96.50, 15: 77.90, 18: 65.70, 21: 57.20, 24: 51.00 },
+            35: { 12: 96.70, 15: 78.10, 18: 65.90, 21: 57.50, 24: 51.40 },
+            36: { 12: 96.80, 15: 78.30, 18: 66.20, 21: 57.80, 24: 51.70 },
+            37: { 12: 97.00, 15: 78.60, 18: 66.50, 21: 58.20, 24: 52.20 },
+            38: { 12: 97.30, 15: 78.80, 18: 66.80, 21: 58.50, 24: 52.60 },
+            39: { 12: 97.50, 15: 79.20, 18: 67.20, 21: 59.00, 24: 53.10 },
+            40: { 12: 97.80, 15: 79.50, 18: 67.60, 21: 59.50, 24: 53.70 },
+            41: { 12: 98.20, 15: 79.90, 18: 68.10, 21: 60.00, 24: 54.30 },
+            42: { 12: 98.50, 15: 80.40, 18: 68.60, 21: 60.60 },
+            43: { 12: 99.00, 15: 80.90, 18: 69.20, 21: 61.30 },
+            44: { 12: 99.40, 15: 81.40, 18: 69.80, 21: 62.00 },
+            45: { 12: 100.00, 15: 82.00, 18: 70.50 },
+            46: { 12: 100.50, 15: 82.70, 18: 71.30 },
+            47: { 12: 101.20, 15: 83.40, 18: 72.10 },
+            48: { 12: 101.90, 15: 84.20 },
+            49: { 12: 102.60, 15: 85.10 },
+            50: { 12: 103.40, 15: 86.00 },
+            51: { 12: 104.40 },
+            52: { 12: 105.40 },
+            53: { 12: 106.40 }
+        };
+
+        const plan4Rates = {
+            20: { 12: 98.70, 16: 71.00, 20: 54.90, 24: 44.60, 28: 37.40 },
+            21: { 12: 98.70, 16: 71.00, 20: 55.00, 24: 44.60, 28: 37.50 },
+            22: { 12: 98.70, 16: 71.00, 20: 55.00, 24: 44.70, 28: 37.60 },
+            23: { 12: 98.70, 16: 71.00, 20: 55.00, 24: 44.70, 28: 37.70 },
+            24: { 12: 98.70, 16: 71.00, 20: 55.10, 24: 44.80, 28: 37.80 },
+            25: { 12: 98.70, 16: 71.10, 20: 55.20, 24: 44.90, 28: 37.90 },
+            26: { 12: 98.70, 16: 71.10, 20: 55.20, 24: 45.10, 28: 38.10 },
+            27: { 12: 98.80, 16: 71.20, 20: 55.30, 24: 45.20, 28: 38.30 },
+            28: { 12: 98.80, 16: 71.30, 20: 55.40, 24: 45.40, 28: 38.50 },
+            29: { 12: 98.90, 16: 71.30, 20: 55.60, 24: 45.50, 28: 38.80 },
+            30: { 12: 98.90, 16: 71.40, 20: 55.70, 24: 45.80, 28: 39.00 },
+            31: { 12: 99.00, 16: 71.60, 20: 55.90, 24: 46.00, 28: 39.40 },
+            32: { 12: 99.10, 16: 71.70, 20: 56.10, 24: 46.30, 28: 39.70 },
+            33: { 12: 99.20, 16: 71.90, 20: 56.40, 24: 46.60, 28: 40.10 },
+            34: { 12: 99.40, 16: 72.10, 20: 56.60, 24: 46.90, 28: 40.50 },
+            35: { 12: 99.50, 16: 72.30, 20: 57.00, 24: 47.30, 28: 41.00 },
+            36: { 12: 99.70, 16: 72.60, 20: 57.30, 24: 47.80, 28: 41.50 },
+            37: { 12: 100.00, 16: 72.90, 20: 57.70, 24: 48.20, 28: 42.10 },
+            38: { 12: 100.30, 16: 73.30, 20: 58.10, 24: 48.80, 28: 42.80 },
+            39: { 12: 100.60, 16: 73.70, 20: 58.60, 24: 49.40, 28: 43.50 },
+            40: { 12: 101.00, 16: 74.20, 20: 59.20, 24: 50.10, 28: 44.30 },
+            41: { 12: 101.40, 16: 74.70, 20: 59.80, 24: 50.80, 28: 45.10 },
+            42: { 12: 101.90, 16: 75.20, 20: 60.50, 24: 51.60, 28: 46.10 },
+            43: { 12: 102.40, 16: 75.90, 20: 61.20, 24: 52.50 },
+            44: { 12: 103.00, 16: 76.60, 20: 62.10, 24: 53.40 },
+            45: { 12: 103.60, 16: 77.30, 20: 63.00, 24: 54.50 },
+            46: { 12: 104.30, 16: 78.20, 20: 63.90, 24: 55.60 },
+            47: { 12: 105.10, 16: 79.10, 20: 65.00 },
+            48: { 12: 106.00, 16: 80.10, 20: 66.20 },
+            49: { 12: 106.90, 16: 81.20, 20: 67.50 },
+            50: { 12: 108.00, 16: 82.40, 20: 68.90 },
+            51: { 12: 109.10, 16: 83.70 },
+            52: { 12: 110.30, 16: 85.20 },
+            53: { 12: 111.70, 16: 86.80 },
+            54: { 12: 113.20, 16: 88.30 },
+            55: { 12: 114.80 }
+        };
+
+        const plan5Rates = {
+            20: { 10: 118.00, 15: 80.20, 20: 61.30, 25: 50.20, 30: 42.90 },
+            21: { 10: 118.00, 15: 80.20, 20: 61.40, 25: 50.20, 30: 43.00 },
+            22: { 10: 118.00, 15: 80.20, 20: 61.40, 25: 50.30, 30: 43.10 },
+            23: { 10: 118.00, 15: 80.20, 20: 61.40, 25: 50.40, 30: 43.30 },
+            24: { 10: 118.00, 15: 80.20, 20: 61.50, 25: 50.50, 30: 43.40 },
+            25: { 10: 118.00, 15: 80.20, 20: 61.50, 25: 50.60, 30: 43.60 },
+            26: { 10: 118.10, 15: 80.30, 20: 61.60, 25: 50.70, 30: 43.80 },
+            27: { 10: 118.10, 15: 80.30, 20: 61.70, 25: 50.80, 30: 44.00 },
+            28: { 10: 118.10, 15: 80.40, 20: 61.80, 25: 51.00, 30: 44.20 },
+            29: { 10: 118.10, 15: 80.50, 20: 61.90, 25: 51.20, 30: 44.50 },
+            30: { 10: 118.20, 15: 80.50, 20: 62.10, 25: 51.40, 30: 44.80 },
+            31: { 10: 118.20, 15: 80.60, 20: 62.20, 25: 51.60, 30: 45.10 },
+            32: { 10: 118.30, 15: 80.80, 20: 62.40, 25: 51.90, 30: 45.40 },
+            33: { 10: 118.40, 15: 80.90, 20: 62.60, 25: 52.20, 30: 45.80 },
+            34: { 10: 118.50, 15: 81.10, 20: 62.90, 25: 52.60, 30: 46.30 },
+            35: { 10: 118.60, 15: 81.30, 20: 63.20, 25: 52.90, 30: 46.80 },
+            36: { 10: 118.80, 15: 81.50, 20: 63.50, 25: 53.40, 30: 47.30 },
+            37: { 10: 118.90, 15: 81.80, 20: 63.90, 25: 53.80, 30: 47.90 },
+            38: { 10: 119.20, 15: 82.10, 20: 64.30, 25: 54.40, 30: 48.60 },
+            39: { 10: 119.40, 15: 82.40, 20: 64.70, 25: 54.90, 30: 49.30 },
+            40: { 10: 119.70, 15: 82.80, 20: 65.20, 25: 55.60, 30: 50.10 },
+            41: { 10: 120.00, 15: 83.20, 20: 65.80, 25: 56.30 },
+            42: { 10: 120.40, 15: 83.70, 20: 66.40, 25: 57.00 },
+            43: { 10: 120.80, 15: 84.30, 20: 67.10, 25: 57.90 },
+            44: { 10: 121.20, 15: 84.80, 20: 67.80, 25: 58.80 },
+            45: { 10: 121.70, 15: 85.50, 20: 68.60, 25: 59.80 },
+            46: { 10: 122.30, 15: 86.20, 20: 69.50 },
+            47: { 10: 122.90, 15: 87.00, 20: 70.50 },
+            48: { 10: 123.60, 15: 87.80, 20: 71.60 },
+            49: { 10: 124.30, 15: 88.80, 20: 72.70 },
+            50: { 10: 125.10, 15: 89.80, 20: 74.00 },
+            51: { 10: 126.00, 15: 90.90 },
+            52: { 10: 127.00, 15: 92.10 },
+            53: { 10: 128.00, 15: 93.50 },
+            54: { 10: 129.20, 15: 94.90 },
+            55: { 10: 130.40, 15: 96.50 }
+        };
+
+        const plan6Rates = {
+            20: { 10: 116.40, 11: 106.10, 12: 97.60, 13: 90.40, 14: 84.30, 15: 79.00, 16: 74.40, 17: 70.40, 18: 66.80, 19: 63.70, 20: 60.80 },
+            21: { 10: 116.40, 11: 106.10, 12: 97.60, 13: 90.40, 14: 84.30, 15: 79.00, 16: 74.40, 17: 70.40, 18: 66.80, 19: 63.70, 20: 60.90 },
+            22: { 10: 116.40, 11: 106.10, 12: 97.60, 13: 90.40, 14: 84.30, 15: 79.00, 16: 74.40, 17: 70.40, 18: 66.90, 19: 63.70, 20: 60.90 },
+            23: { 10: 116.50, 11: 106.20, 12: 97.60, 13: 90.40, 14: 84.30, 15: 79.00, 16: 74.50, 17: 70.40, 18: 66.90, 19: 63.80, 20: 61.00 },
+            24: { 10: 116.50, 11: 106.20, 12: 97.60, 13: 90.50, 14: 84.30, 15: 79.10, 16: 74.50, 17: 70.50, 18: 66.90, 19: 63.80, 20: 61.00 },
+            25: { 10: 116.50, 11: 106.20, 12: 97.70, 13: 90.50, 14: 84.40, 15: 79.10, 16: 74.50, 17: 70.50, 18: 67.00, 19: 63.90, 20: 61.10 },
+            26: { 10: 116.50, 11: 106.20, 12: 97.70, 13: 90.50, 14: 84.40, 15: 79.10, 16: 74.60, 17: 70.60, 18: 67.10, 19: 64.00, 20: 61.20 },
+            27: { 10: 116.50, 11: 106.20, 12: 97.70, 13: 90.60, 14: 84.50, 15: 79.20, 16: 74.70, 17: 70.70, 18: 67.20, 19: 64.10, 20: 61.40 },
+            28: { 10: 116.60, 11: 106.30, 12: 97.80, 13: 90.60, 14: 84.50, 15: 79.30, 16: 74.70, 17: 70.80, 18: 67.30, 19: 64.20, 20: 61.50 },
+            29: { 10: 116.60, 11: 106.30, 12: 97.80, 13: 90.70, 14: 84.60, 15: 79.40, 16: 74.90, 17: 70.90, 18: 67.50, 19: 64.40, 20: 61.70 },
+            30: { 10: 116.70, 11: 106.40, 12: 97.90, 13: 90.80, 14: 84.70, 15: 79.50, 16: 75.00, 17: 71.00, 18: 67.70, 19: 64.60, 20: 62.00 },
+            31: { 10: 116.70, 11: 106.50, 12: 98.00, 13: 90.90, 14: 84.90, 15: 79.70, 16: 75.20, 17: 71.30, 18: 67.90, 19: 64.90, 20: 62.30 },
+            32: { 10: 116.80, 11: 106.60, 12: 98.10, 13: 91.00, 14: 85.00, 15: 79.90, 16: 75.40, 17: 71.50, 18: 68.20, 19: 65.20, 20: 62.60 },
+            33: { 10: 116.90, 11: 106.70, 12: 98.30, 13: 91.20, 14: 85.20, 15: 80.10, 16: 75.70, 17: 71.90, 18: 68.50, 19: 65.60, 20: 63.00 },
+            34: { 10: 117.10, 11: 106.90, 12: 98.50, 13: 91.50, 14: 85.50, 15: 80.40, 16: 76.00, 17: 72.20, 18: 68.90, 19: 66.00, 20: 63.60 },
+            35: { 10: 117.30, 11: 107.10, 12: 98.70, 13: 91.70, 14: 85.80, 15: 80.80, 16: 76.40, 17: 72.70, 18: 69.40, 19: 66.60, 20: 64.20 },
+            36: { 10: 117.50, 11: 107.40, 12: 99.00, 13: 92.00, 14: 86.20, 15: 81.20, 16: 76.90, 17: 73.20, 18: 70.00, 19: 67.20, 20: 64.80 },
+            37: { 10: 117.80, 11: 107.70, 12: 99.40, 13: 92.50, 14: 86.60, 15: 81.70, 16: 77.40, 17: 73.80, 18: 70.70, 19: 68.00, 20: 65.60 },
+            38: { 10: 118.10, 11: 108.10, 12: 99.80, 13: 93.00, 14: 87.20, 15: 82.30, 16: 78.00, 17: 74.50, 18: 71.40, 19: 68.80, 20: 66.50 },
+            39: { 10: 118.50, 11: 108.50, 12: 100.40, 13: 93.50, 14: 87.80, 15: 82.90, 16: 78.80, 17: 75.30, 18: 72.30, 19: 69.70, 20: 67.50 },
+            40: { 10: 119.00, 11: 109.10, 12: 100.90, 13: 94.20, 14: 88.50, 15: 83.70, 16: 79.70, 17: 76.22, 18: 73.30, 19: 70.80, 20: 68.70 },
+            41: { 10: 119.60, 11: 109.70, 12: 101.60, 13: 94.90, 14: 89.30, 15: 84.60, 16: 80.60, 17: 77.20, 18: 74.40, 19: 72.00, 20: 70.00 },
+            42: { 10: 120.20, 11: 110.40, 12: 102.40, 13: 95.70, 14: 90.20, 15: 85.60, 16: 81.70, 17: 78.40, 18: 75.70, 19: 73.40, 20: 71.40 },
+            43: { 10: 120.90, 11: 111.20, 12: 103.20, 13: 96.70, 14: 91.30, 15: 86.70, 16: 82.90, 17: 79.70, 18: 77.00, 19: 74.90, 20: 73.00 },
+            44: { 12: 121.80, 11: 112.10, 12: 104.20, 13: 97.80, 14: 92.40, 15: 88.00, 16: 84.30, 17: 81.20, 18: 78.60, 19: 76.60, 20: 74.90 },
+            45: { 10: 122.70, 11: 113.10, 12: 105.30, 13: 99.00, 14: 93.70, 15: 89.40, 16: 85.80, 17: 82.80, 18: 80.40, 19: 78.40, 20: 76.90 },
+            46: { 10: 123.70, 11: 114.20, 12: 106.60, 13: 100.30, 14: 95.20, 15: 90.90, 16: 87.40, 17: 84.60, 18: 82.30, 19: 80.50, 20: 79.00 },
+            47: { 10: 124.80, 11: 115.50, 12: 107.90, 13: 101.80, 14: 96.70, 15: 92.60, 16: 89.30, 17: 86.60, 18: 84.40, 19: 82.80, 20: 81.50 },
+            48: { 10: 126.10, 11: 116.80, 12: 109.40, 13: 103.40, 14: 98.50, 15: 94.50, 16: 91.30, 17: 88.70, 18: 86.80, 19: 85.30, 20: 84.20 },
+            49: { 10: 127.50, 11: 118.30, 12: 111.00, 13: 105.10, 14: 100.40, 15: 96.60, 16: 93.50, 17: 91.10, 18: 89.30, 19: 88.00, 20: 87.20 },
+            50: { 10: 129.00, 11: 120.00, 12: 112.80, 13: 107.10, 14: 102.50, 15: 98.90, 16: 96.00, 17: 93.80, 18: 92.20, 19: 91.00, 20: 90.40 },
+            51: { 10: 130.70, 11: 121.80, 12: 114.80, 13: 109.20, 14: 104.80, 15: 101.30, 16: 98.70, 17: 96.70, 18: 95.30, 19: 94.40 },
+            52: { 10: 132.50, 11: 123.80, 12: 117.00, 13: 111.60, 14: 107.40, 15: 104.10, 16: 101.60, 17: 99.90, 18: 98.70 },
+            53: { 10: 134.50, 11: 126.00, 12: 119.40, 13: 114.20, 14: 110.20, 15: 107.10, 16: 104.90, 17: 103.40 },
+            54: { 10: 136.70, 11: 128.40, 12: 122.00, 13: 117.00, 14: 113.30, 15: 110.50, 16: 108.50 },
+            55: { 10: 139.10, 11: 131.00, 12: 124.90, 13: 120.20, 14: 116.70, 15: 114.10 }
+        };
+
+        const plan9Rates = {
+            20: { 6: 1442.50, 7: 1339.40, 8: 1244.10, 9: 1156.00, 10: 1074.50, 11: 999.10, 12: 929.30, 13: 864.80, 14: 805.20, 15: 750.10 },
+            21: { 6: 1442.50, 7: 1339.40, 8: 1244.10, 9: 1156.00, 10: 1074.50, 11: 999.10, 12: 929.40, 13: 864.90, 14: 805.20, 15: 750.10 },
+            22: { 6: 1442.50, 7: 1339.40, 8: 1244.10, 9: 1156.00, 10: 1074.50, 11: 999.10, 12: 929.40, 13: 864.90, 14: 805.30, 15: 750.20 },
+            23: { 6: 1442.50, 7: 1339.40, 8: 1244.10, 9: 1156.00, 10: 1074.50, 11: 999.10, 12: 929.40, 13: 865.00, 14: 805.40, 15: 750.20 },
+            24: { 6: 1442.50, 7: 1339.40, 8: 1244.20, 9: 1156.00, 10: 1074.50, 11: 999.20, 12: 929.50, 13: 865.00, 14: 805.40, 15: 750.30 },
+            25: { 6: 1442.50, 7: 1339.50, 8: 1244.20, 9: 1156.10, 10: 1074.60, 11: 999.20, 12: 929.50, 13: 865.10, 14: 805.50, 15: 750.50 },
+            26: { 6: 1442.50, 7: 1339.50, 8: 1244.20, 9: 1156.10, 10: 1074.60, 11: 999.30, 12: 929.60, 13: 865.20, 14: 805.70, 15: 750.60 },
+            27: { 6: 1442.50, 7: 1339.50, 8: 1244.20, 9: 1156.10, 10: 1074.70, 11: 999.40, 12: 929.70, 13: 865.30, 14: 805.80, 15: 750.80 },
+            28: { 6: 1442.50, 7: 1339.50, 8: 1244.30, 9: 1156.20, 10: 1074.80, 11: 999.50, 12: 929.90, 13: 865.50, 14: 806.00, 15: 751.10 },
+            29: { 6: 1442.60, 7: 1339.60, 8: 1244.30, 9: 1156.30, 10: 1074.90, 11: 999.60, 12: 930.00, 13: 865.70, 14: 806.30, 15: 751.40 },
+            30: { 6: 1442.60, 7: 1339.60, 8: 1244.40, 9: 1156.40, 10: 1075.00, 11: 999.80, 12: 930.30, 13: 866.00, 14: 806.70, 15: 751.90 },
+            31: { 6: 1442.60, 7: 1339.70, 8: 1244.50, 9: 1156.50, 10: 1075.20, 11: 1000.00, 12: 930.60, 13: 866.40, 14: 807.20, 15: 752.40 },
+            32: { 6: 1442.70, 7: 1339.80, 8: 1244.60, 9: 1156.70, 10: 1075.40, 11: 1000.30, 12: 930.90, 13: 866.90, 14: 807.70, 15: 753.10 },
+            33: { 6: 1442.80, 7: 1339.90, 8: 1244.80, 9: 1156.90, 10: 1075.70, 11: 1000.70, 12: 931.40, 13: 867.50, 14: 808.40, 15: 754.00 },
+            34: { 6: 1442.90, 7: 1340.10, 8: 1245.00, 9: 1157.20, 10: 1076.10, 11: 1001.20, 12: 932.00, 13: 868.20, 14: 809.30, 15: 755.00 },
+            35: { 6: 1443.00, 7: 1340.30, 8: 1245.30, 9: 1157.60, 10: 1076.60, 11: 1001.80, 12: 932.80, 13: 869.10, 14: 810.40, 15: 756.30 },
+            36: { 6: 1443.20, 7: 1340.50, 8: 1245.70, 9: 1158.10, 10: 1077.20, 11: 1002.50, 12: 933.70, 13: 870.20, 14: 811.70, 15: 757.80 },
+            37: { 6: 1443.40, 7: 1340.80, 8: 1246.10, 9: 1158.60, 10: 1077.90, 11: 1003.40, 12: 934.80, 13: 871.50, 14: 813.20, 15: 759.60 },
+            38: { 6: 1443.70, 7: 1341.20, 8: 1246.60, 9: 1159.30, 10: 1078.80, 11: 1004.50, 12: 936.10, 13: 873.00, 14: 815.00, 15: 761.70 },
+            39: { 6: 1444.00, 7: 1341.70, 8: 1247.20, 9: 1160.10, 10: 1079.80, 11: 1005.80, 12: 937.60, 13: 874.80, 14: 817.10, 15: 764.10 },
+            40: { 6: 1444.40, 7: 1342.20, 8: 1248.00, 9: 1161.10, 10: 1081.00, 11: 1007.20, 12: 939.30, 13: 876.90, 14: 819.50, 15: 766.80 },
+            41: { 6: 1444.90, 7: 1342.90, 8: 1248.90, 9: 1162.20, 10: 1082.40, 11: 1008.90, 12: 941.40, 13: 879.30, 14: 822.30, 15: 770.00 },
+            42: { 6: 1445.40, 7: 1343.70, 8: 1249.90, 9: 1163.50, 10: 1084.00, 11: 1010.90, 12: 943.70, 13: 882.00, 14: 825.40, 15: 773.50 },
+            43: { 6: 1446.10, 7: 1344.50, 8: 1251.00, 9: 1165.00, 10: 1085.80, 11: 1013.10, 12: 946.30, 13: 885.10, 14: 828.90, 15: 777.50 },
+            44: { 6: 1446.80, 7: 1345.60, 8: 1252.40, 9: 1166.70, 10: 1087.90, 11: 1015.60, 12: 949.30, 13: 888.50, 14: 832.80, 15: 782.00 },
+            45: { 6: 1447.60, 7: 1346.70, 8: 1253.90, 9: 1168.50, 10: 1090.20, 11: 1018.40, 12: 952.50, 13: 892.30, 14: 837.20, 15: 786.90 },
+            46: { 6: 1448.50, 7: 1347.90, 8: 1255.50, 9: 1170.60, 10: 1092.80, 11: 1021.40, 12: 956.10, 13: 896.40, 14: 841.90 },
+            47: { 6: 1449.60, 7: 1349.40, 8: 1257.30, 9: 1172.90, 10: 1095.60, 11: 1024.80, 12: 960.10, 13: 901.00 },
+            48: { 6: 1450.70, 7: 1350.90, 8: 1259.40, 9: 1175.50, 10: 1098.70, 11: 1028.50, 12: 964.50 },
+            49: { 6: 1451.90, 7: 1352.60, 8: 1261.60, 9: 1178.30, 10: 1102.10, 11: 1032.60 },
+            50: { 6: 1453.30, 7: 1354.50, 8: 1264.00, 9: 1181.30, 10: 1105.80 },
+            51: { 6: 1454.80, 7: 1356.50, 8: 1266.70, 9: 1184.60 },
+            52: { 6: 1456.40, 7: 1358.70, 8: 1269.60 },
+            53: { 6: 1458.20, 7: 1361.20 },
+            54: { 6: 1460.10 }
+        };
+
+        const planRates = {
+            3: plan3Rates,
+            4: plan4Rates,
+            5: plan5Rates,
+            6: plan6Rates,
+            9: plan9Rates
+        };
+
+        const banglaMonths = [
+            "জানুয়ারী", "ফেব্রুয়ারী", "মার্চ", "এপ্রিল", "মে", "জুন",
+            "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+        ];
+
+        let currentActiveTab = 'dps';
+
+        function toBangla(num) {
+            if (num === null || num === undefined) return '০';
+            return num.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
+        }
+
+        function getCCRate(age) {
+            const a = parseInt(age);
+            if (isNaN(a) || a < 18) return 4.45;
+            if (a <= 29) return 4.45;
+            if (a <= 34) return 6.95;
+            if (a <= 39) return 7.95;
+            if (a <= 44) return 15.95;
+            if (a <= 49) return 26.95;
+            if (a <= 54) return 47.95;
+            return 79.95;
+        }
+
+        // ─── MEDICAL REQUIREMENTS (আলফা ইসলামী লাইফ সার্কুলার অনুযায়ী) ───
+        const medicalMap = {
+            upTo35: {
+                'upto500k': ['NMS'],
+                '500kto1m': ['NMS'],
+                '1mto1.5m': ['FMR', 'PUR'],
+                '1.5mto2m': ['FMR', 'PUR'],
+                '2mto3m': ['FMR', 'PUR', 'ECG'],
+                '3mto5m': ['FMR', 'PUR', 'C-XR', 'ECG'],
+                '5mto7.5m': ['FMR', 'PUR', 'FBS', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ'],
+                'above7.5m': ['FMR', 'PUR', 'FBS', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ']
+            },
+            '36to45': {
+                'upto500k': ['NMS'],
+                '500kto1m': ['NMS'],
+                '1mto1.5m': ['FMR', 'PUR', 'ECG'],
+                '1.5mto2m': ['FMR', 'PUR', 'C-XR', 'ECG'],
+                '2mto3m': ['FMR', 'PUR', 'FBS', 'C-XR', 'ECG'],
+                '3mto5m': ['FMR', 'PUR', 'FBS', 'FLP', 'LFT', 'ECG'],
+                '5mto7.5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ'],
+                'above7.5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ']
+            },
+            '46to54': {
+                'upto500k': ['FMR', 'PUR'],
+                '500kto1m': ['FMR', 'PUR'],
+                '1mto1.5m': ['FMR', 'PUR', 'C-XR', 'ECG'],
+                '1.5mto2m': ['FMR', 'PUR', 'FBS', 'C-XR', 'ECG'],
+                '2mto3m': ['FMR', 'PUR', 'FBS', 'FLP', 'LFT', 'C-XR', 'ECG'],
+                '3mto5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'FLP', 'LFT', 'Echo'],
+                '5mto7.5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ'],
+                'above7.5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ']
+            },
+            '55to60': {
+                'upto500k': ['FMR', 'PUR', 'C-XR'],
+                '500kto1m': ['FMR', 'PUR', 'FBS', 'C-XR', 'ECG'],
+                '1mto1.5m': ['FMR', 'PUR', 'FBS', 'FLP', 'LFT', 'C-XR', 'ECG'],
+                '1.5mto2m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'LFT', 'Echo', 'FLP'],
+                '2mto3m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo'],
+                '3mto5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'FLP', 'LFT', 'Echo'],
+                '5mto7.5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ'],
+                'above7.5m': ['FMR', 'PUR', 'BLOOD PROFILE', 'C-XR', 'Echo', 'FLP', 'LFT', 'HIV', 'FQ']
+            }
+        };
+
+        const testNameMap = {
+            'NMS': 'Non-Medical Statement (NMS)',
+            'FMR': 'Full Medical Report (FMR)',
+            'PUR': 'Urinalysis (PUR)',
+            'FBS': 'Fasting Blood Sugar (FBS)',
+            'BLOOD PROFILE': 'Blood Profile (Hb, WBC+Diff, ESR, FBS)',
+            'C-XR': 'Chest X-Ray PA view (C-XR)',
+            'ECG': 'ECG-12 Lead Tracing',
+            'Echo': 'Echo (Echocardiogram)',
+            'HIV': 'HIV Test',
+            'FLP': 'Fasting Lipids (FLP)',
+            'LFT': 'Liver Function Test (LFT)',
+            'FQ': 'Financial Questionnaire (FQ)'
+        };
+
+        function getMedicalTests(age, sumAssured) {
+            if (!age || !sumAssured || sumAssured <= 0) return [];
+
+            let ageGroup;
+            if (age <= 35) ageGroup = 'upTo35';
+            else if (age <= 45) ageGroup = '36to45';
+            else if (age <= 54) ageGroup = '46to54';
+            else if (age <= 60) ageGroup = '55to60';
+            else return [{ code: 'DECLINE', name: 'বীমা গ্রহণের বয়স ৬০ বছরের বেশি - প্রধান কার্যালয়ের বিশেষ অনুমোদন প্রয়োজন।' }];
+
+            let sumRange;
+            if (sumAssured <= 500000) sumRange = 'upto500k';
+            else if (sumAssured <= 1000000) sumRange = '500kto1m';
+            else if (sumAssured <= 1500000) sumRange = '1mto1.5m';
+            else if (sumAssured <= 2000000) sumRange = '1.5mto2m';
+            else if (sumAssured <= 3000000) sumRange = '2mto3m';
+            else if (sumAssured <= 5000000) sumRange = '3mto5m';
+            else if (sumAssured <= 7500000) sumRange = '5mto7.5m';
+            else sumRange = 'above7.5m';
+
+            const codes = medicalMap[ageGroup]?.[sumRange] || [];
+            return codes.map(code => ({
+                code: code,
+                name: testNameMap[code] || code
+            }));
+        }
+
+        function updateMedicalRequirements(tabId, age, sumAssured) {
+            const container = document.getElementById(`medical-${tabId}`);
+            if (!container) return;
+
+            if (!age || !sumAssured || sumAssured <= 0) {
+                container.className = 'medical-requirements';
+                container.innerHTML = '<i class="fas fa-info-circle"></i> বয়স ও বীমা অংক দিলে মেডিকেল শর্তাবলী দেখাবে।';
+                return;
+            }
+
+            const tests = getMedicalTests(age, sumAssured);
+            let html = '';
+
+            if (tests.length === 1 && tests[0].code === 'NMS') {
+                container.className = 'medical-requirements non-med';
+                html += '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (Non-Medical Statement):</strong> কোনো মেডিকেল টেস্ট লাগবে না। শুধুমাত্র ব্যক্তিগত নন-মেডিকেল বিবরণী ফর্ম পূরণ করতে হবে।';
+            } else if (tests.length === 1 && tests[0].code === 'DECLINE') {
+                container.className = 'medical-requirements has-med';
+                html += `<i class="fas fa-ban"></i> <strong>${tests[0].name}</strong>`;
+            } else if (tests.length > 0) {
+                container.className = 'medical-requirements has-med';
+                html += '<div style="margin-bottom: 6px;"><i class="fas fa-stethoscope"></i> <strong>প্রয়োজনীয় মেডিকেল টেস্ট ও চাহিদা:</strong></div>';
+                html += '<div class="test-list">' + tests.map(t => `<span class="test-tag">${t.name}</span>`).join('') + '</div>';
+            } else {
+                container.className = 'medical-requirements non-med';
+                html += '<i class="fas fa-check-circle"></i> কোনো মেডিকেল টেস্ট প্রয়োজন নেই।';
+            }
+
+            if (sumAssured > 1000000) {
+                html += '<div style="margin-top:8px; font-size:12px; color:#b45309;"><i class="fas fa-file-invoice"></i> ১০ লক্ষ টাকার বেশি বীমা অংকের ক্ষেত্রে আয়ের উৎস সংক্রান্ত প্রমাণপত্র (Financial / Income Document) প্রয়োজন হতে পারে।</div>';
+            }
+
+            container.innerHTML = html;
+        }
+
+        // ─── TAB SWITCH ──────────────────────────────────────────
+
+        function switchTab(tab) {
+            currentActiveTab = tab;
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            const tabMap = { dps: 0, stage3: 1, stage4: 2, stage5: 3, plan6: 4, plan9: 5 };
+            const idx = tabMap[tab];
+            if (idx !== undefined) {
+                document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+                document.getElementById(`tab-${tab}`).classList.add('active');
+                if (tab !== 'dps') {
+                    const stageNum = parseInt(tab.replace(/\D/g, ''));
+                    calculateStage(stageNum);
+                } else {
+                    calculateDPS();
+                }
+            }
+        }
+
+        // ─── DPS ─────────────────────────────────────────────────
+
+        function calculateDPS() {
+            const deposit = parseFloat(document.getElementById('deposit').value) || 0;
+            const term = parseFloat(document.getElementById('term').value) || 0;
+            const ageInput = document.getElementById('dps-age').value;
+            const age = parseInt(ageInput);
+            const isPlus = document.getElementById('plus').checked;
+            const isCC = document.getElementById('cc').checked;
+
+            const sumAssured = deposit * 12 * term;
+
+            let plusAmount = 0;
+            if (isPlus) {
+                const annualPlus = (sumAssured / 1000) * 6.45;
+                plusAmount = Math.round(annualPlus * 0.0925);
+            }
+
+            let ccAmount = 0;
+            if (isCC && age) {
+                const ccRate = getCCRate(age);
+                const annualCC = (sumAssured / 1000) * ccRate;
+                ccAmount = Math.round(annualCC * 0.0925);
+            }
+
+            const totalMonthly = deposit + plusAmount + ccAmount;
+
+            document.getElementById('sumAssured').innerText = sumAssured.toLocaleString('bn-BD') + ' ৳';
+            document.getElementById('plusAmount').innerText = plusAmount.toLocaleString('bn-BD') + ' ৳';
+            document.getElementById('ccAmount').innerText = ccAmount.toLocaleString('bn-BD') + ' ৳';
+            document.getElementById('totalMonthly').innerText = totalMonthly.toLocaleString('bn-BD') + ' ৳';
+
+            document.getElementById('plusAmount').closest('.result-item').style.display = isPlus ? 'flex' : 'none';
+            document.getElementById('ccAmount').closest('.result-item').style.display = isCC ? 'flex' : 'none';
+
+            updateMedicalRequirements('dps', age, sumAssured);
+        }
+
+        // ─── STAGE CALC ──────────────────────────────────────────
+
+        function calculateStage(stageNum) {
+            const ageInput = document.getElementById(`s${stageNum}-age`).value;
+            const sumInput = parseFloat(document.getElementById(`s${stageNum}-sum`).value) || 0;
+            const termInput = parseInt(document.getElementById(`s${stageNum}-term`).value);
+
+            const plusElem = document.getElementById(`s${stageNum}-plus`);
+            const isPlus = plusElem ? plusElem.checked : false;
+
+            const ccElem = document.getElementById(`s${stageNum}-cc`);
+            const isCC = ccElem ? ccElem.checked : false;
+
+            const modeElem = document.querySelector(`input[name="s${stageNum}-mode"]:checked`);
+            const mode = modeElem ? modeElem.value : 'yearly';
+            const errorDiv = document.getElementById(`s${stageNum}-error`);
+
+            errorDiv.innerText = '';
+
+            if (!ageInput) {
+                resetStageResults(stageNum);
+                updateMedicalRequirements(`stage${stageNum}`, null, sumInput);
+                return;
+            }
+
+            const age = parseInt(ageInput);
+            const ratesTable = planRates[stageNum];
+
+            if (!ratesTable || !ratesTable[age] || !ratesTable[age][termInput]) {
+                errorDiv.innerHTML =
+                    `<i class="fas fa-exclamation-circle"></i> বয়স (${toBangla(age)}) ও মেয়াদ (${toBangla(termInput)} বছর)-এর জন্য রেট প্রযোজ্য নয়।`;
+                resetStageResults(stageNum);
+                updateMedicalRequirements(`stage${stageNum}`, age, sumInput);
+                return;
+            }
+
+            const annualRate = ratesTable[age][termInput];
+            const annualBasePremium = (sumInput / 1000) * annualRate;
+
+            let modeFactor = 1.0;
+            if (mode === 'monthly') modeFactor = 0.0925;
+            else if (mode === 'half_yearly') modeFactor = 0.525;
+            else if (mode === 'yearly') modeFactor = 1.0;
+
+            const basePremium = Math.round(annualBasePremium * modeFactor);
+
+            let plusCharge = 0;
+            if (isPlus) {
+                const annualPlus = (sumInput / 1000) * 6.45;
+                plusCharge = Math.round(annualPlus * modeFactor);
+            }
+
+            let ccCharge = 0;
+            if (isCC) {
+                const ccRate = getCCRate(age);
+                const annualCC = (sumInput / 1000) * ccRate;
+                ccCharge = Math.round(annualCC * modeFactor);
+            }
+
+            const totalPremium = basePremium + plusCharge + ccCharge;
+
+            document.getElementById(`s${stageNum}-rate-val`).innerText = toBangla(annualRate.toFixed(2)) + ' ৳';
+            document.getElementById(`s${stageNum}-base-premium`).innerText = basePremium.toLocaleString('bn-BD') + ' ৳';
+
+            const plusRowElem = document.getElementById(`s${stageNum}-plus-charge`);
+            if (plusRowElem) {
+                plusRowElem.innerText = plusCharge.toLocaleString('bn-BD') + ' ৳';
+                plusRowElem.closest('.result-item').style.display = isPlus ? 'flex' : 'none';
+            }
+            const ccRowElem = document.getElementById(`s${stageNum}-cc-charge`);
+            if (ccRowElem) {
+                ccRowElem.innerText = ccCharge.toLocaleString('bn-BD') + ' ৳';
+                ccRowElem.closest('.result-item').style.display = isCC ? 'flex' : 'none';
+            }
+
+            document.getElementById(`s${stageNum}-total-premium`).innerText = totalPremium.toLocaleString('bn-BD') + ' ৳';
+
+            updateMedicalRequirements(`stage${stageNum}`, age, sumInput);
+            generateBudgetSuggestions(stageNum);
+        }
+
+        // ─── BUDGET SUGGESTIONS ──────────────────────────────────
+
+        function generateBudgetSuggestions(stageNum) {
+            const targetBudgetElem = document.getElementById(`s${stageNum}-target-budget`);
+            if (!targetBudgetElem) return;
+
+            const targetBudget = parseFloat(targetBudgetElem.value);
+            const ageInput = parseInt(document.getElementById(`s${stageNum}-age`).value);
+            const selectedTerm = parseInt(document.getElementById(`s${stageNum}-term`).value);
+
+            const plusElem = document.getElementById(`s${stageNum}-plus`);
+            const isPlus = plusElem ? plusElem.checked : false;
+
+            const ccElem = document.getElementById(`s${stageNum}-cc`);
+            const isCC = ccElem ? ccElem.checked : false;
+
+            const modeElem = document.querySelector(`input[name="s${stageNum}-mode"]:checked`);
+            const mode = modeElem ? modeElem.value : 'yearly';
+            const container = document.getElementById(`s${stageNum}-sug-container`);
+
+            container.innerHTML = '';
+
+            if (!targetBudget) {
+                container.innerHTML =
+                '<span style="font-size:12px; color:#7a8aa3;"><i class="fas fa-edit"></i> কাঙ্ক্ষিত প্রিমিয়াম লিখলে ২০টি সাজেশন দেখাবে।</span>';
+                return;
+            }
+
+            const currentAge = ageInput || 40;
+            const ratesTable = planRates[stageNum];
+
+            if (!ratesTable || !ratesTable[currentAge]) {
+                container.innerHTML = '<span style="font-size:12px; color:#ef4444;">এই বয়সের রেট প্রযোজ্য নয়।</span>';
+                return;
+            }
+
+            if (!ratesTable[currentAge][selectedTerm]) {
+                container.innerHTML =
+                    `<span style="font-size:12px; color:#ef4444;">বয়স ${toBangla(currentAge)}-এর জন্য ${toBangla(selectedTerm)} বছর মেয়াদ প্রযোজ্য নয়।</span>`;
+                return;
+            }
+
+            let modeFactor = 1.0;
+            if (mode === 'monthly') modeFactor = 0.0925;
+            else if (mode === 'half_yearly') modeFactor = 0.525;
+            else if (mode === 'yearly') modeFactor = 1.0;
+
+            const rate = ratesTable[currentAge][selectedTerm];
+            const ccRate = getCCRate(currentAge);
+            const effRatePerThousand = (rate + (isPlus ? 6.45 : 0) + (isCC ? ccRate : 0)) * modeFactor;
+
+            const rawSumAssured = (targetBudget / effRatePerThousand) * 1000;
+            const centerSum = Math.max(0, Math.round(rawSumAssured / 1000) * 1000);
+
+            const lessArray = [];
+            const moreArray = [];
+
+            const minSum = (stageNum === 9) ? 1 : 100000;
+
+            for (let i = -25; i <= 35; i++) {
+                const sa = centerSum + (i * 1000);
+                if (sa >= minSum) {
+                    const baseP = Math.round((sa / 1000) * rate * modeFactor);
+                    const plusP = isPlus ? Math.round((sa / 1000) * 6.45 * modeFactor) : 0;
+                    const ccP = isCC ? Math.round((sa / 1000) * ccRate * modeFactor) : 0;
+                    const totalP = baseP + plusP + ccP;
+
+                    const item = { term: selectedTerm, sumAssured: sa, totalPremium: totalP };
+
+                    if (totalP < targetBudget) {
+                        lessArray.push(item);
+                    } else {
+                        moreArray.push(item);
+                    }
+                }
+            }
+
+            lessArray.sort((a, b) => b.totalPremium - a.totalPremium);
+            const selectedLess = lessArray.slice(0, 3);
+
+            moreArray.sort((a, b) => a.totalPremium - b.totalPremium);
+            const neededMore = 20 - selectedLess.length;
+            const selectedMore = moreArray.slice(0, neededMore);
+
+            if (selectedMore.length < neededMore && lessArray.length > selectedLess.length) {
+                const extraLess = lessArray.slice(3, 3 + (neededMore - selectedMore.length));
+                selectedLess.push(...extraLess);
+            }
+
+            const finalSuggestions = [...selectedLess, ...selectedMore];
+            finalSuggestions.sort((a, b) => a.sumAssured - b.sumAssured);
+
+            finalSuggestions.forEach(s => {
+                const card = document.createElement('div');
+                card.className = 'suggestion-card';
+                const isLower = s.totalPremium < targetBudget;
+
+                card.innerHTML = `
+                    <div class="sug-info">
+                        <div class="sug-main">মেয়াদ: ${toBangla(s.term)} বছর · বীমা অংক: <strong>${s.sumAssured.toLocaleString('bn-BD')}</strong> ৳</div>
+                        <div class="sug-premium ${isLower ? 'low' : ''}">
+                            <i class="fas fa-taka"></i> নির্ধারিত কিস্তি: ${s.totalPremium.toLocaleString('bn-BD')} ৳ ${isLower ? '(বাজেটের কম)' : ''}
+                        </div>
+                    </div>
+                    <button class="select-sug-btn" onclick="applySuggestion(${stageNum}, ${s.sumAssured}, ${s.term})">
+                        <i class="fas fa-check"></i> পছন্দ
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function applySuggestion(stageNum, sumAssured, term) {
+            document.getElementById(`s${stageNum}-sum`).value = sumAssured;
+            document.getElementById(`s${stageNum}-term`).value = term;
+            const budgetInput = document.getElementById(`s${stageNum}-target-budget`);
+            if (budgetInput) budgetInput.value = '';
+            calculateStage(stageNum);
+        }
+
+        function resetStageResults(stageNum) {
+            document.getElementById(`s${stageNum}-rate-val`).innerText = '০.০০ ৳';
+            document.getElementById(`s${stageNum}-base-premium`).innerText = '০ ৳';
+            const plusRowElem = document.getElementById(`s${stageNum}-plus-charge`);
+            if (plusRowElem) {
+                plusRowElem.innerText = '০ ৳';
+                plusRowElem.closest('.result-item').style.display = 'none';
+            }
+            const ccRowElem = document.getElementById(`s${stageNum}-cc-charge`);
+            if (ccRowElem) {
+                ccRowElem.innerText = '০ ৳';
+                ccRowElem.closest('.result-item').style.display = 'none';
+            }
+            document.getElementById(`s${stageNum}-total-premium`).innerText = '০ ৳';
+        }
+
+        // ─── CLEAR ────────────────────────────────────────────────
+
+        function clearFields() {
+            if (currentActiveTab === 'dps') {
+                document.getElementById('deposit').value = '';
+                document.getElementById('term').value = '';
+                if (document.getElementById('dps-age')) document.getElementById('dps-age').value = '';
+                document.getElementById('plus').checked = false;
+                document.getElementById('cc').checked = false;
+                calculateDPS();
+            } else {
+                const stageNum = parseInt(currentActiveTab.replace(/\D/g, ''));
+                if (stageNum) {
+                    document.getElementById(`s${stageNum}-age`).value = '';
+                    document.getElementById(`s${stageNum}-sum`).value = '';
+                    if (document.getElementById(`s${stageNum}-target-budget`)) {
+                        document.getElementById(`s${stageNum}-target-budget`).value = '';
+                    }
+                    if (document.getElementById(`s${stageNum}-sug-container`)) {
+                        document.getElementById(`s${stageNum}-sug-container`).innerHTML = '';
+                    }
+                    if (document.getElementById(`s${stageNum}-plus`)) document.getElementById(`s${stageNum}-plus`).checked = false;
+                    if (document.getElementById(`s${stageNum}-cc`)) document.getElementById(`s${stageNum}-cc`).checked = false;
+                    calculateStage(stageNum);
+                }
+            }
+        }
+
+        // ─── AGE CALCULATOR ──────────────────────────────────────
+
+        function populateDateDropdowns() {
+            const today = new Date();
+
+            populateOptions('dobDay', 1, 31, 1);
+            populateMonthOptions('dobMonth', 0);
+            document.getElementById('dobYear').value = '1995';
+
+            populateOptions('asOfDay', 1, 31, today.getDate());
+            populateMonthOptions('asOfMonth', today.getMonth());
+            document.getElementById('asOfYear').value = today.getFullYear();
+        }
+
+        function populateOptions(elementId, start, end, defaultVal) {
+            const select = document.getElementById(elementId);
+            select.innerHTML = '';
+            for (let i = start; i <= end; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = toBangla(i);
+                if (i === defaultVal) opt.selected = true;
+                select.appendChild(opt);
+            }
+        }
+
+        function populateMonthOptions(elementId, defaultVal) {
+            const select = document.getElementById(elementId);
+            select.innerHTML = '';
+            banglaMonths.forEach((m, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.textContent = m;
+                if (idx === defaultVal) opt.selected = true;
+                select.appendChild(opt);
+            });
+        }
+
+        function parseYear(inputStr, isBirthYear = true) {
+            if (!inputStr) return null;
+            let num = parseInt(inputStr, 10);
+            if (isNaN(num)) return null;
+            const currentYear = new Date().getFullYear();
+            if (inputStr.length <= 2) {
+                let curYY = currentYear % 100;
+                if (isBirthYear) {
+                    num = (num <= curYY) ? (2000 + num) : (1900 + num);
+                } else {
+                    num = (num <= 50) ? (2000 + num) : (1900 + num);
+                }
+            }
+            return num;
+        }
+
+        function calculateAge() {
+            const dobD = parseInt(document.getElementById('dobDay').value);
+            const dobM = parseInt(document.getElementById('dobMonth').value);
+            const dobYVal = document.getElementById('dobYear').value.trim();
+
+            const asOfD = parseInt(document.getElementById('asOfDay').value);
+            const asOfM = parseInt(document.getElementById('asOfMonth').value);
+            const asOfYearVal = document.getElementById('asOfYear').value.trim();
+
+            const dobY = parseYear(dobYVal, true);
+            const asOfYear = parseYear(asOfYearVal, false);
+
+            if (!dobY || !asOfYear) {
+                document.getElementById('ageDetailOutput').innerHTML =
+                    '<span style="color:#7a8aa3;">সঠিক সাল লিখুন</span>';
+                document.getElementById('roundAgeOutput').innerText = 'বয়স: --';
+                return;
+            }
+
+            const dob = new Date(dobY, dobM, dobD);
+            const asOf = new Date(asOfYear, asOfM, asOfD);
+
+            if (dob > asOf) {
+                document.getElementById('ageDetailOutput').innerHTML =
+                    '<span style="color:#ef4444;">জন্ম তারিখ বর্তমান তারিখের চেয়ে বেশি হতে পারে না!</span>';
+                document.getElementById('roundAgeOutput').innerText = 'বয়স: --';
+                return;
+            }
+
+            let years = asOf.getFullYear() - dob.getFullYear();
+            let months = asOf.getMonth() - dob.getMonth();
+            let days = asOf.getDate() - dob.getDate();
+
+            if (days < 0) {
+                months--;
+                const prevMonthLastDay = new Date(asOf.getFullYear(), asOf.getMonth(), 0).getDate();
+                days += prevMonthLastDay;
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            let roundYear = years;
+            if (months > 6 || (months === 6 && days > 0)) {
+                roundYear = years + 1;
+            }
+
+            document.getElementById('ageDetailOutput').innerHTML =
+                `বিস্তারিত বয়স: <strong>${toBangla(years)}</strong> বছর <strong>${toBangla(months)}</strong> মাস <strong>${toBangla(days)}</strong> দিন`;
+
+            document.getElementById('roundAgeOutput').innerHTML =
+                `বয়স: <strong>${toBangla(roundYear)}</strong> বছর`;
+
+            if (currentActiveTab === 'dps') {
+                const ageInput = document.getElementById('dps-age');
+                if (ageInput) { 
+                    ageInput.value = roundYear;
+                    calculateDPS(); 
+                }
+            } else {
+                const stageNum = parseInt(currentActiveTab.replace(/\D/g, ''));
+                if (stageNum) {
+                    const ageInput = document.getElementById(`s${stageNum}-age`);
+                    if (ageInput) { 
+                        ageInput.value = roundYear;
+                        calculateStage(stageNum); 
+                    }
+                }
+            }
+        }
+
+        // ─── MODALS ──────────────────────────────────────────────
+
+        function openAgeModal() {
+            document.getElementById('ageModal').style.display = 'flex';
+        }
+
+        function closeAgeModal() {
+            document.getElementById('ageModal').style.display = 'none';
+        }
+
+        function openBenefitModal(type) {
+            const modal = document.getElementById('benefitModal');
+            const body = document.getElementById('benefitModalBody');
+
+            if (type === 'plus') {
+                body.innerHTML = `
+                    <h3><i class="fas fa-shield-alt"></i> Plus (প্লাস) সুবিধা</h3>
+                    <p><strong>দুর্ঘটনা জনিত মৃত্যু, অঙ্গহানি, স্থায়ী অক্ষমতা ও হাসপাতাল সুবিধা</strong></p>
+                    <ul>
+                        <li><strong>দুর্ঘটনায় ক্ষতিপূরণ:</strong> দুর্ঘটনাজনিত মৃত্যু বা স্থায়ী অক্ষমতা/অঙ্গহানি হলে শিডিউল অনুযায়ী গ্রাহক বা তার মনোনীতককে ক্ষতিপূরণ প্রদান করা হবে।</li>
+                        <li><strong>হাসপাতাল চিকিৎসা খরচ:</strong> দুর্ঘটনার জন্য হাসপাতালে ভর্তি হয়ে চিকিৎসা নিলে মূল বীমা অংকের সর্বোচ্চ <strong>১৫%</strong> পর্যন্ত প্রকৃত চিকিৎসা খরচ প্রদান করা হবে।</li>
+                        <li><strong>সর্বোচ্চ বীমা কভারেজ:</strong> সাধারণ গ্রাহকগণ সর্বোচ্চ <strong>২০,০০,০০০</strong> টাকা এবং গৃহিণী ও ২৫ বছরের নিচে গ্রাহকগণ সর্বোচ্চ <strong>১০,০০,০০০</strong> টাকা পর্যন্ত গ্রহণ করতে পারবেন।</li>
+                        <li><strong>মোটরসাইকেল দুর্ঘটনা শর্ত:</strong> মোটরসাইকেল দুর্ঘটনার ক্ষেত্রে কমপক্ষে <strong>০৩ দিন</strong> হাসপাতালে চিকিৎসাধীন থাকতে হবে (অন্যথায় বীমা অংকের ০৫% বিল প্রদান করা হবে)।</li>
+                    </ul>
+                `;
+            } else if (type === 'cc') {
+                body.innerHTML = `
+                    <h3><i class="fas fa-heartbeat"></i> CC (ক্রিটিক্যাল কেয়ার) সুবিধা</h3>
+                    <p><strong>১৮টি জটিল/দুরারোগ্য ব্যাধির বিপরীতে আর্থিক সুরক্ষা</strong></p>
+                    <ul>
+                        <li><strong>কভারেজ পরিমাণ:</strong> সর্বনিম্ন <strong>১,০০,০০০</strong> টাকা থেকে সর্বোচ্চ <strong>৫,০০,০০০</strong> টাকা পর্যন্ত।</li>
+                        <li><strong>এককালীন পরিশোধ:</strong> পলিসি চালুর ৬ মাস পর ১৮টি নির্দিষ্ট জটিল ব্যাধির যেকোনো একটি শনাক্ত হলে বা সার্জারি লাগলে এককালীন টাকা প্রদান করা হয়।</li>
+                        <li><strong>অন্তর্ভুক্ত ১৮টি জটিল ব্যাধি:</strong>
+                            <ol>
+                                <li>ক্যান্সার</li><li>হার্ট অ্যাটাক</li><li>স্ট্রোক</li>
+                                <li>করোনারি আর্টারি সার্জারি</li><li>কিডনি ফেইলিয়র</li>
+                                <li>সম্পূর্ণ অন্ধত্ব</li><li>প্যারালাইসিস</li><li>প্রধান অঙ্গ প্রতিস্থাপন</li>
+                                <li>হার্ট ভালভ প্রতিস্থাপন</li><li>এপ্ল্যাস্টিক অ্যানিমিয়া</li>
+                                <li>দীর্ঘস্থায়ী ফুসফুসের রোগ</li><li>অ্যাওর্টা সার্জারি</li>
+                                <li>ব্রেইন টিউমার</li><li>বধিরতা</li><li>মাথার গুরুতর আঘাত</li>
+                                <li>অঙ্গহানি</li><li>বাকশক্তি লোপ</li><li>মাল্টিপল স্ক্লেরোসিস</li>
+                            </ol>
+                        </li>
+                    </ul>
+                `;
+            }
+            modal.style.display = 'flex';
+        }
+
+        function closeBenefitModal() {
+            document.getElementById('benefitModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const ageModal = document.getElementById('ageModal');
+            const benefitModal = document.getElementById('benefitModal');
+            if (event.target === ageModal) ageModal.style.display = 'none';
+            if (event.target === benefitModal) benefitModal.style.display = 'none';
+        };
+
+        // ─── LONG PRESS ──────────────────────────────────────────
+
+        function setupLongPress() {
+            const targets = document.querySelectorAll('.long-press-target');
+            targets.forEach(target => {
+                let timer = null;
+                const type = target.getAttribute('data-type');
+
+                const start = (e) => {
+                    timer = setTimeout(() => {
+                        openBenefitModal(type);
+                    }, 500);
+                };
+
+                const cancel = () => {
+                    if (timer) { 
+                        clearTimeout(timer);
+                        timer = null; 
+                    }
+                };
+
+                target.addEventListener('mousedown', start);
+                target.addEventListener('touchstart', start, { passive: true });
+                target.addEventListener('mouseup', cancel);
+                target.addEventListener('mouseleave', cancel);
+                target.addEventListener('touchend', cancel);
+                target.addEventListener('touchmove', cancel);
+            });
+        }
+
+        // ─── HELPER: GET CURRENT CALCULATION DATA ─────────────────
+
+        function getCurrentCalculationData() {
+            const data = {
+                planTitle: '',
+                modeText: '',
+                age: '',
+                term: '',
+                sumAssured: '০ ৳',
+                ratePerThousand: '',
+                basePremium: '০ ৳',
+                hasPlus: false,
+                plusAmount: '০ ৳',
+                hasCC: false,
+                ccAmount: '০ ৳',
+                totalPremium: '০ ৳',
+                medicalTests: [],
+                isNonMedical: false,
+                hasIncomeDocNote: false
+            };
+
+            if (currentActiveTab === 'dps') {
+                data.planTitle = 'ডিপিএস গোল্ড (DPS Gold)';
+                data.modeText = 'মাসিক (Monthly)';
+                data.age = document.getElementById('dps-age').value || '--';
+                data.term = document.getElementById('term').value || '--';
+                data.sumAssured = document.getElementById('sumAssured').innerText;
+                data.basePremium = (parseFloat(document.getElementById('deposit').value) || 0).toLocaleString('bn-BD') + ' ৳';
+                data.hasPlus = document.getElementById('plus').checked;
+                data.plusAmount = document.getElementById('plusAmount').innerText;
+                data.hasCC = document.getElementById('cc').checked;
+                data.ccAmount = document.getElementById('ccAmount').innerText;
+                data.totalPremium = document.getElementById('totalMonthly').innerText;
+
+                const numericSum = (parseFloat(document.getElementById('deposit').value) || 0) * 12 * (parseFloat(document.getElementById('term').value) || 0);
+                const ageNum = parseInt(data.age);
+                data.medicalTests = getMedicalTests(ageNum, numericSum);
+                if (numericSum > 1000000) data.hasIncomeDocNote = true;
+            } else {
+                const stageNum = parseInt(currentActiveTab.replace(/\D/g, ''));
+                const planTitles = {
+                    3: '৩ কিস্তি সুবিধা বীমা (Plan 03)',
+                    4: '৪ কিস্তি সুবিধা বীমা (Plan 04)',
+                    5: '৫ কিস্তি সুবিধা বীমা (Plan 05)',
+                    6: 'শিক্ষা সুরক্ষা পলিসি (Plan 06)',
+                    9: 'এককালীন সঞ্চয়ী / এফডিআর (Plan 09)'
+                };
+                data.planTitle = planTitles[stageNum] || 'বীমা পলিসি';
+
+                const modeElem = document.querySelector(`input[name="s${stageNum}-mode"]:checked`);
+                const modeVal = modeElem ? modeElem.value : 'yearly';
+                const modeNames = {
+                    'monthly': 'মাসিক (Monthly)',
+                    'half_yearly': 'ষাণ্মাসিক (Half Yearly)',
+                    'yearly': stageNum === 9 ? 'এককালীন (Single Payment)' : 'বার্ষিক (Yearly)'
+                };
+                data.modeText = modeNames[modeVal] || modeVal;
+
+                data.age = document.getElementById(`s${stageNum}-age`).value || '--';
+                data.term = document.getElementById(`s${stageNum}-term`).value || '--';
+
+                const sumVal = parseFloat(document.getElementById(`s${stageNum}-sum`).value) || 0;
+                data.sumAssured = sumVal.toLocaleString('bn-BD') + ' ৳';
+                data.ratePerThousand = document.getElementById(`s${stageNum}-rate-val`)?.innerText || '';
+                data.basePremium = document.getElementById(`s${stageNum}-base-premium`)?.innerText || '০ ৳';
+
+                const plusElem = document.getElementById(`s${stageNum}-plus`);
+                if (plusElem && plusElem.checked) {
+                    data.hasPlus = true;
+                    data.plusAmount = document.getElementById(`s${stageNum}-plus-charge`)?.innerText || '০ ৳';
+                }
+
+                const ccElem = document.getElementById(`s${stageNum}-cc`);
+                if (ccElem && ccElem.checked) {
+                    data.hasCC = true;
+                    data.ccAmount = document.getElementById(`s${stageNum}-cc-charge`)?.innerText || '০ ৳';
+                }
+
+                data.totalPremium = document.getElementById(`s${stageNum}-total-premium`)?.innerText || '০ ৳';
+
+                const ageNum = parseInt(data.age);
+                data.medicalTests = getMedicalTests(ageNum, sumVal);
+                if (sumVal > 1000000) data.hasIncomeDocNote = true;
+            }
+
+            if (data.medicalTests.length === 1 && data.medicalTests[0].code === 'NMS') {
+                data.isNonMedical = true;
+            }
+
+            return data;
+        }
+
+        // ─── ENHANCED COPY RESULTS ──────────────────────────────
+
+        function copyResults() {
+            const data = getCurrentCalculationData();
+            const now = new Date();
+            const dateStr = `${toBangla(now.getDate())}/${toBangla(now.getMonth() + 1)}/${toBangla(now.getFullYear())}`;
+
+            let text = '📋 *বীমা প্রিমিয়াম ও প্রস্তাবনা হিসাব বিবরণী*\n';
+            text += '🏢 আলফা ইসলামী লাইফ ইন্স্যুরেন্স লিমিটেড\n';
+            text += '━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            text += `📌 *পলিসি:* ${data.planTitle}\n`;
+            text += `👤 *গ্রাহকের বয়স:* ${toBangla(data.age)} বছর\n`;
+            text += `⏳ *মেয়াদ:* ${toBangla(data.term)} বছর\n`;
+            text += `💳 *কিস্তির ধরন:* ${data.modeText}\n`;
+            text += '━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            text += `💰 *বীমা অংক:* ${data.sumAssured}\n`;
+            if (data.ratePerThousand && data.ratePerThousand !== '০.০০ ৳') {
+                text += `📊 *হাজার প্রতি রেট:* ${data.ratePerThousand}\n`;
+            }
+            text += `💵 *মূল প্রিমিয়াম:* ${data.basePremium}\n`;
+
+            if (data.hasPlus) {
+                text += `➕ *প্লাস সুবিধা (Plus):* ${data.plusAmount} (অন্তর্ভুক্ত)\n`;
+            }
+            if (data.hasCC) {
+                text += `❤️ *ক্রিটিক্যাল কেয়ার (CC):* ${data.ccAmount} (অন্তর্ভুক্ত)\n`;
+            }
+
+            text += '━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            text += `⭐ *সর্বমোট নির্ধারিত কিস্তি:* ${data.totalPremium}\n`;
+            text += '━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+
+            text += '🩺 *মেডিকেল চাহিদা ও শর্তাবলী:*\n';
+            if (data.isNonMedical) {
+                text += '• নন-মেডিকেল (NMS): কোনো মেডিকেল টেস্ট লাগবে না। শুধুমাত্র ব্যক্তিগত স্বাস্থ্য বিবৃতি ফর্ম প্রযোজ্য।\n';
+            } else if (data.medicalTests.length > 0) {
+                text += '• প্রয়োজনীয় টেস্টসমূহ:\n';
+                data.medicalTests.forEach(t => {
+                    text += `   - ${t.name}\n`;
+                });
+            } else {
+                text += '• কোনো মেডিকেল টেস্ট প্রয়োজন নেই।\n';
+            }
+
+            if (data.hasIncomeDocNote) {
+                text += '• ১০ লক্ষ টাকার বেশি হওয়ায় আয়ের উৎস সংক্রান্ত প্রমাণপত্র (Financial Document) প্রয়োজন হতে পারে।\n';
+            }
+
+            text += '━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+            text += `📅 হিসাবের তারিখ: ${dateStr}\n`;
+            text += '✨ প্রস্তুতকারক: IT EMON';
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ সম্পূর্ণ তথ্যবহুল কোটেশন কপি করা হয়েছে! WhatsApp বা মেসেঞ্জারে পাঠাতে পারেন।');
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('✅ সম্পূর্ণ তথ্যবহুল কোটেশন কপি করা হয়েছে!');
+            });
+        }
+
+        // ─── ENHANCED PRINT RESULTS ─────────────────────────────
+
+        function printResults() {
+            const data = getCurrentCalculationData();
+            const now = new Date();
+            const dateStr = `${toBangla(now.getDate())} ${banglaMonths[now.getMonth()]}, ${toBangla(now.getFullYear())}`;
+            document.getElementById('print-date').innerText = dateStr;
+
+            let html = `
+                <table class="print-table">
+                    <tr><th>পলিসির নাম</th><td>${data.planTitle}</td></tr>
+                    <tr><th>গ্রাহকের বয়স</th><td>${toBangla(data.age)} বছর</td></tr>
+                    <tr><th>পলিসির মেয়াদ</th><td>${toBangla(data.term)} বছর</td></tr>
+                    <tr><th>কিস্তির ধরন (Mode)</th><td>${data.modeText}</td></tr>
+                    <tr><th>মূল বীমা অংক</th><td>${data.sumAssured}</td></tr>
+            `;
+
+            if (data.ratePerThousand && data.ratePerThousand !== '০.০০ ৳') {
+                html += `<tr><th>হাজার প্রতি প্রিমিয়াম রেট</th><td>${data.ratePerThousand}</td></tr>`;
+            }
+
+            html += `<tr><th>মূল প্রিমিয়াম</th><td>${data.basePremium}</td></tr>`;
+
+            if (data.hasPlus) {
+                html += `<tr><th>প্লাস সুবিধা (দুর্ঘটনা ও অঙ্গহানি)</th><td>${data.plusAmount}</td></tr>`;
+            }
+            if (data.hasCC) {
+                html += `<tr><th>ক্রিটিক্যাল কেয়ার (১৮টি জটিল ব্যাধি)</th><td>${data.ccAmount}</td></tr>`;
+            }
+
+            html += `
+                    <tr style="background:#f0fdf4; font-size:16px;">
+                        <th style="color:#065f46;">সর্বমোট নির্ধারিত প্রিমিয়াম</th>
+                        <td style="color:#065f46; font-size:17px;">${data.totalPremium}</td>
+                    </tr>
+                </table>
+            `;
+
+            html += `<div class="print-box ${data.isNonMedical ? '' : 'medical-box'}">`;
+            html += `<h4><i class="fas fa-stethoscope"></i> আন্ডাররাইটিং ও মেডিকেল চাহিদা (Medical Underwriting):</h4>`;
+
+            if (data.isNonMedical) {
+                html += `<p><strong>নন-মেডিকেল (Non-Medical Statement):</strong> প্রস্তাবকের কোনো প্যাথলজিক্যাল মেডিকেল টেস্ট লাগবে না। শুধুমাত্র নন-মেডিকেল স্বাস্থ্য বিবৃতি ফর্ম পূরণ করতে হবে।</p>`;
+            } else if (data.medicalTests.length > 0) {
+                html += `<p>এই বয়স ও বীমা অংকের জন্য নিম্নোক্ত টেস্টসমূহ সম্পন্ন করতে হবে:</p><ul style="padding-left:20px; margin-top:4px;">`;
+                data.medicalTests.forEach(t => {
+                    html += `<li><strong>${t.name}</strong></li>`;
+                });
+                html += `</ul>`;
+            } else {
+                html += `<p>কোনো মেডিকেল টেস্ট প্রয়োজন নেই।</p>`;
+            }
+
+            if (data.hasIncomeDocNote) {
+                html += `<p style="margin-top:6px; color:#b45309;"><strong>আয়ের প্রমাণের শর্ত:</strong> বীমা অংক ১০ লক্ষ টাকার বেশি হওয়ায় প্রস্তাবকের আয়ের প্রামাণ্য দলিল জমা দিতে হবে।</p>`;
+            }
+            html += `</div>`;
+
+            document.getElementById('print-content-body').innerHTML = html;
+
+            window.print();
+        }
+
+        // ─── DOM READY ──────────────────────────────────────────
+
+        document.addEventListener("DOMContentLoaded", function() {
+            populateDateDropdowns();
+            calculateAge();
+            setupLongPress();
+            calculateDPS();
+        });
+    </script>
+
+    <!-- ── SERVICE WORKER REGISTRATION (Offline & Auto-Update) ── -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        registration.onupdatefound = () => {
+                            const installingWorker = registration.installing;
+                            installingWorker.onstatechange = () => {
+                                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    window.location.reload();
+                                }
+                            };
+                        };
+                    })
+                    .catch((err) => console.log('SW Registration Error: ', err));
+            });
+        }
+    </script>
+
+</body>
+</html>
