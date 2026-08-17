@@ -86,26 +86,28 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
             margin-bottom: 18px;
-            padding-bottom: 14px;
+            padding-bottom: 12px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         .header-container h2 {
-            font-size: 20px;
+            font-size: 17.5px;
             font-weight: 800;
             color: #ffffff;
             letter-spacing: -0.3px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            line-height: 1.2;
+            flex: 1;
         }
 
         .header-container h2 i {
             color: #5eead4;
-            font-size: 24px;
+            font-size: 20px;
+            flex-shrink: 0;
         }
 
         .header-container h2 span {
@@ -117,17 +119,29 @@
         .connect-btn {
             background: linear-gradient(135deg, #0d9488, #0f766e);
             color: #fff;
-            padding: 8px 18px;
-            border-radius: 40px;
+            padding: 4px 10px;
+            border-radius: 20px;
             text-decoration: none;
-            font-size: 12.5px;
+            font-size: 11px;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             border: none;
             cursor: pointer;
             white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.3);
+        }
+
+        .connect-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .connect-btn i {
+            font-size: 10px;
         }
 
         /* ── Tabs ── */
@@ -780,14 +794,14 @@
                 border-radius: 20px;
             }
             .header-container h2 {
-                font-size: 17px;
+                font-size: 15px;
             }
             .header-container h2 i {
-                font-size: 20px;
+                font-size: 18px;
             }
             .connect-btn {
-                font-size: 11px;
-                padding: 6px 14px;
+                font-size: 10px;
+                padding: 4px 8px;
             }
             .tab-btn {
                 font-size: 10px;
@@ -852,8 +866,8 @@
 
     <div class="calculator-card">
         <div class="header-container">
-            <h2><i class="fas fa-shield-alt"></i> <span>বীমা প্রিমিয়াম</span> ক্যালকুলেটর</h2>
-            <a href="https://alphaconnect.alphalife.com.bd/" target="_blank" class="connect-btn">
+            <h2><i class="fas fa-shield-alt"></i> <span id="header-plan-title">ডিপিএস গোল্ড (DPS Gold)</span></h2>
+            <a href="https://alphaconnect.alphalife.com.bd/" target="_blank" class="connect-btn" title="Alpha Connect">
                 <i class="fas fa-link"></i> Connect
             </a>
         </div>
@@ -1003,7 +1017,7 @@
             35: { 10: 106.50, 11: 96.20, 12: 87.70, 13: 80.60, 14: 74.40, 15: 69.20, 16: 64.60, 17: 60.50, 18: 57.00, 19: 53.80, 20: 51.00, 21: 48.40, 22: 46.10, 23: 44.10, 24: 42.20, 25: 40.50, 30: 34.00, 35: 29.80 },
             40: { 10: 107.00, 11: 96.80, 12: 88.40, 13: 81.30, 14: 75.20, 15: 70.00, 16: 65.40, 17: 61.50, 18: 58.00, 19: 54.80, 20: 52.10, 21: 49.60, 22: 47.40, 23: 45.40, 24: 43.60, 25: 42.00, 30: 35.90 },
             45: { 10: 108.20, 11: 98.10, 12: 89.70, 13: 82.70, 14: 76.70, 15: 71.50, 16: 67.10, 17: 63.20, 18: 59.80, 19: 56.80, 20: 54.10, 21: 51.70, 22: 49.60, 23: 47.70, 24: 46.00, 25: 44.50 },
-            50: { 10: 110.20, 11: 100.20, 12: 92.00, 13: 85.00, 14: 79.20, 15: 74.20, 16: 69.80, 17: 66.10, 18: 62.80, 19: 59.90, 20: 57.40 },
+            50: { 110.20: 110.20, 10: 110.20, 11: 100.20, 12: 92.00, 13: 85.00, 14: 79.20, 15: 74.20, 16: 69.80, 17: 66.10, 18: 62.80, 19: 59.90, 20: 57.40 },
             55: { 10: 113.50, 11: 103.70, 12: 95.60, 13: 88.90, 14: 83.20, 15: 78.40 }
         };
         for (let a = 20; a <= 55; a++) { if (!plan1Rates[a]) plan1Rates[a] = { ...plan1Rates[Math.floor(a / 5) * 5] }; }
@@ -1089,7 +1103,7 @@
             return num.toString().replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]);
         }
 
-        // ─── RIDER TOGGLE LOGIC (CC custom show/hide) ──────────────
+        // ─── RIDER TOGGLE LOGIC ──────────────────────────────────────
         function handleRiderToggle(planContext, clickedRider) {
             if (planContext === 'dps') {
                 const plusEl = document.getElementById('dps-plus');
@@ -1097,7 +1111,6 @@
                 if (clickedRider === 'plus' && plusEl && plusEl.checked && adbEl) adbEl.checked = false;
                 else if (clickedRider === 'adb' && adbEl && adbEl.checked && plusEl) plusEl.checked = false;
 
-                // Show/hide CC custom inputs
                 const ccChecked = document.getElementById('dps-cc').checked;
                 document.getElementById('dps-cc-custom').style.display = ccChecked ? 'flex' : 'none';
                 calculateDPS();
@@ -1261,12 +1274,12 @@
             container.innerHTML = html;
         }
 
-        // ─── TAB SWITCHING ──────────────────────────────────────────
+        // ─── TAB SWITCHING & HEADER TITLE UPDATE ──────────────────
         function switchPlanTab(planId) {
             currentActiveTab = planId;
             const allBtns = document.querySelectorAll('.tab-btn');
             allBtns.forEach(b => b.classList.remove('active'));
-            // Find which button was clicked
+
             const btns = document.querySelectorAll('.tab-btn');
             let idx = 0;
             if (planId === 'dps') idx = 0;
@@ -1278,6 +1291,16 @@
             else if (planId === 6) idx = 6;
             else if (planId === 9) idx = 7;
             if (btns[idx]) btns[idx].classList.add('active');
+
+            // Header Title Update Dynamically
+            const headerTitleEl = document.getElementById('header-plan-title');
+            if (headerTitleEl) {
+                if (planId === 'dps') {
+                    headerTitleEl.innerText = 'ডিপিএস গোল্ড (DPS Gold)';
+                } else if (planConfig[planId]) {
+                    headerTitleEl.innerText = planConfig[planId].title;
+                }
+            }
 
             const dpsTab = document.getElementById('tab-dps');
             const dynamicContainer = document.getElementById('dynamic-plan-container');
@@ -1329,7 +1352,6 @@
                 if (conf.riders.includes('wp')) riderHTML += `<div class="checkbox-item"><input type="checkbox" id="p-wp" onchange="handleRiderToggle('plan', 'wp')" /><label for="p-wp"><i class="fas fa-file-invoice"></i> WP</label></div>`;
                 if (conf.riders.includes('ibr')) riderHTML += `<div class="checkbox-item"><input type="checkbox" id="p-ibr" onchange="handleRiderToggle('plan', 'ibr')" /><label for="p-ibr"><i class="fas fa-hand-holding-dollar"></i> IBR</label></div>`;
                 riderHTML += `</div>`;
-                // CC Custom inputs (hidden by default)
                 riderHTML += `<div id="p-cc-custom" class="cc-custom-group" style="display:none;">
                     <div class="form-group"><label><i class="fas fa-percent"></i> CC রেট (প্রতি হাজারে)</label><input type="number" id="p-cc-rate" placeholder="ডিফল্ট" step="0.01" oninput="calculatePlan(${planId})" /></div>
                     <div class="form-group"><label><i class="fas fa-coins"></i> CC আওতায় বিমা অংক</label><input type="number" id="p-cc-sa" placeholder="সর্বোচ্চ ৫,০০,০০০" oninput="calculatePlan(${planId})" /></div>
@@ -1393,7 +1415,6 @@
             const modeFactor = 0.0925;
             const effAge = age || 30;
 
-            // CC custom
             const ccRateInput = document.getElementById('dps-cc-rate').value;
             const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
             const ccSAInput = document.getElementById('dps-cc-sa').value;
@@ -1468,7 +1489,6 @@
             const hasWP = document.getElementById('p-wp')?.checked || false;
             const hasIBR = document.getElementById('p-ibr')?.checked || false;
 
-            // CC custom
             const ccRateInput = document.getElementById('p-cc-rate')?.value;
             const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
             const ccSAInput = document.getElementById('p-cc-sa')?.value;
@@ -1535,7 +1555,6 @@
             const hasWP = document.getElementById('p-wp')?.checked || false;
             const hasIBR = document.getElementById('p-ibr')?.checked || false;
 
-            // CC custom rates for suggestions
             const ccRateInput = document.getElementById('p-cc-rate')?.value;
             const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
             const ccSAInput = document.getElementById('p-cc-sa')?.value;
@@ -1564,10 +1583,7 @@
 
             const rate = ratesTable[currentAge][selectedTerm];
             const ccRateUsed = hasCC ? getCCRate(currentAge, ccRate) : 0;
-            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, 1000000) : 0; // use a placeholder for SA
-            // For suggestion, we approximate CC as if it's proportional to main SA (but limited)
-            // We'll treat CC as a fixed rider rate per thousand based on main SA
-            const ccEffectiveRate = hasCC ? ccRateUsed * (ccSaUsed / 1000) : 0; // this is per thousand of main SA
+            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, 1000000) : 0;
 
             const totalRiderRate = (hasADB ? 1.25 : 0) + (hasPDAB ? 3.50 : 0) + (hasPlus ? 6.45 : 0) +
                 (hasCC ? ccRateUsed * (ccSaUsed / 1000) : 0) + (hasWP ? getWPRate(currentAge) : 0) +
