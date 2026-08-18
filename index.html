@@ -442,17 +442,18 @@
         }
 
         .cc-custom-group .form-group {
-            flex: 1 1 140px;
+            flex: 1 1 100%;
             margin-bottom: 0;
         }
 
         .cc-custom-group label {
-            font-size: 14px;
-            color: var(--text-muted);
+            font-size: 14.5px;
+            color: var(--text-label);
+            font-weight: 700;
         }
 
         .cc-custom-group input {
-            height: 46px;
+            height: 48px;
             font-size: 15.5px;
         }
 
@@ -1004,12 +1005,8 @@
 
             <div id="dps-cc-custom" class="cc-custom-group" style="display:none;">
                 <div class="form-group">
-                    <label><i class="fas fa-percent"></i> CC রেট (প্রতি হাজারে)</label>
-                    <input type="number" id="dps-cc-rate" placeholder="ডিফল্ট: ৪.৪৫" step="0.01" oninput="calculateDPS()" />
-                </div>
-                <div class="form-group">
-                    <label><i class="fas fa-coins"></i> CC আওতায় বিমা অংক</label>
-                    <input type="number" id="dps-cc-sa" placeholder="সর্বোচ্চ ৫,০০,০০০" oninput="calculateDPS()" />
+                    <label><i class="fas fa-coins"></i> CC আওতায় বীমা অংক (ঐচ্ছিক, সর্বোচ্চ ৫ লক্ষ)</label>
+                    <input type="number" id="dps-cc-sa" placeholder="ফাঁকা রাখলে মূল বীমা অংক প্রযোজ্য (সর্বোচ্চ ৫,০০,০০০)" oninput="calculateDPS()" />
                 </div>
             </div>
 
@@ -1214,7 +1211,8 @@
                 else if (clickedRider === 'adb' && adbEl && adbEl.checked && plusEl) plusEl.checked = false;
 
                 const ccChecked = document.getElementById('dps-cc').checked;
-                document.getElementById('dps-cc-custom').style.display = ccChecked ? 'flex' : 'none';
+                const ccCustom = document.getElementById('dps-cc-custom');
+                if (ccCustom) ccCustom.style.display = ccChecked ? 'flex' : 'none';
                 calculateDPS();
             } else {
                 const plusEl = document.getElementById('p-plus');
@@ -1234,10 +1232,7 @@
         }
 
         // ─── CC RATE & SA HELPERS ───────────────────────────────────
-        function getCCRate(age, customRate) {
-            if (customRate !== undefined && customRate !== null && !isNaN(customRate) && customRate > 0) {
-                return parseFloat(customRate);
-            }
+        function getCCRate(age) {
             const a = parseInt(age) || 20;
             if (a <= 29) return 4.45;
             if (a <= 34) return 6.95;
@@ -1252,7 +1247,7 @@
             if (customSA !== undefined && customSA !== null && !isNaN(customSA) && customSA > 0) {
                 return Math.min(customSA, 500000);
             }
-            return Math.min(mainSA, 500000);
+            return Math.min(mainSA || 0, 500000);
         }
 
         function getWPRate(age) {
@@ -1361,7 +1356,7 @@
             let html = '';
             if (tests.length === 1 && tests[0].code === 'NMS') {
                 container.className = 'medical-requirements non-med';
-                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> বয়স (' + toBangla(age) + ' বছর) ও বীমা অংক অনুযায়ী কোনো মেডিকেল টেস্টের প্রয়োজন নেই।';
+                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> বয়স (' + toBangla(age) + ' বছর) ও বীমা অংক অনুযায়ী কোনো মেডিকেল টেস্টের প্রয়োজন নেই। শুধুমাত্র ব্যক্তিগত নন-মেডিকেল ঘোষণা (Personal Non-Medical Statement) প্রযোজ্য।';
             } else if (tests.length === 1 && tests[0].code === 'DECLINE') {
                 container.className = 'medical-requirements has-med';
                 html = '<i class="fas fa-triangle-exclamation"></i> <strong>সতর্কতা:</strong> ' + tests[0].name;
@@ -1454,8 +1449,7 @@
                 if (conf.riders.includes('ibr')) riderHTML += `<div class="checkbox-item"><input type="checkbox" id="p-ibr" onchange="handleRiderToggle('plan', 'ibr')" /><label for="p-ibr"><i class="fas fa-hand-holding-dollar"></i> IBR</label></div>`;
                 riderHTML += `</div>`;
                 riderHTML += `<div id="p-cc-custom" class="cc-custom-group" style="display:none;">
-                    <div class="form-group"><label><i class="fas fa-percent"></i> CC রেট (প্রতি হাজারে)</label><input type="number" id="p-cc-rate" placeholder="ডিফল্ট" step="0.01" oninput="calculatePlan(${planId})" /></div>
-                    <div class="form-group"><label><i class="fas fa-coins"></i> CC আওতায় বিমা অংক</label><input type="number" id="p-cc-sa" placeholder="সর্বোচ্চ ৫,০০,০০০" oninput="calculatePlan(${planId})" /></div>
+                    <div class="form-group"><label><i class="fas fa-coins"></i> CC আওতায় বীমা অংক (ঐচ্ছিক, সর্বোচ্চ ৫ লক্ষ)</label><input type="number" id="p-cc-sa" placeholder="ফাঁকা রাখলে মূল বীমা অংক প্রযোজ্য (সর্বোচ্চ ৫,০০,০০০)" oninput="calculatePlan(${planId})" /></div>
                 </div>`;
             }
 
@@ -1516,15 +1510,13 @@
             const modeFactor = 0.0925;
             const effAge = age || 30;
 
-            const ccRateInput = document.getElementById('dps-cc-rate').value;
-            const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
-            const ccSAInput = document.getElementById('dps-cc-sa').value;
-            const ccSA = ccSAInput !== '' ? parseFloat(ccSAInput) : null;
+            const ccSAInput = document.getElementById('dps-cc-sa')?.value;
+            const customCcSA = (ccSAInput !== undefined && ccSAInput !== '') ? parseFloat(ccSAInput) : null;
 
             const adbAmt = hasADB ? Math.round((mainSA / 1000) * 1.25 * modeFactor) : 0;
             const plusAmt = hasPlus ? Math.round((mainSA / 1000) * 6.45 * modeFactor) : 0;
-            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, mainSA) : 0;
-            const ccRateUsed = hasCC ? getCCRate(effAge, ccRate) : 0;
+            const ccSaUsed = hasCC ? getCCSumAssured(customCcSA, mainSA) : 0;
+            const ccRateUsed = hasCC ? getCCRate(effAge) : 0;
             const ccAmt = hasCC ? Math.round((ccSaUsed / 1000) * ccRateUsed * modeFactor) : 0;
             const wpAmt = hasWP ? Math.round((mainSA / 1000) * getWPRate(effAge) * modeFactor) : 0;
 
@@ -1590,16 +1582,14 @@
             const hasWP = document.getElementById('p-wp')?.checked || false;
             const hasIBR = document.getElementById('p-ibr')?.checked || false;
 
-            const ccRateInput = document.getElementById('p-cc-rate')?.value;
-            const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
             const ccSAInput = document.getElementById('p-cc-sa')?.value;
-            const ccSA = ccSAInput !== '' ? parseFloat(ccSAInput) : null;
+            const customCcSA = (ccSAInput !== undefined && ccSAInput !== '') ? parseFloat(ccSAInput) : null;
 
             const adbCharge = hasADB ? Math.round((sum / 1000) * 1.25 * modeFactor) : 0;
             const pdabCharge = hasPDAB ? Math.round((sum / 1000) * 3.50 * modeFactor) : 0;
             const plusCharge = hasPlus ? Math.round((sum / 1000) * 6.45 * modeFactor) : 0;
-            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, sum) : 0;
-            const ccRateUsed = hasCC ? getCCRate(age, ccRate) : 0;
+            const ccSaUsed = hasCC ? getCCSumAssured(customCcSA, sum) : 0;
+            const ccRateUsed = hasCC ? getCCRate(age) : 0;
             const ccCharge = hasCC ? Math.round((ccSaUsed / 1000) * ccRateUsed * modeFactor) : 0;
             const wpCharge = hasWP ? Math.round((sum / 1000) * getWPRate(age) * modeFactor) : 0;
             const ibrCharge = hasIBR ? Math.round((sum / 1000) * getIBRRate(age, term) * modeFactor) : 0;
@@ -1656,10 +1646,8 @@
             const hasWP = document.getElementById('p-wp')?.checked || false;
             const hasIBR = document.getElementById('p-ibr')?.checked || false;
 
-            const ccRateInput = document.getElementById('p-cc-rate')?.value;
-            const ccRate = ccRateInput !== '' ? parseFloat(ccRateInput) : null;
             const ccSAInput = document.getElementById('p-cc-sa')?.value;
-            const ccSA = ccSAInput !== '' ? parseFloat(ccSAInput) : null;
+            const customCcSA = (ccSAInput !== undefined && ccSAInput !== '') ? parseFloat(ccSAInput) : null;
 
             const modeElem = document.querySelector('input[name="p-mode"]:checked');
             const mode = modeElem ? modeElem.value : 'yearly';
@@ -1683,15 +1671,33 @@
             else if (mode === 'half_yearly') modeFactor = 0.525;
 
             const rate = ratesTable[currentAge][selectedTerm];
-            const ccRateUsed = hasCC ? getCCRate(currentAge, ccRate) : 0;
-            const ccSaUsed = hasCC ? getCCSumAssured(ccSA, 1000000) : 0;
+            const ccRateUsed = hasCC ? getCCRate(currentAge) : 0;
 
-            const totalRiderRate = (hasADB ? 1.25 : 0) + (hasPDAB ? 3.50 : 0) + (hasPlus ? 6.45 : 0) +
-                (hasCC ? ccRateUsed * (ccSaUsed / 1000) : 0) + (hasWP ? getWPRate(currentAge) : 0) +
+            const standardRiderRate = (hasADB ? 1.25 : 0) + (hasPDAB ? 3.50 : 0) + (hasPlus ? 6.45 : 0) +
+                (hasWP ? getWPRate(currentAge) : 0) +
                 (hasIBR ? getIBRRate(currentAge, selectedTerm) : 0);
-            const effRatePerThousand = (rate + totalRiderRate) * modeFactor;
 
-            const rawSumAssured = (targetBudget / effRatePerThousand) * 1000;
+            const baseRatePerThousand = (rate + standardRiderRate) * modeFactor;
+
+            let rawSumAssured = 0;
+            if (hasCC && customCcSA && customCcSA > 0) {
+                const fixedCcSa = Math.min(customCcSA, 500000);
+                const fixedCcPrem = (fixedCcSa / 1000) * ccRateUsed * modeFactor;
+                const remBudget = Math.max(0, targetBudget - fixedCcPrem);
+                rawSumAssured = (remBudget / baseRatePerThousand) * 1000;
+            } else if (hasCC) {
+                const rateWithCC = (rate + standardRiderRate + ccRateUsed) * modeFactor;
+                let estimatedSA = (targetBudget / rateWithCC) * 1000;
+                if (estimatedSA > 500000) {
+                    const fixedCcPrem = (500000 / 1000) * ccRateUsed * modeFactor;
+                    const remBudget = Math.max(0, targetBudget - fixedCcPrem);
+                    estimatedSA = (remBudget / baseRatePerThousand) * 1000;
+                }
+                rawSumAssured = estimatedSA;
+            } else {
+                rawSumAssured = (targetBudget / baseRatePerThousand) * 1000;
+            }
+
             const centerSum = Math.max(0, Math.round(rawSumAssured / 1000) * 1000);
 
             const lessArray = [];
@@ -1702,9 +1708,8 @@
                 const sa = centerSum + (i * 1000);
                 if (sa >= minSum) {
                     const baseP = Math.round((sa / 1000) * rate * modeFactor);
-                    const ccSaActual = hasCC ? getCCSumAssured(ccSA, sa) : 0;
-                    const ccRateActual = hasCC ? getCCRate(currentAge, ccRate) : 0;
-                    const ccP = hasCC ? Math.round((ccSaActual / 1000) * ccRateActual * modeFactor) : 0;
+                    const ccSaActual = hasCC ? getCCSumAssured(customCcSA, sa) : 0;
+                    const ccP = hasCC ? Math.round((ccSaActual / 1000) * ccRateUsed * modeFactor) : 0;
                     const riderP = (hasADB ? Math.round((sa / 1000) * 1.25 * modeFactor) : 0) +
                         (hasPDAB ? Math.round((sa / 1000) * 3.50 * modeFactor) : 0) +
                         (hasPlus ? Math.round((sa / 1000) * 6.45 * modeFactor) : 0) +
@@ -1766,8 +1771,8 @@
                 document.getElementById('dps-term').value = '';
                 document.getElementById('dps-age').value = '';
                 ['adb', 'plus', 'cc', 'wp'].forEach(r => document.getElementById(`dps-${r}`).checked = false);
-                document.getElementById('dps-cc-rate').value = '';
-                document.getElementById('dps-cc-sa').value = '';
+                const ccSA = document.getElementById('dps-cc-sa');
+                if (ccSA) ccSA.value = '';
                 document.getElementById('dps-cc-custom').style.display = 'none';
                 calculateDPS();
             } else {
@@ -1783,8 +1788,6 @@
                 });
                 const ccCustom = document.getElementById('p-cc-custom');
                 if (ccCustom) ccCustom.style.display = 'none';
-                const ccRate = document.getElementById('p-cc-rate');
-                if (ccRate) ccRate.value = '';
                 const ccSA = document.getElementById('p-cc-sa');
                 if (ccSA) ccSA.value = '';
                 calculatePlan(currentActiveTab);
