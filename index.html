@@ -1361,7 +1361,7 @@
             let html = '';
             if (tests.length === 1 && tests[0].code === 'NMS') {
                 container.className = 'medical-requirements non-med';
-                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> বয়স (' + toBangla(age) + ' বছর) ও বীমা অংক অনুযায়ী কোনো মেডিকেল টেস্টের প্রয়োজন নেই। শুধুমাত্র ব্যক্তিগত নন-মেডিকেল ঘোষণা (Personal Non-Medical Statement) প্রযোজ্য।';
+                html = '<i class="fas fa-check-circle"></i> <strong>নন-মেডিকেল (NMS):</strong> বয়স (' + toBangla(age) + ' বছর) ও বীমা অংক অনুযায়ী কোনো মেডিকেল টেস্টের প্রয়োজন নেই।';
             } else if (tests.length === 1 && tests[0].code === 'DECLINE') {
                 container.className = 'medical-requirements has-med';
                 html = '<i class="fas fa-triangle-exclamation"></i> <strong>সতর্কতা:</strong> ' + tests[0].name;
