@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <meta name="theme-color" content="#0d9488" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="বীমা ক্যালকুলেটর" />
+    <title>বীমা প্রিমিয়াম ও বাজেট ক্যালকুলেটর - আলফা ইসলামী লাইফ</title>
+
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="icon.png" />
+    <link rel="icon" type="image/png" href="icon.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800;900&family=Hind+Siliguri:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        /* ── CSS Variables for Light / Dark Theme ── */
+        :root {
+            --bg-color: #edf2f7;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-label: #1e293b;
+            --input-bg: #ffffff;
+            --input-border: #cbd5e1;
+            --input-text: #0f172a;
+            --input-focus: #0d9488;
+            --tab-wrapper-bg: #f1f5f9;
+            --tab-border: #e2e8f0;
+            --tab-btn-color: #475569;
+            --primary: #0d9488;
+            --primary-hover: #0f766e;
+            --checkbox-bg: #f8fafc;
+            --checkbox-border: #cbd5e1;
+            --checkbox-text: #0f172a;
+            --results-bg: #f0fdf4;
+            --results-border: #bbf7d0;
+            --results-label: #166534;
+            --results-amount: #0f172a;
+            --results-total-text: #065f46;
+            --results-total-amount: #0d9488;
+            --budget-bg: #fefce8;
+            --budget-border: #fde047;
+            --budget-header: #854d0e;
+            --budget-card: #ffffff;
+            --med-bg: #f8fafc;
+            --med-border: #cbd5e1;
+            --med-text: #334155;
+            --modal-bg: #ffffff;
+            --modal-border: #0d9488;
+        }
+
+        body.dark-mode {
+            --bg-color: #060911;
+            --card-bg: #0f172a;
+            --card-border: #334155;
+            --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+            --text-label: #f8fafc;
+            --input-bg: #1e293b;
+            --input-border: #475569;
+            --input-text: #ffffff;
+            --input-focus: #38bdf8;
+            --tab-wrapper-bg: #090d16;
+            --tab-border: #1e293b;
+            --tab-btn-color: #94a3b8;
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --checkbox-bg: #1e293b;
+            --checkbox-border: #475569;
+            --checkbox-text: #ffffff;
+            --results-bg: #000000;
+            --results-border: #38bdf8;
+            --results-label: #f1f5f9;
+            --results-amount: #ffffff;
+            --results-total-text: #38bdf8;
+            --results-total-amount: #38bdf8;
+            --budget-bg: #181c24;
+            --budget-border: #facc15;
+            --budget-header: #facc15;
+            --budget-card: #0f172a;
+            --med-bg: #111e33;
+            --med-border: #334155;
+            --med-text: #ffffff;
+            --modal-bg: #0f172a;
+            --modal-border: #38bdf8;
+        }
+
+        /* ── Base ── */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Noto Sans Bengali', 'Hind Siliguri', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 12px;
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* ── Main Container ── */
+        .calculator-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 2px solid var(--card-border);
+            box-shadow: var(--card-shadow);
+            width: 100%;
+            max-width: 760px;
+            padding: 24px 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        /* ── Header ── */
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        .header-container h2 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.3;
+            flex: 1;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        .header-container h2 i {
+            color: var(--primary);
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .header-container h2 span {
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle-btn {
+            background: var(--tab-wrapper-bg);
+            color: var(--text-main);
+            border: 1.5px solid var(--card-border);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .connect-btn {
+            background: var(--primary);
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.25);
+        }
+
+        .connect-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* ── Tabs ── */
+        .tab-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 22px;
+            padding-bottom: 4px;
+        }
+
+        .tab-container {
+            display: flex;
+            gap: 6px;
+            background: var(--tab-wrapper-bg);
+            border-radius: 18px;
+            padding: 6px;
+            border: 1.5px solid var(--tab-border);
+            min-width: max-content;
+        }
+
+        .tab-btn {
+            padding: 9px 15px;
+            border: 1.5px solid transparent;
+            background: transparent;
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--tab-btn-color);
+            cursor: pointer;
+            border-radius: 14px;
+            transition: all 0.2s ease;
+            text-align: center;
+            font-family: inherit;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .tab-btn i {
+            font-size: 15px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+        }
+
+        .tab-btn.active i {
+            color: #ffffff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Form Elements ── */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 800;
+            color: var(--text-label);
+            font-size: 16px;
+        }
+
+        .form-group label i {
+            color: var(--primary);
+            margin-right: 6px;
+            font-size: 17px;
+        }
+
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            height: 52px;
+            padding: 0 16px;
+            border: 2px solid var(--input-border);
+            border-radius: 14px;
+            font-size: 17px;
+            outline: none;
+            background: var(--input-bg);
+            color: var(--input-text);
+            font-weight: 700;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input[type="number"]::placeholder {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 15.5px;
+        }
+
+        .form-group input[type="number"]:focus,
+        .form-group select:focus {
+            border-color: var(--input-focus);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .form-group select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10'%3E%3Cpath d='M1 1l7 7 7-7' stroke='%230d9488' stroke-width='2.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 48px;
+            cursor: pointer;
+        }
+
+        .flex-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* ── Mode Selector ── */
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .mode-option input[type="radio"] {
+            display: none;
+        }
+
+        .mode-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 48px;
+            background: var(--checkbox-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            color: var(--text-muted);
+            text-align: center;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .mode-option input[type="radio"]:checked+label {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.3);
+        }
+
+        /* ── Rider Section ── */
+        .rider-section-title {
+            font-size: 16.5px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-top: 20px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--checkbox-bg);
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 1.5px solid var(--checkbox-border);
+            cursor: pointer;
+            transition: border-color 0.2s;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--primary);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-size: 15.5px;
+            font-weight: 800;
+            color: var(--checkbox-text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        /* CC & HC Custom Inputs & OE Custom Group */
+        .cc-custom-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 12px;
+            padding: 14px 16px;
+            background: var(--tab-wrapper-bg);
+            border-radius: 14px;
+            border: 2px dashed var(--primary);
+        }
+
+        .cc-custom-group .form-group {
+            flex: 1 1 100%;
+            margin-bottom: 0;
+        }
+
+        .cc-custom-group label {
+            font-size: 14.5px;
+            color: var(--text-label);
+            font-weight: 700;
+        }
+
+        .cc-custom-group input {
+            height: 48px;
+            font-size: 15.5px;
+        }
+
+        /* OE Radio Selector Design */
+        .oe-rate-group {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .oe-rate-option {
+            flex: 1;
+        }
+
+        .oe-rate-option input[type="radio"] {
+            display: none;
+        }
+
+        .oe-rate-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 42px;
+            background: var(--card-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .oe-rate-option input[type="radio"]:checked+label {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .child-age-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .mini-age-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 7px 16px;
+            border-radius: 24px;
+            font-size: 13.5px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 6px rgba(13, 148, 136, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .mini-age-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        /* ── Results ── */
+        .results {
+            margin-top: 22px;
+            background: var(--results-bg);
+            padding: 18px 20px;
+            border-radius: 18px;
+            border: 2px solid var(--results-border);
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 16.5px;
+            color: var(--text-main);
+            border-bottom: 1px dashed var(--input-border);
+            gap: 10px;
+        }
+
+        .result-item:last-of-type {
+            border-bottom: none;
+        }
+
+        .result-item .label-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: var(--results-label);
+        }
+
+        .result-item .label-wrap i {
+            color: var(--primary);
+            width: 20px;
+            font-size: 18px;
+        }
+
+        .result-item .amount {
+            font-weight: 900;
+            color: var(--results-amount);
+            font-size: 18px;
+            text-align: right;
+        }
+
+        .result-item.total {
+            margin-top: 10px;
+            padding-top: 14px;
+            border-top: 2.5px dashed var(--primary);
+            font-size: 19px;
+            font-weight: 900;
+        }
+
+        .result-item.total .label-wrap {
+            color: var(--results-total-text);
+        }
+
+        .result-item.total .amount {
+            color: var(--results-total-amount);
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        /* ── Budget Box ── */
+        .budget-box {
+            background: var(--budget-bg);
+            border: 2px solid var(--budget-border);
+            padding: 16px;
+            border-radius: 18px;
+            margin: 18px 0;
+        }
+
+        .budget-box h4 {
+            color: var(--budget-header);
+            font-size: 16.5px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 900;
+        }
+
+        .suggestion-list {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .suggestion-card {
+            background: var(--budget-card);
+            border: 1.5px solid var(--input-border);
+            padding: 12px 14px;
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+        }
+
+        .suggestion-card.card-low {
+            border-left: 6px solid #0284c7;
+        }
+
+        .suggestion-card.card-high {
+            border-left: 6px solid #16a34a;
+        }
+
+        .sug-main {
+            font-size: 15.5px;
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .sug-main strong {
+            font-size: 17px;
+            color: var(--primary);
+            font-weight: 900;
+        }
+
+        .sug-tag {
+            font-size: 12.5px;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .sug-tag.tag-low {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #7dd3fc;
+        }
+
+        .sug-tag.tag-high {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .select-sug-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .error-text {
+            color: #ef4444;
+            font-size: 14.5px;
+            font-weight: 800;
+            margin-top: 6px;
+        }
+
+        /* ── Medical Requirements ── */
+        .medical-requirements {
+            color: var(--med-text);
+            margin-top: 18px;
+            background: var(--med-bg);
+            padding: 14px 18px;
+            border-radius: 16px;
+            border: 2px solid var(--med-border);
+            font-size: 15.5px;
+            line-height: 1.6;
+            font-weight: 700;
+        }
+
+        .medical-requirements.non-med {
+            background: #f0fdf4;
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .medical-requirements.has-med {
+            background: #fff1f2;
+            border-color: #fecdd3;
+            color: #9f1239;
+        }
+
+        .medical-requirements .test-tag {
+            background: #ffe4e6;
+            color: #be123c;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 800;
+            display: inline-block;
+            margin: 4px 4px 4px 0;
+            border: 1px solid #fecdd3;
+        }
+
+        /* ── Action Buttons ── */
+        .action-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+
+        .action-row .btn {
+            flex: 1 1 140px;
+            height: 50px;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-copy:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-print {
+            background: #7e22ce;
+            color: #ffffff;
+        }
+
+        .btn-print:hover {
+            background: #6b21a8;
+        }
+
+        .clear-btn {
+            width: 100%;
+            height: 48px;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1.5px solid #fca5a5;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .clear-btn:hover {
+            background: #fecaca;
+        }
+
+        .credit {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+        }
+
+        .credit strong {
+            color: var(--primary);
+        }
+
+        /* ── Age Modal ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 16px;
+        }
+
+        .modal-content {
+            background: var(--modal-bg);
+            border: 2px solid var(--modal-border);
+            padding: 24px 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 28px;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .date-select-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .date-select-group select,
+        .date-select-group input {
+            flex: 1 1 85px;
+            height: 48px;
+            padding: 0 10px;
+            border-radius: 12px;
+            font-size: 16px;
+            background: var(--input-bg);
+            color: var(--input-text);
+            font-weight: 700;
+            border: 2px solid var(--input-border);
+            outline: none;
+        }
+
+        .age-result-box {
+            margin-top: 16px;
+            padding: 14px;
+            background: var(--results-bg);
+            border-radius: 14px;
+            border: 1.5px solid var(--results-border);
+            text-align: center;
+        }
+
+        /* ─── Bima Detail Popup Modal Styling ─── */
+        .bima-detail-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            padding: 16px;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .bima-detail-modal-card {
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 580px;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+            animation: modalPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .bima-detail-close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--tab-wrapper-bg);
+            border: 1.5px solid var(--card-border);
+            color: var(--text-main);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .bima-detail-close-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            transform: rotate(90deg);
+        }
+
+        .bima-modal-header {
+            padding: 20px 22px 14px 22px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 2px solid var(--card-border);
+            background: var(--tab-wrapper-bg);
+        }
+
+        .bima-modal-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: var(--primary);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.3);
+        }
+
+        .bima-modal-badge {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-bottom: 4px;
+        }
+
+        body.dark-mode .bima-modal-badge {
+            background: #082f49;
+            color: #38bdf8;
+            border-color: #0369a1;
+        }
+
+        .bima-modal-header h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-main);
+            line-height: 1.3;
+        }
+
+        .bima-modal-body {
+            padding: 18px 22px;
+            overflow-y: auto;
+            font-size: 15px;
+            color: var(--text-main);
+            line-height: 1.65;
+        }
+
+        .bima-modal-summary-box {
+            background: var(--results-bg);
+            border: 1.5px solid var(--results-border);
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-weight: 700;
+            color: var(--results-label);
+            margin-bottom: 16px;
+        }
+
+        .bima-modal-points-title {
+            font-size: 15.5px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bima-modal-details-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .bima-modal-details-list li {
+            position: relative;
+            padding-left: 22px;
+            font-size: 14.5px;
+            color: var(--text-main);
+        }
+
+        .bima-modal-details-list li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--primary);
+            font-weight: 900;
+            font-size: 14px;
+        }
+
+        .bima-modal-footer {
+            padding: 14px 22px;
+            border-top: 1.5px solid var(--card-border);
+            display: flex;
+            justify-content: flex-end;
+            background: var(--tab-wrapper-bg);
+        }
+
+        .bima-modal-ok-btn {
+            background: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .bima-modal-ok-btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* ── Print Styles ── */
+        #print-section {
+            display: none;
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                color: #000000 !important;
+            }
+            .calculator-card, .modal-overlay, .bima-detail-modal-overlay, .sb-modal-overlay, .sidebar-overlay {
+                display: none !important;
+            }
+            #print-section {
+                display: block !important;
+                width: 100% !important;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 30px;
+                font-family: 'Noto Sans Bengali', sans-serif;
+                background: #ffffff;
+            }
+            .print-header {
+                text-align: center;
+                border-bottom: 3px solid #0d9488;
+                padding-bottom: 14px;
+                margin-bottom: 18px;
+            }
+            .print-header h1 { font-size: 24px; color: #0f766e; margin-bottom: 4px; }
+            .print-header p { font-size: 14px; color: #475569; }
+            .print-badge {
+                display: inline-block;
+                background: #f0fdf4;
+                color: #166534;
+                border: 1px solid #bbf7d0;
+                padding: 4px 18px;
+                border-radius: 20px;
+                font-size: 14px;
+                font-weight: 700;
+                margin-top: 6px;
+            }
+            .print-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 14px;
+                margin-bottom: 16px;
+            }
+            .print-table th, .print-table td {
+                border: 1px solid #cbd5e1;
+                padding: 10px 14px;
+                font-size: 15px;
+                text-align: left;
+            }
+            .print-table th { background: #f1f5f9; color: #1e293b; width: 40%; font-weight: 700; }
+            .print-table td { font-weight: 800; color: #0f172a; }
+            .print-box {
+                border: 1px solid #cbd5e1;
+                border-radius: 8px;
+                padding: 14px 18px;
+                margin-top: 14px;
+                background: #fafafa;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+            .print-box.medical-box { border-color: #fca5a5; background: #fff5f5; }
+            .print-box h4 { font-size: 15px; color: #0f172a; margin-bottom: 6px; }
+            .print-signatures {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 50px;
+                padding-top: 16px;
+            }
+            .sign-col {
+                text-align: center;
+                width: 200px;
+                border-top: 1.5px dashed #64748b;
+                font-size: 14px;
+                font-weight: 700;
+                padding-top: 8px;
+                color: #1e293b;
+            }
+            .print-footer {
+                text-align: center;
+                margin-top: 24px;
+                font-size: 12px;
+                color: #94a3b8;
+                border-top: 1px solid #e2e8f0;
+                padding-top: 10px;
+            }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 640px) {
+            .calculator-card {
+                padding: 18px 14px;
+                border-radius: 18px;
+            }
+            .header-container h2 {
+                font-size: 18px;
+            }
+            .tab-btn {
+                font-size: 13.5px;
+                padding: 8px 12px;
+            }
+            .mode-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .checkbox-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .cc-custom-group .form-group {
+                flex: 1 1 100%;
+            }
+            .action-row .btn {
+                flex: 1 1 100%;
+                font-size: 16px;
+            }
+        }
+    </style>
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y46qtvj483");
+    </script>
+</head>
+<body>
+
+    <div class="calculator-card">
+        <div class="header-container">
+            <h2><i class="fas fa-shield-halved"></i> <span id="header-plan-title">ডিপিএস গোল্ড (DPS Gold)</span></h2>
+            <div class="header-actions">
+                <button type="button" class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="থিম পরিবর্তন"><i class="fas fa-moon"></i></button>
+                <a href="https://alphaconnect.alphalife.com.bd/" target="_blank" class="connect-btn" title="Alpha Connect">
+                    <i class="fas fa-link"></i> Connect
+                </a>
+            </div>
+        </div>
+
+        <div class="tab-wrapper">
+            <div class="tab-container" id="tabContainer">
+                <button class="tab-btn active" onclick="switchPlanTab('dps')"><i class="fas fa-coins"></i> DPS</button>
+                <button class="tab-btn" onclick="switchPlanTab(1)"><i class="fas fa-piggy-bank"></i> 01</button>
+                <button class="tab-btn" onclick="switchPlanTab(2)"><i class="fas fa-calendar-days"></i> 02</button>
+                <button class="tab-btn" onclick="switchPlanTab(3)"><i class="fas fa-layer-group"></i> 03</button>
+                <button class="tab-btn" onclick="switchPlanTab(4)"><i class="fas fa-layer-group"></i> 04</button>
+                <button class="tab-btn" onclick="switchPlanTab(5)"><i class="fas fa-layer-group"></i> 05</button>
+                <button class="tab-btn" onclick="switchPlanTab(6)"><i class="fas fa-graduation-cap"></i> 06</button>
+                <button class="tab-btn" onclick="switchPlanTab(9)"><i class="fas fa-vault"></i> 09</button>
+            </div>
+        </div>
+
+        <div id="tab-dps" class="tab-content active">
+            <div class="form-group">
+                <label><i class="fas fa-money-bill-wave"></i> মাসিক বেসিক জমা (টাকা)</label>
+                <input type="number" id="deposit" placeholder="যেমন: ৫০০০" oninput="calculateDPS()" />
+            </div>
+            <div class="form-group">
+                <div class="flex-row">
+                    <label><i class="fas fa-user"></i> বয়স</label>
+                    <button type="button" class="mini-age-btn" onclick="openAgeModal()"><i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর</button>
+                </div>
+                <input type="number" id="dps-age" placeholder="যেমন: ৩০" min="18" max="59" oninput="calculateDPS()" />
+            </div>
+            <div class="form-group">
+                <label><i class="fas fa-clock"></i> মেয়াদ (বছর)</label>
+                <input type="number" id="dps-term" placeholder="যেমন: ১২" oninput="calculateDPS()" />
+            </div>
+
+            <div class="rider-section-title"><i class="fas fa-shield-heart"></i> সহযোগী বীমা (Riders)</div>
+            <div class="checkbox-group">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dps-adb" onchange="handleRiderToggle('dps', 'adb')" />
+                    <label for="dps-adb"><i class="fas fa-car-crash"></i> ADB</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dps-plus" onchange="handleRiderToggle('dps', 'plus')" />
+                    <label for="dps-plus"><i class="fas fa-plus-circle"></i> Plus</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dps-cc" onchange="handleRiderToggle('dps', 'cc')" />
+                    <label for="dps-cc"><i class="fas fa-heartbeat"></i> CC</label>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dps-wp" onchange="handleRiderToggle('dps', 'wp')" />
+                    <label for="dps-wp"><i class="fas fa-file-invoice"></i> WP</label>
+                </div>
+            </div>
+
+            <div id="dps-cc-custom" class="cc-custom-group" style="display:none;">
+                <div class="form-group">
+                    <label><i class="fas fa-coins"></i> CC আওতায় বীমা অংক (ঐচ্ছিক, সর্বোচ্চ ৫ লক্ষ)</label>
+                    <input type="number" id="dps-cc-sa" placeholder="ফাঁকা রাখলে মূল বীমা অংক প্রযোজ্য (সর্বোচ্চ ৫,০০,০০০)" oninput="calculateDPS()" />
+                </div>
+            </div>
+
+            <!-- DPS Occupation Extra Section -->
+            <div style="margin-top: 14px;">
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dps-oe-check" onchange="toggleOESelector('dps')" />
+                    <label for="dps-oe-check"><i class="fas fa-user-shield"></i> Occupation extra আছে কি? (হ্যাঁ/না)</label>
+                </div>
+                <div id="dps-oe-options" class="cc-custom-group" style="display:none; margin-top:8px;">
+                    <label style="margin-bottom:6px; width:100%;"><i class="fas fa-tag"></i> OE রেট নির্বাচন করুন (হাজার প্রতি):</label>
+                    <div class="oe-rate-group">
+                        <div class="oe-rate-option">
+                            <input type="radio" id="dps-oe-2" name="dps-oe-rate" value="2" checked onchange="calculateDPS()" />
+                            <label for="dps-oe-2">২ ৳</label>
+                        </div>
+                        <div class="oe-rate-option">
+                            <input type="radio" id="dps-oe-3" name="dps-oe-rate" value="3" onchange="calculateDPS()" />
+                            <label for="dps-oe-3">৩ ৳</label>
+                        </div>
+                        <div class="oe-rate-option">
+                            <input type="radio" id="dps-oe-4" name="dps-oe-rate" value="4" onchange="calculateDPS()" />
+                            <label for="dps-oe-4">৪ ৳</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results" id="dps-results">
+                <div class="result-item">
+                    <span class="label-wrap"><i class="fas fa-umbrella"></i> বীমা অংক</span>
+                    <span class="amount" id="dps-sumAssured">০ ৳</span>
+                </div>
+                <div class="result-item" id="row-dps-adb" style="display:none;"><span class="label-wrap"><i class="fas fa-car-crash"></i> মাসিক ADB চার্জ</span><span class="amount" id="dps-adbAmount">০ ৳</span></div>
+                <div class="result-item" id="row-dps-plus" style="display:none;"><span class="label-wrap"><i class="fas fa-plus-circle"></i> মাসিক Plus চার্জ</span><span class="amount" id="dps-plusAmount">০ ৳</span></div>
+                <div class="result-item" id="row-dps-cc" style="display:none;"><span class="label-wrap"><i class="fas fa-heartbeat"></i> মাসিক CC চার্জ</span><span class="amount" id="dps-ccAmount">০ ৳</span></div>
+                <div class="result-item" id="row-dps-wp" style="display:none;"><span class="label-wrap"><i class="fas fa-file-invoice"></i> মাসিক WP চার্জ</span><span class="amount" id="dps-wpAmount">০ ৳</span></div>
+                <div class="result-item" id="row-dps-oe" style="display:none;"><span class="label-wrap"><i class="fas fa-user-shield"></i> মাসিক OE চার্জ</span><span class="amount" id="dps-oeAmount">০ ৳</span></div>
+                <div class="result-item total">
+                    <span class="label-wrap"><i class="fas fa-calculator"></i> মোট মাসিক প্রিমিয়াম</span>
+                    <span class="amount" id="dps-totalMonthly">০ ৳</span>
+                </div>
+            </div>
+            <div id="medical-dps" class="medical-requirements"></div>
+        </div>
+
+        <div id="dynamic-plan-container"></div>
+
+        <div class="action-row">
+            <button class="btn btn-copy" onclick="copyResults()"><i class="fas fa-copy"></i> কপি রেজাল্ট</button>
+            <button class="btn btn-print" onclick="printResults()"><i class="fas fa-print"></i> প্রিন্ট/PDF</button>
+        </div>
+        <button type="button" class="clear-btn" onclick="clearActivePlanFields()"><i class="fas fa-eraser"></i> ক্লিয়ার করুন</button>
+        <div class="credit">✨ Developed by <strong>IT EMON</strong> ✨</div>
+    </div>
+
+    <div id="print-section">
+        <div class="print-header">
+            <h1>আলফা ইসলামী লাইফ ইনস্যুরেন্স লিমিটেড</h1>
+            <p>হেড অফিস: এ জে টাওয়ার, প্লট # ৪, সোনারগাঁও লিংক রোড, কাওরান বাজার, ঢাকা-১২১৫</p>
+            <div class="print-badge">বীমা পলিসি প্রিমিয়াম ও মেডিকেল প্রস্তাবনা সামারি</div>
+        </div>
+        <div id="print-content-body"></div>
+        <div class="print-signatures">
+            <div class="sign-col">গ্রাহক / প্রস্তাবকের স্বাক্ষর</div>
+            <div class="sign-col">মাঠ কর্মকর্তা / প্রতিনিধির স্বাক্ষর</div>
+        </div>
+        <div class="print-footer">
+            ক্যালকুলেশন প্রস্তুতের তারিখ: <span id="print-date"></span> | সফ্টওয়্যার ডেভেলপমেন্ট: <strong>IT EMON</strong>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="ageModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeAgeModal()">&times;</button>
+            <h3 style="text-align:center; margin-bottom:18px; font-size:18px; font-weight:800; color:var(--primary);"><i class="fas fa-cake-candles"></i> বয়স ক্যালকুলেটর</h3>
+            <div class="form-group">
+                <label>জন্ম তারিখ (NID অনুযায়ী)</label>
+                <div class="date-select-group">
+                    <select id="dobDay" onchange="calculateAge()"></select>
+                    <select id="dobMonth" onchange="calculateAge()"></select>
+                    <input type="number" id="dobYear" placeholder="সাল" oninput="calculateAge()" min="1900" max="2100" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>আজকের / নির্দিষ্ট তারিখ</label>
+                <div class="date-select-group">
+                    <select id="asOfDay" onchange="calculateAge()"></select>
+                    <select id="asOfMonth" onchange="calculateAge()"></select>
+                    <input type="number" id="asOfYear" placeholder="সাল" oninput="calculateAge()" min="1900" max="2100" />
+                </div>
+            </div>
+            <div class="age-result-box">
+                <div id="ageDetailOutput" style="font-size:15px; color:var(--text-muted); font-weight:700;">জন্ম তারিখ দিন</div>
+                <div id="roundAgeOutput" style="font-size:22px; font-weight:900; color:var(--primary); margin-top:8px;">বীমা বয়স: --</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- স্ক্রিপ্ট লিঙ্কসমূহ -->
+    <script src="plan-details.js"></script>
+    <script src="sidebar.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
