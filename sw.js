@@ -1,1 +1,59 @@
-let _0x6c1e1c;const CACHE_NAME="61v-clac-amib".split("").reverse().join("");_0x6c1e1c="nopaie".split("").reverse().join("");const CORE_ASSETS=["\u002E\u002F","lmth.xedni/.".split("").reverse().join(""),"\u002E\u002F\u0061\u0070\u0070\u002E\u006A\u0073","\u002E\u002F\u0070\u006C\u0061\u006E\u002D\u0064\u0065\u0074\u0061\u0069\u006C\u0073\u002E\u006A\u0073","\u002E\u002F\u0073\u0069\u0064\u0065\u0062\u0061\u0072\u002E\u006A\u0073","\u002E\u002F\u006D\u0061\u006E\u0069\u0066\u0065\u0073\u0074\u002E\u006A\u0073\u006F\u006E"];self['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("\u0069\u006E\u0073\u0074\u0061\u006C\u006C",e=>{self['\u0073\u006B\u0069\u0070\u0057\u0061\u0069\u0074\u0069\u006E\u0067']();e['\u0077\u0061\u0069\u0074\u0055\u006E\u0074\u0069\u006C'](caches['\u006F\u0070\u0065\u006E'](CACHE_NAME)['\u0074\u0068\u0065\u006E'](cache=>{return cache['\u0061\u0064\u0064\u0041\u006C\u006C'](CORE_ASSETS)['\u0063\u0061\u0074\u0063\u0068'](err=>{console['\u0077\u0061\u0072\u006E'](":\u09C7\u099B\u09C7\u09BC\u09AF\u09B9 \u09BE\u09AF\u09CD\u09B8\u09AE\u09B8 \u09C7\u09A4\u09B0\u0995 \u09B6\u09BE\u09AF\u09CD\u0995 \u09B2\u0987\u09BE\u09AB \u09B0\u09CB\u0995".split("").reverse().join(""),err);});}));});self['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("\u0061\u0063\u0074\u0069\u0076\u0061\u0074\u0065",e=>{e['\u0077\u0061\u0069\u0074\u0055\u006E\u0074\u0069\u006C'](caches['\u006B\u0065\u0079\u0073']()['\u0074\u0068\u0065\u006E'](keys=>{return Promise['\u0061\u006C\u006C'](keys['\u006D\u0061\u0070'](key=>{if(key!==CACHE_NAME){return caches['\u0064\u0065\u006C\u0065\u0074\u0065'](key);}}));})['\u0074\u0068\u0065\u006E'](()=>self['\u0063\u006C\u0069\u0065\u006E\u0074\u0073']['\u0063\u006C\u0061\u0069\u006D']()));});self['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("hctef".split("").reverse().join(""),e=>{e['\u0072\u0065\u0073\u0070\u006F\u006E\u0064\u0057\u0069\u0074\u0068'](caches['\u006D\u0061\u0074\u0063\u0068'](e['\u0072\u0065\u0071\u0075\u0065\u0073\u0074'])['\u0074\u0068\u0065\u006E'](cachedResponse=>{if(cachedResponse){return cachedResponse;}return fetch(e['\u0072\u0065\u0071\u0075\u0065\u0073\u0074'])['\u0074\u0068\u0065\u006E'](networkResponse=>{if(networkResponse&&networkResponse['\u0073\u0074\u0061\u0074\u0075\u0073']===(278045^278229)&&e['\u0072\u0065\u0071\u0075\u0065\u0073\u0074']['\u006D\u0065\u0074\u0068\u006F\u0064']==="TEG".split("").reverse().join("")){let _0x56f;const responseClone=networkResponse['\u0063\u006C\u006F\u006E\u0065']();_0x56f=(373323^373314)+(468806^468801);caches['\u006F\u0070\u0065\u006E'](CACHE_NAME)['\u0074\u0068\u0065\u006E'](cache=>{cache['\u0070\u0075\u0074'](e['\u0072\u0065\u0071\u0075\u0065\u0073\u0074'],responseClone);});}return networkResponse;})['\u0063\u0061\u0074\u0063\u0068'](()=>{});}));});
+const CACHE_NAME = 'bima-calc-v17';
+const CORE_ASSETS = [
+    './',
+    './index.html',
+    './app.js',
+    './plan-details.js',
+    './sidebar.js',
+    './manifest.json'
+];
+
+// ১. ইন্সটল ইভেন্ট (প্রয়োজনীয় কোর ফাইলগুলো আগে অফলাইন ক্যাশ করবে)
+self.addEventListener('install', (e) => {
+    self.skipWaiting();
+    e.waitUntil(
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.addAll(CORE_ASSETS).catch((err) => {
+                console.warn('কোর ফাইল ক্যাশ করতে সমস্যা হয়েছে:', err);
+            });
+        })
+    );
+});
+
+// ২. অ্যাক্টিভেট ইভেন্ট (পুরনো ভার্সনের ক্যাশ থাকলে তা স্বয়ংক্রিয়ভাবে মুছে ফেলবে)
+self.addEventListener('activate', (e) => {
+    e.waitUntil(
+        caches.keys().then((keys) => {
+            return Promise.all(
+                keys.map((key) => {
+                    if (key !== CACHE_NAME) {
+                        return caches.delete(key);
+                    }
+                })
+            );
+        }).then(() => self.clients.claim())
+    );
+});
+
+// ৩. ফেচ ইভেন্ট (ক্যাশ ফার্স্ট স্ট্র্যাটেজি + এক্সটার্নাল ফন্ট ও সিডিএন ডায়নামিক ক্যাশিং)
+self.addEventListener('fetch', (e) => {
+    e.respondWith(
+        caches.match(e.request).then((cachedResponse) => {
+            if (cachedResponse) {
+                return cachedResponse;
+            }
+            return fetch(e.request).then((networkResponse) => {
+                // শুধুমাত্র সফল GET রিকোয়েস্টগুলো ক্যাশে যোগ করবে (ফন্ট, আইকন সিডিএন সহ)
+                if (networkResponse && networkResponse.status === 200 && e.request.method === 'GET') {
+                    const responseClone = networkResponse.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(e.request, responseClone);
+                    });
+                }
+                return networkResponse;
+            }).catch(() => {
+                // অফলাইনে থাকলে এবং ক্যাশে ফাইলটি না থাকলে এটি ফেইলর রোধ করবে
+            });
+        })
+    );
+});
