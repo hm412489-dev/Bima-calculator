@@ -1,4 +1,4 @@
-function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis-amib".split("").reverse().join("");_0xg1a65a='\u006A\u006D\u006C\u006E\u006B\u0069';if(document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064'](_0xea72f))return;const _0x8b5bb=`
+function injectSidebarStyles(_0xeb_0x596,_0xa936f,_0x5db){_0xa936f="\u0062\u0069\u006D\u0061\u002D\u0073\u0069\u0064\u0065\u0062\u0061\u0072\u002D\u0063\u0075\u0073\u0074\u006F\u006D\u002D\u0073\u0074\u0079\u006C\u0065\u0073";_0xeb_0x596=(958324^958321)+(835834^835839);if(document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064'](_0xa936f))return;const _0xc942a=`
     /* Hamburger Button in Header */
     .sidebar-menu-btn {
         background: var(--tab-wrapper-bg);
@@ -118,6 +118,30 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         background: #ef4444;
         color: #ffffff;
         border-color: #ef4444;
+    }
+
+    /* Sidebar Top Connect Button */
+    .sidebar-connect-link {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 13px 14px;
+        border-radius: 14px;
+        background: var(--primary);
+        color: #ffffff !important;
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 800;
+        text-decoration: none;
+        box-shadow: 0 4px 12px rgba(13, 148, 136, 0.35);
+        transition: all 0.2s ease;
+        border: none;
+    }
+    .sidebar-connect-link:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
     }
 
     /* Sidebar Menu List */
@@ -381,7 +405,7 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         margin: 0 auto 10px auto;
         box-shadow: 0 6px 18px rgba(13, 148, 136, 0.35);
     }
-    `;const _0xf82gfa=document['\u0063\u0072\u0065\u0061\u0074\u0065\u0045\u006C\u0065\u006D\u0065\u006E\u0074']("elyts".split("").reverse().join(""));_0xf82gfa['\u0069\u0064']=_0xea72f;_0xf82gfa['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=_0x8b5bb;document['\u0068\u0065\u0061\u0064']['\u0061\u0070\u0070\u0065\u006E\u0064\u0043\u0068\u0069\u006C\u0064'](_0xf82gfa);}function createSidebarDOM(_0x7abb){if(document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("yalrevOrabediSamib".split("").reverse().join("")))return;const _0xd3ef=`
+    `;const _0x38ca=document['\u0063\u0072\u0065\u0061\u0074\u0065\u0045\u006C\u0065\u006D\u0065\u006E\u0074']("\u0073\u0074\u0079\u006C\u0065");_0x5db=(438076^438068)+(272728^272735);_0x38ca['\u0069\u0064']=_0xa936f;_0x38ca['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=_0xc942a;document['\u0068\u0065\u0061\u0064']['\u0061\u0070\u0070\u0065\u006E\u0064\u0043\u0068\u0069\u006C\u0064'](_0x38ca);}function createSidebarDOM(){if(document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("yalrevOrabediSamib".split("").reverse().join("")))return;const _0x06e26d=`
     <div class="sidebar-overlay" id="bimaSidebarOverlay" onclick="handleSidebarOverlayClick(event)">
         <div class="sidebar-panel" onclick="event.stopPropagation()">
             <!-- হেডার -->
@@ -398,32 +422,57 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
                 </button>
             </div>
 
-            <!-- মেনু তালিকা (৫টি নির্ধারিত অপশন) -->
+            <!-- মেনু তালিকা -->
             <div class="sidebar-content">
+                <!-- ১. সবার উপরে Connect বাটন -->
+                <li class="sidebar-nav-item">
+                    <a href="https://alphaconnect.alphalife.com.bd/" target="_blank" class="sidebar-connect-link">
+                        <i class="fas fa-link"></i>
+                        <span>Alpha Connect পোর্টাল</span>
+                    </a>
+                </li>
+
+                <!-- ২. থিম পরিবর্তন (Dark / Light Mode) -->
+                <li class="sidebar-nav-item">
+                    <button class="sidebar-nav-btn" onclick="toggleTheme()">
+                        <i class="fas fa-moon icon" id="sidebarThemeIcon"></i>
+                        <span id="sidebarThemeText">ডার্ক মোড</span>
+                    </button>
+                </li>
+
+                <!-- ৩. কর্মকর্তাদের ফোন নম্বর -->
                 <li class="sidebar-nav-item">
                     <button class="sidebar-nav-btn" onclick="openSbModal('contacts')">
                         <i class="fas fa-phone-volume icon"></i>
                         <span>কর্মকর্তাদের ফোন নম্বর</span>
                     </button>
                 </li>
+
+                <!-- ৪. ব্যাংক একাউন্ট ডিটেইলস -->
                 <li class="sidebar-nav-item">
                     <button class="sidebar-nav-btn" onclick="openSbModal('bank')">
                         <i class="fas fa-building-columns icon"></i>
                         <span>ব্যাংক একাউন্ট ডিটেইলস</span>
                     </button>
                 </li>
+
+                <!-- ৫. অ্যাপ ফিচারসমূহ -->
                 <li class="sidebar-nav-item">
                     <button class="sidebar-nav-btn" onclick="openSbModal('features')">
                         <i class="fas fa-wand-magic-sparkles icon"></i>
                         <span>অ্যাপ ফিচারসমূহ</span>
                     </button>
                 </li>
+
+                <!-- ৬. ব্যবহার নির্দেশিকা -->
                 <li class="sidebar-nav-item">
                     <button class="sidebar-nav-btn" onclick="openSbModal('guide')">
                         <i class="fas fa-book-open-reader icon"></i>
                         <span>ব্যবহার নির্দেশিকা</span>
                     </button>
                 </li>
+
+                <!-- ৭. About Me (ডেভেলপার) -->
                 <li class="sidebar-nav-item">
                     <button class="sidebar-nav-btn" onclick="openSbModal('about')">
                         <i class="fas fa-user-tie icon"></i>
@@ -450,7 +499,7 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
             <div class="sb-modal-body" id="sbModalBody"></div>
         </div>
     </div>
-    `;_0x7abb=(642115^642113)+(972015^972009);document['\u0062\u006F\u0064\u0079']['\u0069\u006E\u0073\u0065\u0072\u0074\u0041\u0064\u006A\u0061\u0063\u0065\u006E\u0074\u0048\u0054\u004D\u004C']("dneerofeb".split("").reverse().join(""),_0xd3ef);}function injectMenuButtonToHeader(_0xac_0xc9f){if(document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("ntBuneMrabedis".split("").reverse().join("")))return;const _0x_0xead=document['\u0071\u0075\u0065\u0072\u0079\u0053\u0065\u006C\u0065\u0063\u0074\u006F\u0072']("\u002E\u0068\u0065\u0061\u0064\u0065\u0072\u002D\u0063\u006F\u006E\u0074\u0061\u0069\u006E\u0065\u0072\u0020\u0068\u0032");_0xac_0xc9f=(871552^871557)+(226161^226163);if(!_0x_0xead)return;const _0x826b5e=document['\u0063\u0072\u0065\u0061\u0074\u0065\u0045\u006C\u0065\u006D\u0065\u006E\u0074']("nottub".split("").reverse().join(""));_0x826b5e['\u0074\u0079\u0070\u0065']="nottub".split("").reverse().join("");_0x826b5e['\u0069\u0064']="\u0073\u0069\u0064\u0065\u0062\u0061\u0072\u004D\u0065\u006E\u0075\u0042\u0074\u006E";_0x826b5e['\u0063\u006C\u0061\u0073\u0073\u004E\u0061\u006D\u0065']="\u0073\u0069\u0064\u0065\u0062\u0061\u0072\u002D\u006D\u0065\u006E\u0075\u002D\u0062\u0074\u006E";_0x826b5e['\u0074\u0069\u0074\u006C\u0065']="\u09A8\u09C1\u09B2\u09C1\u0996 \u09C1\u09A8\u09C7\u09AE".split("").reverse().join("");_0x826b5e['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=">i/<>\"srab-af saf\"=ssalc i<".split("").reverse().join("");_0x826b5e['\u006F\u006E\u0063\u006C\u0069\u0063\u006B']=()=>toggleSidebar(!![]);_0x_0xead['\u0070\u0061\u0072\u0065\u006E\u0074\u004E\u006F\u0064\u0065']['\u0069\u006E\u0073\u0065\u0072\u0074\u0042\u0065\u0066\u006F\u0072\u0065'](_0x826b5e,_0x_0xead);}function toggleSidebar(open=!![]){var _0x10bde=(950576^950580)+(356998^356995);const _0xa1b3f=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0062\u0069\u006D\u0061\u0053\u0069\u0064\u0065\u0062\u0061\u0072\u004F\u0076\u0065\u0072\u006C\u0061\u0079");_0x10bde="nodidp".split("").reverse().join("");if(!_0xa1b3f)return;if(open){_0xa1b3f['\u0063\u006C\u0061\u0073\u0073\u004C\u0069\u0073\u0074']['\u0061\u0064\u0064']("\u0061\u0063\u0074\u0069\u0076\u0065");document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']="\u0068\u0069\u0064\u0064\u0065\u006E";}else{_0xa1b3f['\u0063\u006C\u0061\u0073\u0073\u004C\u0069\u0073\u0074']['\u0072\u0065\u006D\u006F\u0076\u0065']("\u0061\u0063\u0074\u0069\u0076\u0065");document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']='';}}function handleSidebarOverlayClick(e){if(e['\u0074\u0061\u0072\u0067\u0065\u0074']&&e['\u0074\u0061\u0072\u0067\u0065\u0074']['\u0069\u0064']==="\u0062\u0069\u006D\u0061\u0053\u0069\u0064\u0065\u0062\u0061\u0072\u004F\u0076\u0065\u0072\u006C\u0061\u0079"){toggleSidebar(false);}}function openSbModal(type){toggleSidebar(false);const _0x2beb=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("ladoMlasrevinUbs".split("").reverse().join(""));const _0x1f36gd=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0062\u004D\u006F\u0064\u0061\u006C\u0054\u0069\u0074\u006C\u0065");var _0x9bgb=(873491^873495)+(537035^537032);const _0x3775ea=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0062\u004D\u006F\u0064\u0061\u006C\u0042\u006F\u0064\u0079");_0x9bgb=786988^786986;if(!_0x2beb||!_0x1f36gd||!_0x3775ea)return;if(type==="stcatnoc".split("").reverse().join("")){_0x1f36gd['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u09B0\u09AC\u09CD\u09AE\u09A8 \u09A8\u09CB\u09AB \u09B0\u09C7\u09A6\u09BE\u09A4\u09CD\u09B0\u0995\u09AE\u09CD\u09B0\u0995 \u09A4\u09CD\u09AA\u09BE\u09B0\u09CD\u09AA\u09AC\u09CD\u09A4\u09BF\u09DF\u09BE\u09A6 >i/<>\"emulov-enohp-af saf\"=ssalc i<".split("").reverse().join("");_0x3775ea['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderContactsContent();}else if(type==="\u0062\u0061\u006E\u006B"){_0x1f36gd['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0062\u0075\u0069\u006C\u0064\u0069\u006E\u0067\u002D\u0063\u006F\u006C\u0075\u006D\u006E\u0073\u0022\u003E\u003C\u002F\u0069\u003E\u0020\u09AC\u09CD\u09AF\u09BE\u0982\u0995\u0020\u098F\u0995\u09BE\u0989\u09A8\u09CD\u099F\u0020\u0993\u0020\u09AA\u09C7\u09AE\u09C7\u09A8\u09CD\u099F\u0020\u09A4\u09A5\u09CD\u09AF";_0x3775ea['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderBankContent();}else if(type==="serutaef".split("").reverse().join("")){_0x1f36gd['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0077\u0061\u006E\u0064\u002D\u006D\u0061\u0067\u0069\u0063\u002D\u0073\u0070\u0061\u0072\u006B\u006C\u0065\u0073\u0022\u003E\u003C\u002F\u0069\u003E\u0020\u0985\u09CD\u09AF\u09BE\u09AA\u09C7\u09B0\u0020\u09B6\u0995\u09CD\u09A4\u09BF\u09B6\u09BE\u09B2\u09C0\u0020\u09AB\u09BF\u099A\u09BE\u09B0\u09B8\u09AE\u09C2\u09B9";_0x3775ea['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderFeaturesContent();}else if(type==="\u0067\u0075\u0069\u0064\u0065"){_0x1f36gd['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u09BE\u0995\u09BF\u09B6\u09C7\u09A6\u09CD\u09B0\u09BF\u09A8 \u09B0\u09BE\u09B9\u09AC\u09AF\u09CD\u09AC \u09AA\u09BE\u09AF\u09CD\u0985 >i/<>\"redaer-nepo-koob-af saf\"=ssalc i<".split("").reverse().join("");_0x3775ea['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderGuideContent();}else if(type==="\u0061\u0062\u006F\u0075\u0074"){_0x1f36gd['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0075\u0073\u0065\u0072\u002D\u0074\u0069\u0065\u0022\u003E\u003C\u002F\u0069\u003E\u0020\u09A1\u09C7\u09AD\u09C7\u09B2\u09AA\u09BE\u09B0\u0020\u09AA\u09B0\u09BF\u099A\u09BF\u09A4\u09BF\u0020\u0028\u0041\u0062\u006F\u0075\u0074\u0020\u004D\u0065\u0029";_0x3775ea['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderAboutContent();}_0x2beb['\u0073\u0074\u0079\u006C\u0065']['\u0064\u0069\u0073\u0070\u006C\u0061\u0079']="\u0066\u006C\u0065\u0078";document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']="\u0068\u0069\u0064\u0064\u0065\u006E";}function closeSbModal(){var _0x3907fc=(289595^289587)+(161764^161765);const _0x6fd=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0062\u0055\u006E\u0069\u0076\u0065\u0072\u0073\u0061\u006C\u004D\u006F\u0064\u0061\u006C");_0x3907fc='\u006E\u0067\u0067\u006C\u006A\u0063';if(_0x6fd){_0x6fd['\u0073\u0074\u0079\u006C\u0065']['\u0064\u0069\u0073\u0070\u006C\u0061\u0079']="\u006E\u006F\u006E\u0065";document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']='';}}function renderContactsContent(){return`
+    `;document['\u0062\u006F\u0064\u0079']['\u0069\u006E\u0073\u0065\u0072\u0074\u0041\u0064\u006A\u0061\u0063\u0065\u006E\u0074\u0048\u0054\u004D\u004C']("\u0062\u0065\u0066\u006F\u0072\u0065\u0065\u006E\u0064",_0x06e26d);}function injectMenuButtonToHeader(){if(document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0069\u0064\u0065\u0062\u0061\u0072\u004D\u0065\u006E\u0075\u0042\u0074\u006E"))return;const _0x5422a=document['\u0071\u0075\u0065\u0072\u0079\u0053\u0065\u006C\u0065\u0063\u0074\u006F\u0072']("2h reniatnoc-redaeh.".split("").reverse().join(""));if(!_0x5422a)return;const _0x3193e=document['\u0063\u0072\u0065\u0061\u0074\u0065\u0045\u006C\u0065\u006D\u0065\u006E\u0074']("nottub".split("").reverse().join(""));_0x3193e['\u0074\u0079\u0070\u0065']="\u0062\u0075\u0074\u0074\u006F\u006E";_0x3193e['\u0069\u0064']="\u0073\u0069\u0064\u0065\u0062\u0061\u0072\u004D\u0065\u006E\u0075\u0042\u0074\u006E";_0x3193e['\u0063\u006C\u0061\u0073\u0073\u004E\u0061\u006D\u0065']="ntb-unem-rabedis".split("").reverse().join("");_0x3193e['\u0074\u0069\u0074\u006C\u0065']="\u09AE\u09C7\u09A8\u09C1\u0020\u0996\u09C1\u09B2\u09C1\u09A8";_0x3193e['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0062\u0061\u0072\u0073\u0022\u003E\u003C\u002F\u0069\u003E";_0x3193e['\u006F\u006E\u0063\u006C\u0069\u0063\u006B']=()=>toggleSidebar(!![]);_0x5422a['\u0070\u0061\u0072\u0065\u006E\u0074\u004E\u006F\u0064\u0065']['\u0069\u006E\u0073\u0065\u0072\u0074\u0042\u0065\u0066\u006F\u0072\u0065'](_0x3193e,_0x5422a);}function toggleSidebar(open=!![]){const _0x111b8b=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0062\u0069\u006D\u0061\u0053\u0069\u0064\u0065\u0062\u0061\u0072\u004F\u0076\u0065\u0072\u006C\u0061\u0079");if(!_0x111b8b)return;if(open){_0x111b8b['\u0063\u006C\u0061\u0073\u0073\u004C\u0069\u0073\u0074']['\u0061\u0064\u0064']("evitca".split("").reverse().join(""));document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']="\u0068\u0069\u0064\u0064\u0065\u006E";}else{_0x111b8b['\u0063\u006C\u0061\u0073\u0073\u004C\u0069\u0073\u0074']['\u0072\u0065\u006D\u006F\u0076\u0065']("\u0061\u0063\u0074\u0069\u0076\u0065");document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']='';}}function handleSidebarOverlayClick(e){if(e['\u0074\u0061\u0072\u0067\u0065\u0074']&&e['\u0074\u0061\u0072\u0067\u0065\u0074']['\u0069\u0064']==="yalrevOrabediSamib".split("").reverse().join("")){toggleSidebar(false);}}function openSbModal(type){toggleSidebar(false);const _0x8f_0xa8g=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("ladoMlasrevinUbs".split("").reverse().join(""));const _0xe_0x378=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("\u0073\u0062\u004D\u006F\u0064\u0061\u006C\u0054\u0069\u0074\u006C\u0065");const _0xb5c3d=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("ydoBladoMbs".split("").reverse().join(""));if(!_0x8f_0xa8g||!_0xe_0x378||!_0xb5c3d)return;if(type==="\u0063\u006F\u006E\u0074\u0061\u0063\u0074\u0073"){_0xe_0x378['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0070\u0068\u006F\u006E\u0065\u002D\u0076\u006F\u006C\u0075\u006D\u0065\u0022\u003E\u003C\u002F\u0069\u003E\u0020\u09A6\u09BE\u09DF\u09BF\u09A4\u09CD\u09AC\u09AA\u09CD\u09B0\u09BE\u09AA\u09CD\u09A4\u0020\u0995\u09B0\u09CD\u09AE\u0995\u09B0\u09CD\u09A4\u09BE\u09A6\u09C7\u09B0\u0020\u09AB\u09CB\u09A8\u0020\u09A8\u09AE\u09CD\u09AC\u09B0";_0xb5c3d['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderContactsContent();}else if(type==="\u0062\u0061\u006E\u006B"){_0xe_0x378['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u09AF\u09CD\u09A5\u09A4 \u099F\u09CD\u09A8\u09C7\u09AE\u09C7\u09AA \u0993 \u099F\u09CD\u09A8\u0989\u09BE\u0995\u098F \u0995\u0982\u09BE\u09AF\u09CD\u09AC >i/<>\"snmuloc-gnidliub-af saf\"=ssalc i<".split("").reverse().join("");_0xb5c3d['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderBankContent();}else if(type==="\u0066\u0065\u0061\u0074\u0075\u0072\u0065\u0073"){_0xe_0x378['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0077\u0061\u006E\u0064\u002D\u006D\u0061\u0067\u0069\u0063\u002D\u0073\u0070\u0061\u0072\u006B\u006C\u0065\u0073\u0022\u003E\u003C\u002F\u0069\u003E\u0020\u0985\u09CD\u09AF\u09BE\u09AA\u09C7\u09B0\u0020\u09B6\u0995\u09CD\u09A4\u09BF\u09B6\u09BE\u09B2\u09C0\u0020\u09AB\u09BF\u099A\u09BE\u09B0\u09B8\u09AE\u09C2\u09B9";_0xb5c3d['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderFeaturesContent();}else if(type==="\u0067\u0075\u0069\u0064\u0065"){_0xe_0x378['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']="\u003C\u0069\u0020\u0063\u006C\u0061\u0073\u0073\u003D\u0022\u0066\u0061\u0073\u0020\u0066\u0061\u002D\u0062\u006F\u006F\u006B\u002D\u006F\u0070\u0065\u006E\u002D\u0072\u0065\u0061\u0064\u0065\u0072\u0022\u003E\u003C\u002F\u0069\u003E\u0020\u0985\u09CD\u09AF\u09BE\u09AA\u0020\u09AC\u09CD\u09AF\u09AC\u09B9\u09BE\u09B0\u0020\u09A8\u09BF\u09B0\u09CD\u09A6\u09C7\u09B6\u09BF\u0995\u09BE";_0xb5c3d['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderGuideContent();}else if(type==="tuoba".split("").reverse().join("")){_0xe_0x378['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=")eM tuobA( \u09BF\u09A4\u09BF\u099A\u09BF\u09B0\u09AA \u09B0\u09BE\u09AA\u09B2\u09C7\u09AD\u09C7\u09A1 >i/<>\"eit-resu-af saf\"=ssalc i<".split("").reverse().join("");_0xb5c3d['\u0069\u006E\u006E\u0065\u0072\u0048\u0054\u004D\u004C']=renderAboutContent();}_0x8f_0xa8g['\u0073\u0074\u0079\u006C\u0065']['\u0064\u0069\u0073\u0070\u006C\u0061\u0079']="\u0066\u006C\u0065\u0078";document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']="\u0068\u0069\u0064\u0064\u0065\u006E";}function closeSbModal(){var _0xcce3c=(684802^684810)+(844104^844097);const _0x85g=document['\u0067\u0065\u0074\u0045\u006C\u0065\u006D\u0065\u006E\u0074\u0042\u0079\u0049\u0064']("ladoMlasrevinUbs".split("").reverse().join(""));_0xcce3c='\u0071\u0069\u006F\u006C\u0064\u006C';if(_0x85g){_0x85g['\u0073\u0074\u0079\u006C\u0065']['\u0064\u0069\u0073\u0070\u006C\u0061\u0079']="enon".split("").reverse().join("");document['\u0062\u006F\u0064\u0079']['\u0073\u0074\u0079\u006C\u0065']['\u006F\u0076\u0065\u0072\u0066\u006C\u006F\u0077']='';}}function renderContactsContent(){return`
     <div style="background:var(--results-bg); border:1.5px solid var(--results-border); padding:10px 14px; border-radius:12px; font-weight:700; color:var(--results-label); margin-bottom:12px;">
         🏢 <strong>প্রধান কার্যালয়:</strong> এ জে টাওয়ার, প্লট # ৪, সোনারগাঁও লিংক রোড, কাওরান বাজার, ঢাকা-১২১৫।<br>
         📞 <strong>হটলাইন:</strong> <a href="tel:09678300200" class="phone-badge">০৯৬৭৮-৩০০২০০</a> | <a href="tel:0255013304" class="phone-badge">০২৫৫০১৩৩০৪-৫</a>
@@ -624,7 +673,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         (সকল ব্যাংক ও এমএফএস-এ প্রিমিয়াম জমা দেওয়ার জন্য এই একাউন্টসমূহ প্রযোজ্য)
     </div>
 
-    <!-- 1. Al-Arafah Islami Bank Ltd -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ১. Al-Arafah Islami Bank Ltd (AIBL)</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Head Office, Corporate Br. 911,2A</span></div>
@@ -632,7 +680,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">15272694</span></div>
     </div>
 
-    <!-- 2. Bank Asia Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ২. Bank Asia Limited</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Principal Branch (Islamic Window)</span></div>
@@ -640,7 +687,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">70275357</span></div>
     </div>
 
-    <!-- 3. Brac Bank -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৩. Brac Bank</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">New Eskaton Branch, Dhaka</span></div>
@@ -648,7 +694,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">60261397</span></div>
     </div>
 
-    <!-- 4. Dutch-Bangla Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৪. Dutch-Bangla Bank Limited (DBBL)</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -656,7 +701,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">90262537</span></div>
     </div>
 
-    <!-- 5. Eastern Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৫. Eastern Bank Limited (EBL)</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Sonargaon Road Branch</span></div>
@@ -664,7 +708,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">95276586</span></div>
     </div>
 
-    <!-- 6. Janata Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৬. Janata Bank Limited</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -672,7 +715,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">135262568</span></div>
     </div>
 
-    <!-- 7. Mutual Trust Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৭. Mutual Trust Bank Limited (MTBL)</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Corporate Head Office / Main Branch</span></div>
@@ -680,7 +722,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">145270816</span></div>
     </div>
 
-    <!-- 8. NCC Bank Ltd. -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৮. NCC Bank Ltd.</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -688,7 +729,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">160262533</span></div>
     </div>
 
-    <!-- 9. Pubali Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ৯. Pubali Bank Limited</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Principal Branch (Islamic Window)</span></div>
@@ -696,7 +736,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">175275357</span></div>
     </div>
 
-    <!-- 10. Social Islami Bank Ltd -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ১০. Social Islami Bank Ltd (SIBL)</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -704,7 +743,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">195262537</span></div>
     </div>
 
-    <!-- 11. Sonali Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ১১. Sonali Bank Limited</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -712,7 +750,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">200262530</span></div>
     </div>
 
-    <!-- 12. Southeast Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ১২. Southeast Bank Limited</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -720,7 +757,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">205262535</span></div>
     </div>
 
-    <!-- 13. The Premier Bank Limited -->
     <div class="bank-card">
         <h4><i class="fas fa-building-columns"></i> ১৩. The Premier Bank Limited</h4>
         <div class="bank-info-row"><span>Branch:</span> <span class="val">Kawran Bazar Branch, Dhaka</span></div>
@@ -728,7 +764,6 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
         <div class="bank-info-row"><span>Routing No:</span> <span class="val">235262534</span></div>
     </div>
 
-    <!-- মোবাইল ব্যাংকিং -->
     <div class="bank-card" style="border: 2px dashed var(--primary); background:var(--tab-wrapper-bg);">
         <h4 style="color:#d97706;"><i class="fas fa-mobile-screen-button"></i> মোবাইল ব্যাংকিং (MFS Payment)</h4>
         <div style="font-size:13.5px; line-height:1.7; margin-top:6px;">
@@ -866,4 +901,4 @@ function injectSidebarStyles(_0xg1a65a,_0xea72f){_0xea72f="selyts-motsuc-rabedis
             ভার্সন: ২.৫ (লেটেস্ট আপডেট) | সর্বস্বত্ব সংরক্ষিত © ২০২৬
         </div>
     </div>
-    `;}document['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("\u0044\u004F\u004D\u0043\u006F\u006E\u0074\u0065\u006E\u0074\u004C\u006F\u0061\u0064\u0065\u0064",()=>{injectSidebarStyles();createSidebarDOM();injectMenuButtonToHeader();});document['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("nwodyek".split("").reverse().join(""),e=>{if(e['\u006B\u0065\u0079']==="\u0045\u0073\u0063\u0061\u0070\u0065"){toggleSidebar(false);closeSbModal();}});window['\u0074\u006F\u0067\u0067\u006C\u0065\u0053\u0069\u0064\u0065\u0062\u0061\u0072']=toggleSidebar;window['\u006F\u0070\u0065\u006E\u0053\u0062\u004D\u006F\u0064\u0061\u006C']=openSbModal;window['\u0063\u006C\u006F\u0073\u0065\u0053\u0062\u004D\u006F\u0064\u0061\u006C']=closeSbModal;
+    `;}document['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("\u0044\u004F\u004D\u0043\u006F\u006E\u0074\u0065\u006E\u0074\u004C\u006F\u0061\u0064\u0065\u0064",()=>{injectSidebarStyles();createSidebarDOM();injectMenuButtonToHeader();});document['\u0061\u0064\u0064\u0045\u0076\u0065\u006E\u0074\u004C\u0069\u0073\u0074\u0065\u006E\u0065\u0072']("\u006B\u0065\u0079\u0064\u006F\u0077\u006E",e=>{if(e['\u006B\u0065\u0079']==="epacsE".split("").reverse().join("")){toggleSidebar(false);closeSbModal();}});window['\u0074\u006F\u0067\u0067\u006C\u0065\u0053\u0069\u0064\u0065\u0062\u0061\u0072']=toggleSidebar;window['\u006F\u0070\u0065\u006E\u0053\u0062\u004D\u006F\u0064\u0061\u006C']=openSbModal;window['\u0063\u006C\u006F\u0073\u0065\u0053\u0062\u004D\u006F\u0064\u0061\u006C']=closeSbModal;
