@@ -1134,13 +1134,6 @@
             }
         }
     </style>
-    <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "y46qtvj483");
-    </script>
 </head>
 <body>
 
@@ -1197,12 +1190,74 @@
                     <input type="checkbox" id="dps-wp" onchange="handleRiderToggle('dps', 'wp')" />
                     <label for="dps-wp"><i class="fas fa-file-invoice"></i> WP</label>
                 </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" id="dps-hi" onchange="handleRiderToggle('dps', 'hi')" />
+                    <label for="dps-hi"><i class="fas fa-notes-medical"></i> HI</label>
+                </div>
             </div>
 
             <div id="dps-cc-custom" class="cc-custom-group" style="display:none;">
                 <div class="form-group">
                     <label><i class="fas fa-coins"></i> CC আওতায় বীমা অংক (ঐচ্ছিক, সর্বোচ্চ ৫ লক্ষ)</label>
                     <input type="number" id="dps-cc-sa" placeholder="ফাঁকা রাখলে মূল বীমা অংক প্রযোজ্য (সর্বোচ্চ ৫,০০,০০০)" oninput="calculateDPS()" />
+                </div>
+            </div>
+
+            <div id="dps-hi-custom" class="cc-custom-group" style="display:none; margin-top:12px;">
+                <div class="form-group" style="margin-bottom:12px;">
+                    <label><i class="fas fa-notes-medical"></i> স্বাস্থ্য বীমা (HI) কভারেজ প্ল্যান নির্বাচন করুন</label>
+                    <select id="dps-hi-tier" onchange="calculateDPS()">
+                        <option value="bronze">ব্রোঞ্জ - Bronze (২৫,০০০ ৳)</option>
+                        <option value="silver" selected>সিলভার - Silver (৫০,০০০ ৳)</option>
+                        <option value="diamond">ডায়মন্ড - Diamond (১,০০,০০০ ৳)</option>
+                        <option value="gold">গোল্ড - Gold (২,০০,০০০ ৳)</option>
+                        <option value="platinum">প্লাটিনাম - Platinum (৫,০০,০০০ ৳)</option>
+                    </select>
+                </div>
+                <div style="font-weight:800; font-size:14.5px; margin-bottom:8px; color:var(--primary);"><i class="fas fa-users"></i> HI কভারেজভুক্ত সদস্যগণ:</div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                    <div class="checkbox-item" style="padding:8px 12px;">
+                        <input type="checkbox" id="dps-hi-self" checked onchange="calculateDPS()" />
+                        <label for="dps-hi-self"><i class="fas fa-user-check"></i> গ্রাহক (প্রস্তাবক নিজে)</label>
+                    </div>
+                    <div style="background:var(--card-bg); padding:10px; border-radius:10px; border:1px solid var(--input-border);">
+                        <div class="checkbox-item" style="padding:4px 0; border:none; background:transparent;">
+                            <input type="checkbox" id="dps-hi-spouse" onchange="document.getElementById('dps-hi-spouse-box').style.display=this.checked?'block':'none'; calculateDPS();" />
+                            <label for="dps-hi-spouse"><i class="fas fa-heart"></i> স্ত্রী / স্বামী (Spouse)</label>
+                        </div>
+                        <div id="dps-hi-spouse-box" style="display:none; margin-top:6px;">
+                            <input type="number" id="dps-hi-spouse-age" placeholder="স্ত্রী/স্বামীর বয়স (১৮-৫৫)" min="18" max="55" oninput="calculateDPS()" />
+                        </div>
+                    </div>
+                    <div style="background:var(--card-bg); padding:10px; border-radius:10px; border:1px solid var(--input-border);">
+                        <div class="checkbox-item" style="padding:4px 0; border:none; background:transparent;">
+                            <input type="checkbox" id="dps-hi-child" onchange="toggleHIChildBox(this.checked, 'dps')" />
+                            <label for="dps-hi-child"><i class="fas fa-child"></i> সন্তান (Child - বয়স ৬ মাস থেকে ২৪ বছর)</label>
+                        </div>
+                        <div id="dps-hi-child-box" style="display:none; margin-top:8px;">
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                                <label style="font-size:13.5px; font-weight:700; color:var(--text-muted); margin:0;">সন্তানের বয়স লিখুন:</label>
+                                <div style="display:flex; gap:6px;">
+                                    <button type="button" class="mini-age-btn" style="padding:4px 10px; font-size:12px;" onclick="addHIChild('dps')"><i class="fas fa-plus"></i> সন্তান যোগ</button>
+                                    <button type="button" class="mini-age-btn" style="padding:4px 10px; font-size:12px; background:#ef4444;" onclick="removeHIChild('dps')"><i class="fas fa-minus"></i> মুছুন</button>
+                                </div>
+                            </div>
+                            <div id="dps-hi-children-container" style="display:flex; flex-direction:column; gap:6px;">
+                                <div class="child-age-row" style="display:flex; align-items:center; gap:8px;">
+                                    <span style="font-size:13.5px; font-weight:700; min-width:85px;">১ম সন্তান:</span>
+                                    <input type="number" class="dps-hi-child-age" placeholder="বয়স (১-২৪)" min="1" max="24" oninput="calculateDPS()" style="height:42px; font-size:14.5px;" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background:var(--card-bg); padding:10px; border-radius:10px; border:1px solid var(--input-border);">
+                        <label style="font-size:13.5px; font-weight:700; margin-bottom:6px; display:block;"><i class="fas fa-baby"></i> মাতৃত্বকালীন সুবিধা (ঐচ্ছিক):</label>
+                        <select id="dps-hi-maternity" onchange="calculateDPS()">
+                            <option value="none">প্রয়োজন নেই (None)</option>
+                            <option value="standard">স্ট্যান্ডার্ড প্ল্যান (প্রিমিয়াম ৫,০০০ ৳ - নরমাল ১৫হাজার / সিজার ৩০হাজার)</option>
+                            <option value="deluxe">ডিলাক্স প্ল্যান (প্রিমিয়াম ৬,০০০ ৳ - নরমাল ২৫হাজার / সিজার ৪৫হাজার)</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -1240,6 +1295,7 @@
                 <div class="result-item" id="row-dps-plus" style="display:none;"><span class="label-wrap"><i class="fas fa-plus-circle"></i> মাসিক Plus চার্জ</span><span class="amount" id="dps-plusAmount">০ ৳</span></div>
                 <div class="result-item" id="row-dps-cc" style="display:none;"><span class="label-wrap"><i class="fas fa-heartbeat"></i> মাসিক CC চার্জ</span><span class="amount" id="dps-ccAmount">০ ৳</span></div>
                 <div class="result-item" id="row-dps-wp" style="display:none;"><span class="label-wrap"><i class="fas fa-file-invoice"></i> মাসিক WP চার্জ</span><span class="amount" id="dps-wpAmount">০ ৳</span></div>
+                <div class="result-item" id="row-dps-hi" style="display:none;"><span class="label-wrap"><i class="fas fa-notes-medical"></i> মাসিক HI চার্জ</span><span class="amount" id="dps-hiAmount">০ ৳</span></div>
                 <div class="result-item" id="row-dps-oe" style="display:none;"><span class="label-wrap"><i class="fas fa-user-shield"></i> মাসিক OE চার্জ</span><span class="amount" id="dps-oeAmount">০ ৳</span></div>
                 <div class="result-item total">
                     <span class="label-wrap"><i class="fas fa-calculator"></i> মোট মাসিক প্রিমিয়াম</span>
