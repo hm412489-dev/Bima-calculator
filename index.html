@@ -230,6 +230,7 @@
         /* ── Form Elements ── */
         .form-group {
             margin-bottom: 18px;
+            width: 100%;
         }
 
         .form-group label {
@@ -248,15 +249,16 @@
 
         .form-group input[type="number"],
         .form-group select,
-        .cc-custom-group select {
+        .cc-custom-group select,
+        .cc-custom-group input[type="number"] {
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
-            height: 52px;
-            padding: 0 16px;
+            height: 50px;
+            padding: 0 14px;
             border: 2px solid var(--input-border);
             border-radius: 14px;
-            font-size: 16px;
+            font-size: 15.5px;
             outline: none;
             background: var(--input-bg);
             color: var(--input-text);
@@ -269,12 +271,13 @@
         .form-group input[type="number"]::placeholder {
             color: var(--text-muted);
             font-weight: 500;
-            font-size: 15.5px;
+            font-size: 15px;
         }
 
         .form-group input[type="number"]:focus,
         .form-group select:focus,
-        .cc-custom-group select:focus {
+        .cc-custom-group select:focus,
+        .cc-custom-group input[type="number"]:focus {
             border-color: var(--input-focus);
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
         }
@@ -284,8 +287,8 @@
             appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10'%3E%3Cpath d='M1 1l7 7 7-7' stroke='%230d9488' stroke-width='2.5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: right 18px center;
-            padding-right: 48px;
+            background-position: right 14px center;
+            padding-right: 40px !important;
             cursor: pointer;
         }
 
@@ -389,17 +392,19 @@
             cursor: pointer;
         }
 
+        /* ── Custom Rider Containers ── */
         .cc-custom-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             margin-top: 12px;
-            padding: 14px 16px;
+            padding: 14px;
             background: var(--tab-wrapper-bg);
-            border-radius: 14px;
+            border-radius: 16px;
             border: 2px dashed var(--primary);
             width: 100%;
             box-sizing: border-box;
+            overflow: hidden;
         }
 
         .cc-custom-group .form-group {
@@ -408,23 +413,21 @@
         }
 
         .cc-custom-group label {
-            font-size: 14.5px;
+            font-size: 14px;
             color: var(--text-label);
             font-weight: 700;
         }
 
-        .cc-custom-group input {
-            width: 100% !important;
-            box-sizing: border-box !important;
-            height: 48px;
-            font-size: 15.5px;
-            padding: 0 14px;
-            border: 2px solid var(--input-border);
+        .hi-member-card {
+            background: var(--card-bg);
+            padding: 10px 12px;
             border-radius: 12px;
-            background: var(--input-bg);
-            color: var(--input-text);
-            outline: none;
-            font-family: inherit;
+            border: 1px solid var(--card-border);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .oe-rate-group {
@@ -468,6 +471,7 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 4px;
+            width: 100%;
         }
 
         .mini-age-btn {
@@ -1042,21 +1046,21 @@
                         <input type="checkbox" id="dps-hi-self" checked onchange="calculateDPS()" />
                         <label for="dps-hi-self"><i class="fas fa-user-check"></i> গ্রাহক (প্রস্তাবক নিজে)</label>
                     </div>
-                    <div style="background:var(--card-bg); padding:10px; border-radius:10px; border:1px solid var(--input-border);">
+                    <div class="hi-member-card">
                         <div class="checkbox-item" style="padding:4px 0; border:none; background:transparent;">
                             <input type="checkbox" id="dps-hi-spouse" onchange="document.getElementById('dps-hi-spouse-box').style.display=this.checked?'block':'none'; calculateDPS();" />
                             <label for="dps-hi-spouse"><i class="fas fa-heart"></i> স্ত্রী / স্বামী (Spouse)</label>
                         </div>
-                        <div id="dps-hi-spouse-box" style="display:none; margin-top:6px;">
+                        <div id="dps-hi-spouse-box" style="display:none; margin-top:4px;">
                             <input type="number" id="dps-hi-spouse-age" placeholder="স্ত্রী/স্বামীর বয়স (১৮-৫৫)" min="18" max="55" oninput="calculateDPS()" />
                         </div>
                     </div>
-                    <div style="background:var(--card-bg); padding:10px; border-radius:10px; border:1px solid var(--input-border);">
+                    <div class="hi-member-card">
                         <div class="checkbox-item" style="padding:4px 0; border:none; background:transparent;">
                             <input type="checkbox" id="dps-hi-child" onchange="toggleHIChildBox(this.checked, 'dps')" />
                             <label for="dps-hi-child"><i class="fas fa-child"></i> সন্তান (Child - ৬ মাস থেকে ২৪ বছর)</label>
                         </div>
-                        <div id="dps-hi-child-box" style="display:none; margin-top:8px;">
+                        <div id="dps-hi-child-box" style="display:none; margin-top:6px;">
                             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                                 <label style="font-size:13.5px; font-weight:700; color:var(--text-muted); margin:0;">সন্তানের বয়স লিখুন:</label>
                                 <div style="display:flex; gap:6px;">
@@ -1065,19 +1069,19 @@
                                 </div>
                             </div>
                             <div id="dps-hi-children-container" style="display:flex; flex-direction:column; gap:6px;">
-                                <div class="child-age-row" style="display:flex; align-items:center; gap:8px;">
+                                <div class="child-age-row">
                                     <span style="font-size:13.5px; font-weight:700; min-width:85px;">১ম সন্তান:</span>
                                     <input type="number" class="dps-hi-child-age" placeholder="বয়স (১-২৪)" min="1" max="24" oninput="calculateDPS()" style="height:42px; font-size:14.5px;" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div style="background:var(--card-bg); padding:10px; border-radius:10px; border:1px solid var(--input-border);">
-                        <label style="font-size:13.5px; font-weight:700; margin-bottom:6px; display:block;"><i class="fas fa-baby"></i> মাতৃত্বকালীন সুবিধা (ঐচ্ছিক):</label>
-                        <select id="dps-hi-maternity" onchange="calculateDPS()" style="height:44px; font-size:14px;">
+                    <div class="hi-member-card">
+                        <label style="font-size:13.5px; font-weight:700; margin-bottom:4px; display:block;"><i class="fas fa-baby"></i> মাতৃত্বকালীন সুবিধা (ঐচ্ছিক):</label>
+                        <select id="dps-hi-maternity" onchange="calculateDPS()">
                             <option value="none">প্রয়োজন নেই (None)</option>
-                            <option value="standard">স্ট্যান্ডার্ড (৫,০০০ ৳ - নরমাল ১৫হাজার / সিজার ৩০হাজার)</option>
-                            <option value="deluxe">ডিলাক্স (৬,০০০ ৳ - নরমাল ২৫হাজার / সিজার ৪৫হাজার)</option>
+                            <option value="standard">স্ট্যান্ডার্ড (৫,০০০ ৳) — ডেলিভারি ১৫হাজার / সিজার ৩০হাজার</option>
+                            <option value="deluxe">ডিলাক্স (৬,০০০ ৳) — ডেলিভারি ২৫হাজার / সিজার ৪৫হাজার</option>
                         </select>
                     </div>
                 </div>
@@ -1134,7 +1138,7 @@
             <button class="btn btn-print" onclick="printResults()"><i class="fas fa-print"></i> প্রিন্ট/PDF</button>
         </div>
         <button type="button" class="clear-btn" onclick="clearActivePlanFields()"><i class="fas fa-eraser"></i> ক্লিয়ার করুন</button>
-        <div class="credit">✨ Developed by <strong>IT EMON</strong> ✨</div>
+        <div class="credit">✨ Developed by <strong>IT OFFICER</strong> ✨</div>
     </div>
 
     <div id="print-section">
@@ -1149,7 +1153,7 @@
             <div class="sign-col">মাঠ কর্মকর্তা / প্রতিনিধির স্বাক্ষর</div>
         </div>
         <div class="print-footer">
-            ক্যালকুলেশন প্রস্তুতের তারিখ: <span id="print-date"></span> | সফ্টওয়্যার ডেভেলপমেন্ট: <strong>IT EMON</strong>
+            ক্যালকুলেশন প্রস্তুতের তারিখ: <span id="print-date"></span> | সফ্টওয়্যার ডেভেলপমেন্ট: <strong>IT OFFICER</strong>
         </div>
     </div>
 
