@@ -1,4 +1,4 @@
-const CACHE_NAME = 'bima-calc-v20';
+const CACHE_NAME = 'bima-calc-v21';
 const CORE_ASSETS = [
     './',
     './index.html',
