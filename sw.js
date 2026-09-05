@@ -2,7 +2,7 @@
 self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
-
+1
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     // ১. ফোনের ক্যাশ স্টোরেজের সব ফাইল পুরোপুরি মুছে ফেলা
